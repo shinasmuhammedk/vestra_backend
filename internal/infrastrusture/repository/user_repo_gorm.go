@@ -4,6 +4,7 @@ import (
 	"vestra-ecommerce-backend/internal/domain"
 	"vestra-ecommerce-backend/internal/repository"
 
+	"github.com/google/uuid"
 	"gorm.io/gorm"
 )
 
@@ -16,7 +17,7 @@ func NewUserRepoGorm(db *gorm.DB) repository.UserRepository {
 }
 
 func (r *UserRepoGorm) Create(user *domain.User) error {
-	model := UserModel{
+	model := User{
 		ID:         user.ID,
 		Name:       user.Name,
 		Email:      user.Email,
@@ -30,7 +31,7 @@ func (r *UserRepoGorm) Create(user *domain.User) error {
 }
 
 func (r *UserRepoGorm) FindByEmail(email string) (*domain.User, error) {
-	var model UserModel
+	var model User
 	if err := r.db.Where("email = ?", email).First(&model).Error; err != nil {
 		return nil, err
 	}
@@ -48,7 +49,7 @@ func (r *UserRepoGorm) FindByEmail(email string) (*domain.User, error) {
 }
 
 func (r *UserRepoGorm) Update(user *domain.User) error {
-	return r.db.Model(&UserModel{}).Where("id = ?", user.ID).Updates(UserModel{
+	return r.db.Model(&User{}).Where("id = ?", user.ID).Updates(User{
 		Name:       user.Name,
 		Email:      user.Email,
 		Password:   user.Password,
@@ -56,4 +57,14 @@ func (r *UserRepoGorm) Update(user *domain.User) error {
 		IsVerified: user.IsVerified,
 		UpdatedAt:  user.UpdatedAt,
 	}).Error
+}
+
+
+func (r *UserRepoGorm) FindByID(id uuid.UUID) (*domain.User, error) {
+	var user domain.User
+	err := r.db.Where("id = ?", id).First(&user).Error
+	if err != nil {
+		return nil, err
+	}
+	return &user, nil
 }

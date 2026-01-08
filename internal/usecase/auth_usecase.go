@@ -136,3 +136,187 @@ func hashPassword(password string) (string, error) {
 func generateOTP() string {
 	return fmt.Sprintf("%06d", rand.Intn(1000000))
 }
+
+
+// func (a *AuthUseCase) LoginUser(email, password string) (string, error) {
+// 	// 1️⃣ Find user
+// 	user, err := a.userRepo.FindByEmail(email)
+// 	if err != nil || user == nil {
+// 		return "", errors.New("invalid email or password")
+// 	}
+
+// 	// 2️⃣ Check if verified
+// 	if !user.IsVerified {
+// 		return "", errors.New("please verify your email before login")
+// 	}
+
+// 	// 3️⃣ Compare password
+// 	err = bcrypt.CompareHashAndPassword(
+// 		[]byte(user.Password),
+// 		[]byte(password),
+// 	)
+// 	if err != nil {
+// 		return "", errors.New("invalid email or password")
+// 	}
+
+// 	// 4️⃣ Generate JWT token
+// 	token, err := utils.GenerateAccessToken(user.ID, user.Email, user.Role)
+// 	if err != nil {
+// 		return "", err
+// 	}
+
+// 	return token, nil
+// }
+
+
+
+func (a *AuthUseCase) LoginUser(email, password string) (string, string, error) {
+	// 1️⃣ Find user by email
+	user, err := a.userRepo.FindByEmail(email)
+	if err != nil || user == nil {
+		return "", "", errors.New("invalid email or password")
+	}
+
+	// 2️⃣ Check email verification
+	if !user.IsVerified {
+		return "", "", errors.New("please verify your email before login")
+	}
+
+	// 3️⃣ Compare password
+	err = bcrypt.CompareHashAndPassword(
+		[]byte(user.Password),
+		[]byte(password),
+	)
+	if err != nil {
+		return "", "", errors.New("invalid email or password")
+	}
+
+	// 4️⃣ Generate access token
+	accessToken, err := utils.GenerateAccessToken(
+		user.ID,
+		user.Email,
+		user.Role,
+	)
+	if err != nil {
+		return "", "", err
+	}
+
+	// 5️⃣ Generate refresh token (FIXED)
+	refreshToken, _, err := utils.GenerateRefreshToken(user.ID)
+	if err != nil {
+		return "", "", err
+	}
+
+	return accessToken, refreshToken, nil
+}
+
+
+
+
+
+
+
+//=========Forgot password======
+// ForgotPassword sends OTP for password reset
+func (a *AuthUseCase) ForgotPassword(email string) error {
+	// 1️⃣ Check user exists
+	user, err := a.userRepo.FindByEmail(email)
+	if err != nil || user == nil {
+		return errors.New("user not found")
+	}
+
+	// 2️⃣ Generate OTP
+	otpCode := generateOTP()
+	otp := &domain.OTP{
+		ID:        uuid.New(),
+		UserID:    user.ID,
+		Code:      otpCode,
+		ExpiresAt: time.Now().Add(5 * time.Minute),
+		Used:      false,
+		CreatedAt: time.Now(),
+	}
+
+	// 3️⃣ Save OTP
+	if err := a.otpRepo.Save(otp); err != nil {
+		return err
+	}
+
+	// 4️⃣ Send OTP email
+	if err := utils.SendOTPEmail(user.Email, otpCode); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+
+
+
+
+
+//=================RESET PASSWORD===============
+// ResetPassword resets user password using OTP
+func (a *AuthUseCase) ResetPassword(email, otpCode, newPassword string) error {
+	// 1️⃣ Find user
+	user, err := a.userRepo.FindByEmail(email)
+	if err != nil || user == nil {
+		return errors.New("user not found")
+	}
+
+	// 2️⃣ Validate OTP
+	otp, err := a.otpRepo.FindValidOTP(user.ID, otpCode)
+	if err != nil || otp == nil {
+		return errors.New("invalid or expired OTP")
+	}
+
+	// 3️⃣ Hash new password
+	hashedPassword, err := hashPassword(newPassword)
+	if err != nil {
+		return err
+	}
+
+	// 4️⃣ Update password
+	user.Password = hashedPassword
+	user.UpdatedAt = time.Now()
+
+	if err := a.userRepo.Update(user); err != nil {
+		return err
+	}
+
+	// 5️⃣ Mark OTP used
+	if err := a.otpRepo.MarkUsed(otp.ID); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+
+
+func (a *AuthUseCase) RefreshAccessToken(refreshToken string) (string, error) {
+	// 1️⃣ Validate refresh token
+	claims, err := utils.ValidateRefreshToken(refreshToken)
+	if err != nil {
+		return "", errors.New("invalid or expired refresh token")
+	}
+
+	// 2️⃣ Parse user ID
+	userID, err := uuid.Parse(claims.UserID)
+	if err != nil {
+		return "", errors.New("invalid token user")
+	}
+
+	// 3️⃣ Fetch user
+	user, err := a.userRepo.FindByID(userID)
+	if err != nil || user == nil {
+		return "", errors.New("user njjjot found")
+	}
+
+	// 4️⃣ Generate new access token
+	accessToken, err := utils.GenerateAccessToken(user.ID, user.Email, user.Role)
+	if err != nil {
+		return "", err
+	}
+
+	return accessToken, nil
+}

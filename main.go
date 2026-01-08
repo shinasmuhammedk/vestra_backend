@@ -16,20 +16,22 @@ func main() {
 	db := config.ConnectDB()
 
 	// Auto migrate tables
-	db.AutoMigrate(&repository.UserModel{}, &repository.OTPModel{})
+	db.AutoMigrate(&repository.User{}, &repository.OTPModel{})
 
 	// Repositories
 	userRepo := repository.NewUserRepoGorm(db)
 	otpRepo := repository.NewOTPRepoGorm(db)
 
-	// Use case
+	// Use cases
 	authUC := usecase.NewAuthUseCase(userRepo, otpRepo)
+	userUC := usecase.NewUserUseCase(userRepo)
 
 	// Handlers
 	authHandler := handlers.NewAuthHandler(authUC)
+	userHandler := handlers.NewUserHandler(userUC)
 
 	// Routes
-	http.SetupRoutes(r, authHandler)
+	http.SetupRoutes(r, authHandler, userHandler)
 
 	r.Run(":8080")
 }

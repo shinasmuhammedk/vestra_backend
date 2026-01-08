@@ -24,9 +24,7 @@ func ConnectDB() *gorm.DB {
 	password := os.Getenv("DB_PASSWORD")
 	dbname := os.Getenv("DB_NAME")
 
-	// Debug: Print out the values to ensure they are loaded correctly
-	fmt.Println("DB_HOST:", host)
-	fmt.Println("DB_PORT:", port)
+	
 
 	// Format the connection string (DSN)
 	dsn := fmt.Sprintf(

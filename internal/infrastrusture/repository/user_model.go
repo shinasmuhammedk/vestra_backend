@@ -8,7 +8,7 @@ import (
 )
 
 // UserModel maps to DB
-type UserModel struct {
+type User struct {
 	ID         uuid.UUID `gorm:"primaryKey;type:uuid"`
 	Name       string
 	Email      string `gorm:"uniqueIndex"`

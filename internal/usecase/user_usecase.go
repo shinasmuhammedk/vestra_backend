@@ -31,3 +31,27 @@ func (u *UserUseCase) GetProfile(userID string) (*domain.User, error) {
 	user.Password = "" // 🔐 never expose password
 	return user, nil
 }
+
+
+
+
+func (u *UserUseCase) UpdateProfile(userID string, name string) (*domain.User, error) {
+	id, err := uuid.Parse(userID)
+	if err != nil {
+		return nil, errors.New("invalid user id")
+	}
+
+	user, err := u.userRepo.FindByID(id)
+	if err != nil || user == nil {
+		return nil, errors.New("user not found")
+	}
+
+	user.Name = name
+
+	if err := u.userRepo.Update(user); err != nil {
+		return nil, errors.New("failed to update profile")
+	}
+
+	user.Password = ""
+	return user, nil
+}

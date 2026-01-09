@@ -12,5 +12,6 @@ type UserRepository interface {
 	Update(user *domain.User) error
     
     FindByID(id uuid.UUID) (*domain.User, error)
-
+    FindAll() ([]domain.User, error)
+    SoftDelete(id uuid.UUID) error
 }

@@ -1,6 +1,7 @@
 package repository
 
 import (
+	"time"
 	"vestra-ecommerce-backend/internal/domain"
 	"vestra-ecommerce-backend/internal/repository"
 
@@ -48,15 +49,31 @@ func (r *UserRepoGorm) FindByEmail(email string) (*domain.User, error) {
 	}, nil
 }
 
+// func (r *UserRepoGorm) Update(user *domain.User) error {
+// 	return r.db.Model(&User{}).Where("id = ?", user.ID).Updates(User{
+// 		Name:       user.Name,
+// 		Email:      user.Email,
+// 		Password:   user.Password,
+// 		Role:       user.Role,
+// 		IsVerified: user.IsVerified,
+// 		UpdatedAt:  user.UpdatedAt,
+// 	}).Error
+// }
 func (r *UserRepoGorm) Update(user *domain.User) error {
-	return r.db.Model(&User{}).Where("id = ?", user.ID).Updates(User{
+	model := User{
+		ID:         user.ID,
 		Name:       user.Name,
 		Email:      user.Email,
 		Password:   user.Password,
 		Role:       user.Role,
 		IsVerified: user.IsVerified,
 		UpdatedAt:  user.UpdatedAt,
-	}).Error
+        IsBlocked: user.IsBlocked,
+	}
+
+	return r.db.Model(&User{}).
+		Where("id = ?", user.ID).
+		Updates(&model).Error
 }
 
 
@@ -68,3 +85,28 @@ func (r *UserRepoGorm) FindByID(id uuid.UUID) (*domain.User, error) {
 	}
 	return &user, nil
 }
+
+func (r *UserRepoGorm) FindAll() ([]domain.User, error) {
+	var users []domain.User
+
+	err := r.db.Find(&users).Error
+	if err != nil {
+		return nil, err
+	}
+
+	// 🔐 Remove passwords before returning
+	for i := range users {
+		users[i].Password = ""
+	}
+
+	return users, nil
+}
+
+
+func (r *UserRepoGorm) SoftDelete(userID uuid.UUID) error {
+    t := time.Now()
+    return r.db.Model(&User{}).
+        Where("id = ? AND deleted_at IS NULL", userID).
+        Update("deleted_at", &t).Error
+}
+

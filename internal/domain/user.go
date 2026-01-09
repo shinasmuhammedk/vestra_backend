@@ -17,4 +17,5 @@ type User struct {
 	UpdatedAt  time.Time
 	DeletedAt  *time.Time `gorm:"index"`
 	IsVerified bool
+	IsBlocked  bool `gorm:"default:false"`
 }

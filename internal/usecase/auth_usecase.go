@@ -137,7 +137,6 @@ func generateOTP() string {
 	return fmt.Sprintf("%06d", rand.Intn(1000000))
 }
 
-
 // func (a *AuthUseCase) LoginUser(email, password string) (string, error) {
 // 	// 1️⃣ Find user
 // 	user, err := a.userRepo.FindByEmail(email)
@@ -168,13 +167,16 @@ func generateOTP() string {
 // 	return token, nil
 // }
 
-
-
 func (a *AuthUseCase) LoginUser(email, password string) (string, string, error) {
 	// 1️⃣ Find user by email
 	user, err := a.userRepo.FindByEmail(email)
 	if err != nil || user == nil {
 		return "", "", errors.New("invalid email or password")
+	}
+    
+    //Check blocked or not
+	if user.IsBlocked == true{
+		return "", "", errors.New("account is blocked by admin")
 	}
 
 	// 2️⃣ Check email verification
@@ -210,13 +212,7 @@ func (a *AuthUseCase) LoginUser(email, password string) (string, string, error) 
 	return accessToken, refreshToken, nil
 }
 
-
-
-
-
-
-
-//=========Forgot password======
+// =========Forgot password======
 // ForgotPassword sends OTP for password reset
 func (a *AuthUseCase) ForgotPassword(email string) error {
 	// 1️⃣ Check user exists
@@ -249,12 +245,7 @@ func (a *AuthUseCase) ForgotPassword(email string) error {
 	return nil
 }
 
-
-
-
-
-
-//=================RESET PASSWORD===============
+// =================RESET PASSWORD===============
 // ResetPassword resets user password using OTP
 func (a *AuthUseCase) ResetPassword(email, otpCode, newPassword string) error {
 	// 1️⃣ Find user
@@ -290,8 +281,6 @@ func (a *AuthUseCase) ResetPassword(email, otpCode, newPassword string) error {
 
 	return nil
 }
-
-
 
 func (a *AuthUseCase) RefreshAccessToken(refreshToken string) (string, error) {
 	// 1️⃣ Validate refresh token

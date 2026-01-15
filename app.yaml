@@ -1,0 +1,26 @@
+server:
+  port: 3000
+
+db:
+  host: localhost
+  port: 5432
+  user: postgres
+  password: Shinas
+  name: ecommerce_db
+  sslmode: disable
+  timezone: Asia/Kolkata
+
+
+smtp:
+  host: smtp.gmail.com
+  port: 587
+  username: shinaskdk@gmail.com
+  password: ymbk isia oigo nsbc
+  from: "Vestra Ecommerce <shinaskdk@gmail.com>"
+  
+  
+jwt:
+  access_secret: "access_token_secret123"
+  refresh_secret: "refersh_token_secret123"
+  access_ttl_minutes: 15
+  refresh_ttl_hours: 168  # 7 days

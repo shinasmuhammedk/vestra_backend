@@ -23,38 +23,36 @@ import (
 )
 
 func main() {
-	// 1️⃣ Load config
+	// -------------------- 1️⃣ Load config --------------------
 	cfg, err := config.LoadConfig("app.yaml")
 	if err != nil {
 		log.Fatal("Config load failed:", err)
 	}
 
-	// 2️⃣ Connect DB
+	// -------------------- 2️⃣ Connect DB --------------------
 	db := database.GetInstancepostgres(cfg)
 
-	// 3️⃣ Init repository
+	// -------------------- 3️⃣ Init repository --------------------
 	repo.PgSQLInit()
+	userRepo := repo.GetPgSQLRepository() // must implement IPgSQLRepository
 
-	// 4️⃣ Init email
+	// -------------------- 4️⃣ Init email --------------------
 	email.Init(cfg.SMTP)
 
-	// 5️⃣ Run migrations
+	// -------------------- 5️⃣ Run migrations --------------------
 	migration.Migrate()
 
-	// 6️⃣ Fiber app
+	// -------------------- 6️⃣ Fiber app --------------------
 	app := fiber.New(fiber.Config{
 		Prefork: cfg.Server.Prefork, // use config value
 	})
 
-	// 7️⃣ Health check
+	// -------------------- 7️⃣ Health check --------------------
 	app.Get("/health", func(c *fiber.Ctx) error {
 		return c.SendString("Fiber + DB + SMTP connected 🚀")
 	})
 
-	// 8️⃣ Initialize repository instance
-	userRepo := repo.GetPgSQLRepository() // must implement IPgSQLRepository
-
-	// 9️⃣ Initialize JWTManager from config
+	// -------------------- 8️⃣ Initialize JWTManager --------------------
 	jwtManager := jwt.NewJWTManager(
 		cfg.JWT.AccessSecret,
 		cfg.JWT.RefreshSecret,
@@ -62,22 +60,24 @@ func main() {
 		time.Hour*time.Duration(cfg.JWT.RefreshTTLHours),
 	)
 
-	// 🔟 Initialize UserAuthService with OTP expiry from config (e.g., 5 mins)
-	authService := services.NewUserAuthService(userRepo, 5)
-
-	// 1️⃣1️⃣ Initialize controller with service & JWTManager
+	// -------------------- 9️⃣ Initialize Auth Service & Controller --------------------
+	authService := services.NewUserAuthService(userRepo, 5) // OTP expiry 5 min
 	authController := controller.NewUserAuthController(authService, jwtManager)
 
-	// 1️⃣2️⃣ Register routes
-	router.Setup(app, authController, jwtManager)
+	// -------------------- 🔟 Initialize Product Service & Controller --------------------
+	productService := services.NewProductService(userRepo)
+	productController := controller.NewProductController(productService)
 
-	// 1️⃣3️⃣ Graceful shutdown
+	// -------------------- 1️⃣1️⃣ Register routes --------------------
+	router.Setup(app, authController, productController, jwtManager, userRepo)
+
+	// -------------------- 1️⃣2️⃣ Graceful shutdown --------------------
 	quit := make(chan os.Signal, 1)
 	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
 
 	port := cfg.Server.Port
 	go func() {
-		log.Println("🚀 Server started on http://localhost:3000")
+		log.Printf("🚀 Server started on http://localhost:%d\n", port)
 		if err := app.Listen(fmt.Sprintf(":%d", port)); err != nil {
 			log.Println("Server stopped:", err)
 		}

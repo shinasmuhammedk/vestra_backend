@@ -8,7 +8,11 @@ import (
 )
 
 func Migrate() {
-	if err := database.PgSQLDB.AutoMigrate(&model.User{}); err != nil {
+	if err := database.PgSQLDB.AutoMigrate(
+		&model.User{},
+		&model.Product{},
+		&model.ProductSize{},
+	); err != nil {
 		log.Fatal("❌ Migration failed:", err)
 	}
 

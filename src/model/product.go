@@ -19,10 +19,14 @@ type Product struct {
 	IsActive     bool          `gorm:"default:true" json:"is_active"`
 	CreatedAt    time.Time
 	UpdatedAt    time.Time
-	Sizes        []ProductSize `gorm:"foreignKey:ProductID;constraint:OnDelete:CASCADE"`
+	DeletedAt    gorm.DeletedAt `gorm:"index" json:"-"` // <-- soft delete
+	Sizes        []ProductSize  `gorm:"foreignKey:ProductID;constraint:OnDelete:CASCADE"`
 }
 
+// BeforeCreate auto-generates UUID
 func (p *Product) BeforeCreate(tx *gorm.DB) (err error) {
-	p.ID = uuid.New()
+	if p.ID == uuid.Nil {
+		p.ID = uuid.New()
+	}
 	return
 }

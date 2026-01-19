@@ -103,3 +103,25 @@ func (pc *ProductController) GetProductByID(c *fiber.Ctx) error {
 
 	return c.Status(fiber.StatusOK).JSON(product)
 }
+
+
+
+// DeleteProduct handler
+func (pc *ProductController) DeleteProduct(c *fiber.Ctx) error {
+	id := c.Params("id")
+	if id == "" {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"error": "product id is required",
+		})
+	}
+
+	if err := pc.service.DeleteProduct(id); err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"error": err.Error(),
+		})
+	}
+
+	return c.JSON(fiber.Map{
+		"message": "product deleted successfully",
+	})
+}

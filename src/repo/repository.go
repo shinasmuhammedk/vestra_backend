@@ -94,7 +94,7 @@ func (r *PgSQLRepository) UpdateByFields(obj interface{}, id interface{}, fields
 }
 
 func (r *PgSQLRepository) Delete(obj interface{}, id interface{}) error {
-	if err := database.PgSQLDB.Debug().Where("id = ?", id).First(obj).Delete(obj).Error; err != nil {
+	if err := database.PgSQLDB.Debug().Where("id = ?", id).Delete(obj).Error; err != nil {
 		return err
 	}
 	return nil
@@ -116,4 +116,26 @@ func (r *PgSQLRepository) FindDistinct(obj interface{}, field string, query inte
 
 func (r *PgSQLRepository) Raw(query string, args ...interface{}) *gorm.DB {
 	return database.PgSQLDB.Raw(query, args...)
+}
+
+
+func (r *PgSQLRepository) Exec(sql string, values ...interface{}) *gorm.DB {
+	return database.PgSQLDB.Exec(sql, values...)
+}
+
+
+func (r *PgSQLRepository) FindByIdWithPreload(obj interface{}, id interface{}, preloads ...string) error {
+	db := database.PgSQLDB
+	for _, preload := range preloads {
+		db = db.Preload(preload)
+	}
+	return db.Where("id = ?", id).First(obj).Error
+}
+
+func (r *PgSQLRepository) FindWhereWithPreload(obj interface{}, query string, args []interface{}, preloads ...string) error {
+	db := database.PgSQLDB
+	for _, preload := range preloads {
+		db = db.Preload(preload)
+	}
+	return db.Where(query, args...).Find(obj).Error
 }

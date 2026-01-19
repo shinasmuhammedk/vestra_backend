@@ -23,36 +23,35 @@ import (
 )
 
 func main() {
-	// -------------------- 1️⃣ Load config --------------------
+	// -------------------- 1️⃣ Load Config --------------------
 	cfg, err := config.LoadConfig("app.yaml")
 	if err != nil {
-		log.Fatal("Config load failed:", err)
+		log.Fatal("❌ Config load failed:", err)
 	}
 
-	// -------------------- 2️⃣ Connect DB --------------------
+	// -------------------- 2️⃣ Database --------------------
 	db := database.GetInstancepostgres(cfg)
 
-	// -------------------- 3️⃣ Init repository --------------------
+	// -------------------- 3️⃣ Repository --------------------
 	repo.PgSQLInit()
-	userRepo := repo.GetPgSQLRepository() // must implement IPgSQLRepository
+	pgRepo := repo.GetPgSQLRepository()
 
-	// -------------------- 4️⃣ Init email --------------------
+	// -------------------- 4️⃣ Email --------------------
 	email.Init(cfg.SMTP)
 
-	// -------------------- 5️⃣ Run migrations --------------------
+	// -------------------- 5️⃣ Migrations --------------------
 	migration.Migrate()
 
-	// -------------------- 6️⃣ Fiber app --------------------
+	// -------------------- 6️⃣ Fiber App --------------------
 	app := fiber.New(fiber.Config{
-		Prefork: cfg.Server.Prefork, // use config value
+		Prefork: cfg.Server.Prefork,
 	})
 
-	// -------------------- 7️⃣ Health check --------------------
 	app.Get("/health", func(c *fiber.Ctx) error {
-		return c.SendString("Fiber + DB + SMTP connected 🚀")
+		return c.SendString("OK 🚀")
 	})
 
-	// -------------------- 8️⃣ Initialize JWTManager --------------------
+	// -------------------- 7️⃣ JWT Manager --------------------
 	jwtManager := jwt.NewJWTManager(
 		cfg.JWT.AccessSecret,
 		cfg.JWT.RefreshSecret,
@@ -60,24 +59,44 @@ func main() {
 		time.Hour*time.Duration(cfg.JWT.RefreshTTLHours),
 	)
 
-	// -------------------- 9️⃣ Initialize Auth Service & Controller --------------------
-	authService := services.NewUserAuthService(userRepo, 5) // OTP expiry 5 min
+	// -------------------- 8️⃣ Auth --------------------
+	authService := services.NewUserAuthService(pgRepo, 5)
 	authController := controller.NewUserAuthController(authService, jwtManager)
 
-	// -------------------- 🔟 Initialize Product Service & Controller --------------------
-	productService := services.NewProductService(userRepo)
+	// -------------------- 9️⃣ Products --------------------
+	productService := services.NewProductService(pgRepo)
 	productController := controller.NewProductController(productService)
 
-	// -------------------- 1️⃣1️⃣ Register routes --------------------
-	router.Setup(app, authController, productController, jwtManager, userRepo)
+	// -------------------- 🔟 Cart --------------------
+	cartService := services.NewCartService(pgRepo)
+	cartController := controller.NewCartController(cartService)
 
-	// -------------------- 1️⃣2️⃣ Graceful shutdown --------------------
+	// -------------------- Wishlist --------------------
+	wishlistService := services.NewWishlistService(pgRepo)
+	wishlistController := controller.NewWishlistController(wishlistService)
+
+	orderService := services.NewOrderService(pgRepo)
+	orderController := controller.NewOrderController(orderService)
+
+	// -------------------- 1️⃣1️⃣ Routes --------------------
+	router.Setup(
+		app,
+		authController,
+		productController,
+		jwtManager,
+		pgRepo,
+		cartController,
+		wishlistController,
+        orderController,
+	)
+
+	// -------------------- 1️⃣2️⃣ Graceful Shutdown --------------------
 	quit := make(chan os.Signal, 1)
 	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
 
 	port := cfg.Server.Port
 	go func() {
-		log.Printf("🚀 Server started on http://localhost:%d\n", port)
+		log.Printf("🚀 Server running on http://localhost:%d\n", port)
 		if err := app.Listen(fmt.Sprintf(":%d", port)); err != nil {
 			log.Println("Server stopped:", err)
 		}

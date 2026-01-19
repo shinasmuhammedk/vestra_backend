@@ -12,6 +12,11 @@ func Migrate() {
 		&model.User{},
 		&model.Product{},
 		&model.ProductSize{},
+		&model.Cart{},
+		&model.CartItem{},
+        &model.Wishlist{},
+        &model.Order{},
+        &model.OrderItem{},
 	); err != nil {
 		log.Fatal("❌ Migration failed:", err)
 	}

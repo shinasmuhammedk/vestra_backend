@@ -49,3 +49,20 @@ func (s *ProductService) GetProductByID(id string) (*model.Product, error) {
 }
 
 
+
+
+// DeleteProduct soft deletes a product by ID
+func (s *ProductService) DeleteProduct(id string) error {
+	// Find the product first
+	var product model.Product
+	if err := s.repo.FindById(&product, id); err != nil {
+		return err
+	}
+
+	// Soft delete using repo.Delete
+	if err := s.repo.Delete(&product, id); err != nil {
+		return err
+	}
+
+	return nil
+}

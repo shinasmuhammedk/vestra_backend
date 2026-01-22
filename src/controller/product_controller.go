@@ -76,7 +76,7 @@ func (pc *ProductController) CreateProduct(c *fiber.Ctx) error {
 		// })
 		return response.Error(
 			c,
-			constant.BADGATEWAY,
+			constant.BADREQUEST,
 			"name, price and sizes are required",
 			"",
 			nil,
@@ -352,7 +352,7 @@ func (pc *PaymentController) GetAllPayments(c *fiber.Ctx) error {
 	if err != nil {
 		return response.Error(
 			c,
-			500,
+			constant.INTERNALSERVERERROR,
 			"Failed to fetch payments",
 			"",
 			err.Error(),
@@ -361,7 +361,7 @@ func (pc *PaymentController) GetAllPayments(c *fiber.Ctx) error {
 
 	return response.Success(
 		c,
-		200,
+		constant.SUCCESS,
 		"Payments fetched successfully",
 		"",
 		payments,

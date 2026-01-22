@@ -51,21 +51,21 @@ func Setup(
 	userGroup.Get("/payment/:id", paymentController.GetUserPaymentByID)
 	userGroup.Put("/payment/:id/cancel", paymentController.CancelPayment)
 
-	// ================= CART ROUTES =================
-	cartGroup := app.Group("/cart", middleware.AuthMiddleware(jwtManager))
+	// Cart
+	cartGroup := userGroup.Group("/cart")
 	cartGroup.Post("/", cartController.AddToCart)
 	cartGroup.Get("/", cartController.GetCart)
 	cartGroup.Put("/:id", cartController.UpdateCartItem)
 	cartGroup.Delete("/:id", cartController.RemoveCartItem)
 
-	// ================= WISHLIST ROUTES =================
-	wishlistGroup := app.Group("/wishlist", middleware.AuthMiddleware(jwtManager))
+	// Wishlist
+	wishlistGroup := userGroup.Group("/wishlist")
 	wishlistGroup.Post("/", wishlistController.AddToWishlist)
 	wishlistGroup.Get("/", wishlistController.GetWishlist)
 	wishlistGroup.Delete("/:product_id", wishlistController.RemoveFromWishlist)
 
-	// ================= ORDER ROUTES =================
-	orderGroup := app.Group("/orders", middleware.AuthMiddleware(jwtManager))
+	// Orders
+	orderGroup := userGroup.Group("/orders")
 	orderGroup.Get("/", orderController.GetUserOrders)
 	orderGroup.Post("/", orderController.PlaceOrder)
 	orderGroup.Get("/:id", orderController.GetOrderDetails)
@@ -73,31 +73,30 @@ func Setup(
 	orderGroup.Put("/:id/cancel", orderController.CancelOrder)
 	orderGroup.Delete("/:id", orderController.DeleteOrder)
 
-	// ================= ADDRESS ROUTES =================
+	// Address
 	addressGroup := userGroup.Group("/address")
 	addressGroup.Post("/", addressController.CreateAddress)
 	addressGroup.Get("/", addressController.GetAddresses)
 	addressGroup.Put("/:id", addressController.UpdateAddress)
 	addressGroup.Delete("/:id", addressController.DeleteAddress)
 
-	// ================= ADMIN ROUTES =================
+	// ================= ADMIN ROUTES (PROTECTED) =================
 	adminGroup := app.Group("/admin", middleware.AdminAuthMiddleware(jwtManager, pgRepo))
 
-	// Admin Users
+	// Users
 	adminGroup.Put("/users/:id/block", auth.ToggleUserBlock)
 
-	// Admin Products
+	// Products
 	adminGroup.Post("/products", productController.CreateProduct)
 	adminGroup.Patch("/products/:id", productController.UpdateProduct)
 	adminGroup.Delete("/products/:id", productController.DeleteProduct)
 
-	// Admin Orders
+	// Orders
 	adminGroup.Get("/orders", orderController.GetAllOrders)
 	adminGroup.Put("/order/:id", orderController.UpdateOrderStatusAdmin)
-    
-    
-    adminGroup.Get("/payments", paymentController.GetAllPayments)
-    adminGroup.Get("/payments/:id", paymentController.GetPaymentByIDAdmin)
 
-
+	// Payments
+	adminGroup.Get("/payments", paymentController.GetAllPayments)
+	adminGroup.Get("/payments/:id", paymentController.GetPaymentByIDAdmin)
+	adminGroup.Put("/payments/:id/status", paymentController.UpdatePaymentStatus) // ✅ update payment status
 }

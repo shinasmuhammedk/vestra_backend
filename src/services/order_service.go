@@ -294,7 +294,7 @@ func (s *OrderService) CancelOrder(userID, orderID string) (*model.Order, error)
             )
 	}
 
-	if err := s.repo.UpdateByFields(&order, oID, map[string]interface{}{"status": "CANCELLED"}); err != nil {
+	if err := s.repo.UpdateByFields(&order, oID, map[string]interface{}{"status": constant.CANCELLED}); err != nil {
 		return nil, apperror.New(
             constant.INTERNALSERVERERROR, 
             "", 
@@ -401,10 +401,10 @@ func (s *OrderService) UpdateOrderStatusByID(
 
 	// Validate status
 	validStatuses := map[string]bool{
-		"PLACED":    true,
-		"SHIPPED":   true,
-		"DELIVERED": true,
-		"CANCELLED": true,
+		constant.PLACED:    true,
+		constant.SHIPPED:   true,
+		constant.DELIVERED: true,
+		constant.CANCELLED: true,
 	}
 
 	if !validStatuses[status] {

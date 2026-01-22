@@ -1,10 +1,12 @@
 package services
 
 import (
-	"errors"
 	"time"
+
 	"vestra-ecommerce/src/model"
 	"vestra-ecommerce/src/repo"
+	constant "vestra-ecommerce/utils/constants"
+	"vestra-ecommerce/utils/utils/apperror"
 )
 
 type PaymentService struct {
@@ -15,151 +17,258 @@ func NewPaymentService(repo repo.IPgSQLRepository) *PaymentService {
 	return &PaymentService{repo: repo}
 }
 
-
+/* =======================
+   DTOs
+   ======================= */
 
 type VerifyPaymentRequest struct {
-    PaymentID     string `json:"payment_id" validate:"required"`
-    TransactionID string `json:"transaction_id" validate:"required"`
-    Status        string `json:"status" validate:"required"` // e.g., "success" or "failed"
+	PaymentID     string `json:"payment_id" validate:"required"`
+	TransactionID string `json:"transaction_id" validate:"required"`
+	Status        string `json:"status" validate:"required"`
 }
 
+/* =======================
+   CREATE PAYMENT
+   ======================= */
 
+func (s *PaymentService) CreatePayment(
+	userID string,
+	req model.PaymentRequest,
+) (*model.Payment, error) {
 
-// CreatePayment inserts a new payment record
-func (s *PaymentService) CreatePayment(userID string, req model.PaymentRequest) (*model.Payment, error) {
 	payment := &model.Payment{
 		UserID:        userID,
 		OrderID:       req.OrderID,
 		Amount:        req.Amount,
 		PaymentMethod: req.PaymentMethod,
-		Status:        "pending", // initially pending
+		Status:        constant.PENDING,
 		CreatedAt:     time.Now(),
 		UpdatedAt:     time.Now(),
 	}
 
-	// Use your generic repo Insert method
 	if err := s.repo.Insert(payment); err != nil {
-		return nil, err
+		return nil, apperror.New(
+			constant.INTERNALSERVERERROR,
+			"",
+			"Failed to create payment",
+		)
 	}
 
 	return payment, nil
 }
 
+/* =======================
+   VERIFY PAYMENT
+   ======================= */
 
-// VerifyPayment updates the payment status
-func (s *PaymentService) VerifyPayment(paymentID, transactionID, status string) (*model.Payment, error) {
-    payment := &model.Payment{}
+func (s *PaymentService) VerifyPayment(
+	paymentID,
+	transactionID,
+	status string,
+) (*model.Payment, error) {
 
-    // Find the payment by ID
-    if err := s.repo.FindById(payment, paymentID); err != nil {
-        return nil, errors.New("payment not found")
-    }
+	var payment model.Payment
 
-    // Update the status and transaction ID
-    update := map[string]interface{}{
-        "status":         status,
-        "transaction_id": transactionID,
-    }
+	if err := s.repo.FindById(&payment, paymentID); err != nil {
+		return nil, apperror.New(
+			constant.NOTFOUND,
+			"",
+			"Payment not found",
+		)
+	}
 
-    if err := s.repo.UpdateByFields(payment, paymentID, update); err != nil {
-        return nil, err
-    }
+	// Only allow valid statuses
+	switch status {
+	case constant.PAID, constant.FAILED:
+	default:
+		return nil, apperror.New(
+			constant.BADREQUEST,
+			"",
+			"Invalid payment status",
+		)
+	}
 
-    return payment, nil
+	updates := map[string]interface{}{
+		"status":         status,
+		"transaction_id": transactionID,
+		"updated_at":     time.Now(),
+	}
+
+	if err := s.repo.UpdateByFields(&model.Payment{}, paymentID, updates); err != nil {
+		return nil, apperror.New(
+			constant.INTERNALSERVERERROR,
+			"",
+			"Failed to verify payment",
+		)
+	}
+
+	// Reload
+	if err := s.repo.FindById(&payment, paymentID); err != nil {
+		return nil, apperror.ErrInternal
+	}
+
+	return &payment, nil
 }
 
+/* =======================
+   USER PAYMENTS
+   ======================= */
 
-
-// GetPaymentsByUser fetches all payments for a given user
 func (s *PaymentService) GetPaymentsByUser(userID string) ([]model.Payment, error) {
 	var payments []model.Payment
 
-	// Use the generic repo method FindAllWhere
 	if err := s.repo.FindAllWhere(&payments, "user_id = ?", userID); err != nil {
-		return nil, err
+		return nil, apperror.ErrInternal
 	}
 
 	return payments, nil
 }
 
+func (s *PaymentService) GetPaymentByID(
+	userID,
+	paymentID string,
+) (*model.Payment, error) {
 
-
-// GetPaymentByID fetches a single payment by ID for a user
-func (s *PaymentService) GetPaymentByID(userID, paymentID string) (*model.Payment, error) {
 	var payment model.Payment
 
-	err := s.repo.FindOneWhere(
+	if err := s.repo.FindOneWhere(
 		&payment,
 		"id = ? AND user_id = ?",
 		paymentID,
 		userID,
-	)
-	if err != nil {
-		return nil, errors.New("payment not found")
+	); err != nil {
+		return nil, apperror.New(
+			constant.NOTFOUND,
+			"",
+			"Payment not found",
+		)
 	}
 
 	return &payment, nil
 }
 
+/* =======================
+   CANCEL PAYMENT
+   ======================= */
 
+func (s *PaymentService) CancelPayment(
+	userID,
+	paymentID string,
+) (*model.Payment, error) {
 
-// CancelPayment cancels a pending payment
-func (s *PaymentService) CancelPayment(userID, paymentID string) (*model.Payment, error) {
 	var payment model.Payment
 
-	// Ensure payment exists & belongs to user
-	err := s.repo.FindOneWhere(
+	if err := s.repo.FindOneWhere(
 		&payment,
 		"id = ? AND user_id = ?",
 		paymentID,
 		userID,
-	)
-	if err != nil {
-		return nil, errors.New("payment not found")
+	); err != nil {
+		return nil, apperror.New(
+			constant.NOTFOUND,
+			"",
+			"Payment not found",
+		)
 	}
 
-	// Only pending payments can be cancelled
-	if payment.Status != "pending" {
-		return nil, errors.New("only pending payments can be cancelled")
+	if payment.Status != constant.PENDING {
+		return nil, apperror.New(
+			constant.BADREQUEST,
+			"",
+			"Only pending payments can be cancelled",
+		)
 	}
 
-	update := map[string]interface{}{
-		"status":     "cancelled",
+	updates := map[string]interface{}{
+		"status":     constant.CANCELLED,
 		"updated_at": time.Now(),
 	}
 
-	if err := s.repo.UpdateByFields(&payment, paymentID, update); err != nil {
-		return nil, err
+	if err := s.repo.UpdateByFields(&model.Payment{}, paymentID, updates); err != nil {
+		return nil, apperror.ErrInternal
 	}
 
-	// Reflect updated status in response
-	payment.Status = "cancelled"
-	payment.UpdatedAt = time.Now()
+	// Reload
+	if err := s.repo.FindById(&payment, paymentID); err != nil {
+		return nil, apperror.ErrInternal
+	}
 
 	return &payment, nil
 }
 
+/* =======================
+   ADMIN
+   ======================= */
 
-
-// GetAllPayments fetches all payments (admin)
 func (s *PaymentService) GetAllPayments() ([]model.Payment, error) {
 	var payments []model.Payment
 
 	if err := s.repo.FindAll(&payments); err != nil {
-		return nil, err
+		return nil, apperror.ErrInternal
 	}
 
 	return payments, nil
 }
 
+func (s *PaymentService) GetPaymentByIDAdmin(
+	paymentID string,
+) (*model.Payment, error) {
 
-
-// GetPaymentByIDAdmin fetches a payment by ID (admin)
-func (s *PaymentService) GetPaymentByIDAdmin(paymentID string) (*model.Payment, error) {
 	var payment model.Payment
 
 	if err := s.repo.FindById(&payment, paymentID); err != nil {
-		return nil, errors.New("payment not found")
+		return nil, apperror.New(
+			constant.NOTFOUND,
+			"",
+			"Payment not found",
+		)
+	}
+
+	return &payment, nil
+}
+
+/* =======================
+   ADMIN UPDATE STATUS
+   ======================= */
+
+func (s *PaymentService) UpdatePaymentStatus(
+	paymentID string,
+	status string,
+) (*model.Payment, error) {
+
+	var payment model.Payment
+
+	if err := s.repo.FindById(&payment, paymentID); err != nil {
+		return nil, apperror.New(
+			constant.NOTFOUND,
+			"",
+			"Payment not found",
+		)
+	}
+
+	switch status {
+	case constant.PENDING, constant.PAID, constant.FAILED, constant.CANCELLED:
+	default:
+		return nil, apperror.New(
+			constant.BADREQUEST,
+			"",
+			"Invalid payment status",
+		)
+	}
+
+	if err := s.repo.UpdateByFields(
+		&model.Payment{},
+		paymentID,
+		map[string]interface{}{
+			"status":     status,
+			"updated_at": time.Now(),
+		},
+	); err != nil {
+		return nil, apperror.ErrInternal
+	}
+
+	if err := s.repo.FindById(&payment, paymentID); err != nil {
+		return nil, apperror.ErrInternal
 	}
 
 	return &payment, nil

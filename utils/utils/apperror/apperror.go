@@ -26,6 +26,6 @@ func New(status int, code, message string) *AppError {
 // Common errors
 var (
 	ErrInvalidRequest = New(http.StatusBadRequest, constant.INVALID_REQUEST, "Invalid request body")
-	ErrUnauthorized   = New(http.StatusUnauthorized, "UNAUTHORIZED", "Unauthorized")
-	ErrInternal       = New(http.StatusInternalServerError, "INTERNAL_ERROR", "Internal server error")
+	ErrUnauthorized   = New(http.StatusUnauthorized, constant.UN_AUTHORIZED, "Unauthorized")
+	ErrInternal       = New(http.StatusInternalServerError, constant.INTERNAL_ERROR, "Internal server error")
 )

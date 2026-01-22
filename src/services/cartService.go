@@ -28,8 +28,8 @@ func (s *CartService) AddToCart(
 	uID, err := uuid.Parse(userID)
 	if err != nil {
 		return apperror.New(
-			400,
-			constant.INVALID_REQUEST,
+			constant.BADREQUEST,
+			"",
 			"invalid user id",
 		)
 	}
@@ -37,8 +37,8 @@ func (s *CartService) AddToCart(
 	pID, err := uuid.Parse(productID)
 	if err != nil {
 		return apperror.New(
-			400,
-			constant.INVALID_REQUEST,
+			constant.BADREQUEST,
+			"",
 			"invalid product id",
 		)
 	}
@@ -89,15 +89,13 @@ func (s *CartService) AddToCart(
 	return nil
 }
 
-
-
 func (s *CartService) GetUserCart(userID string) (*model.Cart, error) {
 
 	uID, err := uuid.Parse(userID)
 	if err != nil {
 		return nil, apperror.New(
-			400,
-			constant.INVALID_REQUEST,
+			constant.BADREQUEST,
+			"",
 			"invalid user id",
 		)
 	}
@@ -110,16 +108,14 @@ func (s *CartService) GetUserCart(userID string) (*model.Cart, error) {
 
 	if err != nil {
 		return nil, apperror.New(
-			404,
-			"CART_NOT_FOUND",
+			constant.NOTFOUND,
+			"",
 			"cart not found",
 		)
 	}
 
 	return &cart, nil
 }
-
-
 
 func (s *CartService) UpdateCartItem(
 	userID string,
@@ -136,8 +132,8 @@ func (s *CartService) UpdateCartItem(
 	iID, err := uuid.Parse(itemID)
 	if err != nil {
 		return apperror.New(
-			400,
-			constant.INVALID_REQUEST,
+			constant.BADREQUEST,
+			"",
 			"invalid cart item id",
 		)
 	}
@@ -145,7 +141,11 @@ func (s *CartService) UpdateCartItem(
 	// 1️⃣ Get cart for user
 	var cart model.Cart
 	if err := s.repo.FindOneWhere(&cart, "user_id = ?", uID); err != nil {
-		return apperror.New(404, "CART_NOT_FOUND", "cart not found")
+		return apperror.New(
+			constant.NOTFOUND,
+			"",
+			"cart not found",
+		)
 	}
 
 	// 2️⃣ Get item & verify ownership
@@ -156,7 +156,11 @@ func (s *CartService) UpdateCartItem(
 		iID,
 		cart.ID,
 	); err != nil {
-		return apperror.New(404, "ITEM_NOT_FOUND", "cart item not found")
+		return apperror.New(
+			constant.NOTFOUND,
+			"",
+			"cart item not found",
+		)
 	}
 
 	// 3️⃣ Build update fields
@@ -169,8 +173,8 @@ func (s *CartService) UpdateCartItem(
 	if quantity != nil {
 		if *quantity <= 0 {
 			return apperror.New(
-				400,
-				constant.INVALID_REQUEST,
+				constant.BADREQUEST,
+				"",
 				"quantity must be greater than zero",
 			)
 		}
@@ -179,8 +183,8 @@ func (s *CartService) UpdateCartItem(
 
 	if len(updates) == 0 {
 		return apperror.New(
-			400,
-			constant.INVALID_REQUEST,
+			constant.BADREQUEST,
+			"",
 			"no fields to update",
 		)
 	}
@@ -188,23 +192,33 @@ func (s *CartService) UpdateCartItem(
 	return s.repo.UpdateByFields(&model.CartItem{}, item.ID, updates)
 }
 
-
-
 // RemoveCartItem deletes a cart item by its ID
 func (s *CartService) RemoveCartItem(cartItemID string) error {
 	itemUUID, err := uuid.Parse(cartItemID)
 	if err != nil {
-		return apperror.New(400, "INVALID_ID", "Invalid cart item ID")
+		return apperror.New(
+			constant.BADREQUEST,
+			"",
+			"Invalid cart item ID",
+		)
 	}
 
 	var item model.CartItem
 	err = s.repo.FindById(&item, itemUUID)
 	if err != nil {
-		return apperror.New(404, "ITEM_NOT_FOUND", "Cart item not found")
+		return apperror.New(
+			constant.NOTFOUND,
+			"",
+			"Cart item not found",
+		)
 	}
 
 	if err := s.repo.Delete(&item, item.ID); err != nil {
-		return apperror.New(500, "DELETE_FAILED", err.Error())
+		return apperror.New(
+			constant.INTERNALSERVERERROR,
+			"",
+			err.Error(),
+		)
 	}
 
 	return nil

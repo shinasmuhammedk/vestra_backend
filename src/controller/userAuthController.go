@@ -36,17 +36,37 @@ func (c *UserAuthController) Signup(ctx *fiber.Ctx) error {
 	var req signupRequest
 	if err := ctx.BodyParser(&req); err != nil {
 		log.Println("Signup BodyParser error:", err)
-		return response.Error(ctx, constant.BADREQUEST, "Invalid request body", "INVALID_REQUEST", nil)
+		return response.Error(
+			ctx,
+			constant.BADREQUEST,
+			"Invalid request body",
+			"",
+			nil, // Error details optional
+		)
 	}
 
 	if err := c.authService.Signup(req.Name, req.Email, req.Password); err != nil {
 		if appErr, ok := err.(*apperror.AppError); ok {
+			// Use business-specific error code if available
 			return response.Error(ctx, appErr.Status, appErr.Message, appErr.Code, nil)
 		}
-		return response.Error(ctx, constant.INTERNALSERVERERROR, "Something went wrong", "INTERNAL_ERROR", err.Error())
+		return response.Error(
+			ctx,
+			constant.INTERNALSERVERERROR,
+			"Something went wrong",
+			"",
+			err.Error(),
+		)
 	}
 
-	return response.Success(ctx, constant.CREATED, "OTP sent to your email", "AUTH_OTP_SENT", nil)
+	// Success response (code optional, data omitted)
+	return response.Success(
+		ctx,
+		constant.CREATED,
+		"OTP sent to your email",
+		"",  // optional business code
+		nil, // optional data
+	)
 }
 
 // ------------------ Verify OTP ------------------
@@ -60,17 +80,35 @@ func (c *UserAuthController) VerifyOTP(ctx *fiber.Ctx) error {
 	var req verifyOTPRequest
 	if err := ctx.BodyParser(&req); err != nil {
 		log.Println("VerifyOTP BodyParser error:", err)
-		return response.Error(ctx, constant.BADREQUEST, "Invalid request body", "INVALID_REQUEST", nil)
+		return response.Error(
+			ctx,
+			constant.BADREQUEST,
+			"Invalid request body",
+			"",
+			nil,
+		)
 	}
 
 	if err := c.authService.VerifyOTP(req.Email, req.OTP); err != nil {
 		if appErr, ok := err.(*apperror.AppError); ok {
 			return response.Error(ctx, appErr.Status, appErr.Message, appErr.Code, nil)
 		}
-		return response.Error(ctx, constant.INTERNALSERVERERROR, "Something went wrong", "INTERNAL_ERROR", err.Error())
+		return response.Error(
+			ctx,
+			constant.INTERNALSERVERERROR,
+			"Something went wrong",
+			"",
+			err.Error(),
+		)
 	}
 
-	return response.Success(ctx, constant.SUCCESS, "Account verified successfully", "ACCOUNT_VERIFIED", nil)
+	return response.Success(
+		ctx,
+		constant.SUCCESS,
+		"Account verified successfully",
+		"",
+		nil,
+	)
 }
 
 // ------------------ Login ------------------
@@ -84,7 +122,13 @@ func (c *UserAuthController) Login(ctx *fiber.Ctx) error {
 	var req loginRequest
 	if err := ctx.BodyParser(&req); err != nil {
 		log.Println("Login BodyParser error:", err)
-		return response.Error(ctx, constant.BADREQUEST, "Invalid request payload", "INVALID_REQUEST", nil)
+		return response.Error(
+			ctx,
+			constant.BADREQUEST,
+			"Invalid request payload",
+			"",
+			nil,
+		)
 	}
 
 	log.Println("Login request received:", req.Email)
@@ -94,23 +138,47 @@ func (c *UserAuthController) Login(ctx *fiber.Ctx) error {
 		if appErr, ok := err.(*apperror.AppError); ok {
 			return response.Error(ctx, appErr.Status, appErr.Message, appErr.Code, nil)
 		}
-		return response.Error(ctx, constant.UNAUTHORIZED, "Invalid credentials", "LOGIN_FAILED", nil)
+		return response.Error(
+			ctx,
+			constant.UNAUTHORIZED,
+			"Invalid credentials",
+			"",
+			nil,
+		)
 	}
 
 	accessToken, err := c.jwtManager.GenerateAccessToken(user.ID.String())
 	if err != nil {
-		return response.Error(ctx, constant.INTERNALSERVERERROR, "Failed to generate access token", "TOKEN_GENERATION_FAILED", err.Error())
+		return response.Error(
+			ctx,
+			constant.INTERNALSERVERERROR,
+			"Failed to generate access token",
+			"",
+			err.Error(),
+		)
 	}
 
 	refreshToken, err := c.jwtManager.GenerateRefreshToken(user.ID.String())
 	if err != nil {
-		return response.Error(ctx, constant.INTERNALSERVERERROR, "Failed to generate refresh token", "TOKEN_GENERATION_FAILED", err.Error())
+		return response.Error(
+			ctx,
+			constant.INTERNALSERVERERROR,
+			"Failed to generate refresh token",
+			"",
+			err.Error(),
+		)
 	}
 
-	return response.Success(ctx, constant.SUCCESS, "Login successful", "LOGIN_SUCCESS", fiber.Map{
-		"access_token":  accessToken,
-		"refresh_token": refreshToken,
-	})
+	return response.Success(
+		ctx,
+		constant.SUCCESS,
+		"Login successful",
+		"",
+		fiber.Map{
+			"access_token":  accessToken,
+			"refresh_token": refreshToken,
+		},
+	)
 }
 
 // ------------------ Refresh Token ------------------
@@ -123,27 +191,57 @@ func (c *UserAuthController) RefreshToken(ctx *fiber.Ctx) error {
 	var req refreshRequest
 	if err := ctx.BodyParser(&req); err != nil {
 		log.Println("RefreshToken BodyParser error:", err)
-		return response.Error(ctx, constant.BADREQUEST, "Invalid request payload", "INVALID_REQUEST", nil)
+		return response.Error(
+			ctx,
+			constant.BADREQUEST,
+			"Invalid request payload",
+			"",
+			nil,
+		)
 	}
 
 	claims, err := c.jwtManager.ValidateRefreshToken(req.RefreshToken)
 	if err != nil {
-		return response.Error(ctx, constant.UNAUTHORIZED, "Invalid or expired refresh token", "INVALID_REFRESH_TOKEN", nil)
+		return response.Error(
+			ctx,
+			constant.UNAUTHORIZED,
+			"Invalid or expired refresh token",
+			"",
+			nil,
+		)
 	}
 
 	userID, ok := claims["user_id"].(string)
 	if !ok || userID == "" {
-		return response.Error(ctx, constant.UNAUTHORIZED, "Invalid token claims", "INVALID_REFRESH_TOKEN", nil)
+		return response.Error(
+			ctx,
+			constant.UNAUTHORIZED,
+			"Invalid token claims",
+			"",
+			nil,
+		)
 	}
 
 	accessToken, err := c.jwtManager.GenerateAccessToken(userID)
 	if err != nil {
-		return response.Error(ctx, constant.INTERNALSERVERERROR, "Failed to generate access token", "TOKEN_GENERATION_FAILED", err.Error())
+		return response.Error(
+			ctx,
+			constant.INTERNALSERVERERROR,
+			"Failed to generate access token",
+			"",
+			err.Error(),
+		)
 	}
 
-	return response.Success(ctx, constant.SUCCESS, "Access token refreshed", "ACCESS_TOKEN_REFRESHED", fiber.Map{
-		"access_token": accessToken,
-	})
+	return response.Success(
+		ctx,
+		constant.SUCCESS,
+		"Access token refreshed",
+		"",
+		fiber.Map{
+			"access_token": accessToken,
+		},
+	)
 }
 
 type forgotPasswordRequest struct {
@@ -157,7 +255,7 @@ func (c *UserAuthController) ForgotPassword(ctx *fiber.Ctx) error {
 			ctx,
 			constant.BADREQUEST,
 			"Invalid request body",
-			"INVALID_REQUEST",
+			"",
 			nil,
 		)
 	}
@@ -171,7 +269,7 @@ func (c *UserAuthController) ForgotPassword(ctx *fiber.Ctx) error {
 			ctx,
 			constant.INTERNALSERVERERROR,
 			"Something went wrong",
-			"INTERNAL_ERROR",
+			"",
 			err.Error(),
 		)
 	}
@@ -180,7 +278,7 @@ func (c *UserAuthController) ForgotPassword(ctx *fiber.Ctx) error {
 		ctx,
 		constant.SUCCESS,
 		"If email exists, OTP sent to the inbox",
-		"FORGOT_PASSWORD_EMAIL_SENT",
+		"",
 		nil,
 	)
 }
@@ -199,7 +297,7 @@ func (c *UserAuthController) ResetPassword(ctx *fiber.Ctx) error {
 			ctx,
 			constant.BADREQUEST,
 			"Invalid request body",
-			"INVALID_REQUEST",
+			"",
 			nil,
 		)
 	}
@@ -209,7 +307,7 @@ func (c *UserAuthController) ResetPassword(ctx *fiber.Ctx) error {
 			ctx,
 			constant.BADREQUEST,
 			"All fields are required",
-			"FIELDS_REQUIRED",
+			"",
 			nil,
 		)
 	}
@@ -227,7 +325,7 @@ func (c *UserAuthController) ResetPassword(ctx *fiber.Ctx) error {
 			ctx,
 			constant.INTERNALSERVERERROR,
 			"Something went wrong",
-			"INTERNAL_ERROR",
+			"",
 			err.Error(),
 		)
 	}
@@ -236,7 +334,7 @@ func (c *UserAuthController) ResetPassword(ctx *fiber.Ctx) error {
 		ctx,
 		constant.SUCCESS,
 		"Password reset successfully",
-		"PASSWORD_RESET_SUCCESS",
+		"",
 		nil,
 	)
 }
@@ -249,7 +347,7 @@ func (c *UserAuthController) GetProfile(ctx *fiber.Ctx) error {
 			ctx,
 			constant.UNAUTHORIZED,
 			"Unauthorized",
-			"UNAUTHORIZED",
+			"",
 			nil,
 		)
 	}
@@ -265,7 +363,7 @@ func (c *UserAuthController) GetProfile(ctx *fiber.Ctx) error {
 			ctx,
 			constant.INTERNALSERVERERROR,
 			"Something went wrong",
-			"INTERNAL_ERROR",
+			"",
 			err.Error(),
 		)
 	}
@@ -274,7 +372,7 @@ func (c *UserAuthController) GetProfile(ctx *fiber.Ctx) error {
 		ctx,
 		constant.SUCCESS,
 		"Profile fetched successfully",
-		"PROFILE_FETCHED",
+		"",
 		user,
 	)
 }
@@ -290,7 +388,7 @@ func (c *UserAuthController) UpdateProfile(ctx *fiber.Ctx) error {
 			ctx,
 			constant.BADREQUEST,
 			"Invalid request body",
-			"INVALID_REQUEST",
+			"",
 			nil,
 		)
 	}
@@ -300,7 +398,7 @@ func (c *UserAuthController) UpdateProfile(ctx *fiber.Ctx) error {
 			ctx,
 			constant.BADREQUEST,
 			"Name is required",
-			"INVALID_REQUEST",
+			"",
 			nil,
 		)
 	}
@@ -311,7 +409,7 @@ func (c *UserAuthController) UpdateProfile(ctx *fiber.Ctx) error {
 			ctx,
 			constant.UNAUTHORIZED,
 			"Unauthorized",
-			"UNAUTHORIZED",
+			"",
 			nil,
 		)
 	}
@@ -321,41 +419,68 @@ func (c *UserAuthController) UpdateProfile(ctx *fiber.Ctx) error {
 		if appErr, ok := err.(*apperror.AppError); ok {
 			return response.Error(ctx, appErr.Status, appErr.Message, appErr.Code, nil)
 		}
-		return response.Error(ctx, constant.INTERNALSERVERERROR, "Something went wrong", "INTERNAL_ERROR", err.Error())
+		return response.Error(
+			ctx,
+			constant.INTERNALSERVERERROR,
+			"Something went wrong",
+			"",
+			err.Error(),
+		)
 	}
 
 	return response.Success(
 		ctx,
 		constant.SUCCESS,
 		"Profile updated successfully",
-		"PROFILE_UPDATED",
+		"",
 		user,
 	)
 }
-
-
-
 
 func (c *UserAuthController) ToggleUserBlock(ctx *fiber.Ctx) error {
 	// 1️⃣ Get current user ID from JWT
 	currentUserID := ctx.Locals("user_id")
 	if currentUserID == nil {
-		return response.Error(ctx, constant.UNAUTHORIZED, "Unauthorized", "UNAUTHORIZED", nil)
+		return response.Error(
+			ctx,
+			constant.UNAUTHORIZED,
+			"Unauthorized",
+			"",
+			nil,
+		)
 	}
 
 	// 2️⃣ Check if current user is ADMIN
 	currentUser, err := c.authService.GetByID(currentUserID.(string))
 	if err != nil {
-		return response.Error(ctx, constant.UNAUTHORIZED, "Unauthorized", "UNAUTHORIZED", nil)
+		return response.Error(
+			ctx,
+			constant.UNAUTHORIZED,
+			"Unauthorized",
+			"",
+			nil,
+		)
 	}
 	if currentUser.Role != "admin" {
-		return response.Error(ctx, constant.FORBIDDEN, "Admin access required", "FORBIDDEN", nil)
+		return response.Error(
+			ctx,
+			constant.FORBIDDEN,
+			"Admin access required",
+			"",
+			nil,
+		)
 	}
 
 	// 3️⃣ Get target user ID from URL
 	targetID := ctx.Params("id")
 	if targetID == "" {
-		return response.Error(ctx, constant.BADREQUEST, "User ID required", "INVALID_REQUEST", nil)
+		return response.Error(
+			ctx,
+			constant.BADREQUEST,
+			"User ID required",
+			"",
+			nil,
+		)
 	}
 
 	// 4️⃣ Call service to toggle is_blocked
@@ -364,8 +489,20 @@ func (c *UserAuthController) ToggleUserBlock(ctx *fiber.Ctx) error {
 		if appErr, ok := err.(*apperror.AppError); ok {
 			return response.Error(ctx, appErr.Status, appErr.Message, appErr.Code, nil)
 		}
-		return response.Error(ctx, constant.INTERNALSERVERERROR, "Something went wrong", "INTERNAL_ERROR", err.Error())
+		return response.Error(
+			ctx,
+			constant.INTERNALSERVERERROR,
+			"wdhb",
+			"Something went wrong",
+			err.Error(),
+		)
 	}
 
-	return response.Success(ctx, constant.SUCCESS, "User block status toggled", "USER_BLOCK_TOGGLED", updatedUser)
+	return response.Success(
+		ctx,
+		constant.SUCCESS,
+		"User block status toggled",
+		"",
+		updatedUser,
+	)
 }

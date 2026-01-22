@@ -7,8 +7,8 @@ import (
 
 type AppError struct {
 	Status  int
-	Code    string
 	Message string
+	Code    string
 }
 
 func (e *AppError) Error() string {
@@ -18,8 +18,8 @@ func (e *AppError) Error() string {
 func New(status int, code, message string) *AppError {
 	return &AppError{
 		Status:  status,
-		Code:    code,
 		Message: message,
+		Code:    code,
 	}
 }
 

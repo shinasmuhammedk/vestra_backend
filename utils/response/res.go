@@ -1,9 +1,10 @@
 package response
 
 type APIResponse struct {
-	Success bool        `json:"success"`
-	Message string      `json:"message"`
-	Data    interface{} `json:"data,omitempty"`
-	Error   interface{} `json:"error,omitempty"`
-	Code    string      `json:"code"`
+	StatusCode int         `json:"status"`           // HTTP status code
+	// Success    bool        `json:"success"`          // success/failure
+	Message    string      `json:"message"`          // human-readable message
+	Data       interface{} `json:"data,omitempty"`   // optional data
+	Error      interface{} `json:"error,omitempty"`  // optional error
+	Code       string      `json:"code,omitempty"`   // only included if set
 }

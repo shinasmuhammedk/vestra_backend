@@ -13,13 +13,16 @@ func Setup(
 	app *fiber.App,
 	auth *controller.UserAuthController,
 	productController *controller.ProductController,
+	paymentController *controller.PaymentController,
+	addressController *controller.AddressController,
 	jwtManager *jwt.JWTManager,
 	pgRepo repo.IPgSQLRepository,
 	cartController *controller.CartController,
 	wishlistController *controller.WishlistController,
 	orderController *controller.OrderController,
 ) {
-	// ---------------- Auth Routes (Public) ----------------
+
+	// ================= AUTH ROUTES (PUBLIC) =================
 	authGroup := app.Group("/auth")
 	authGroup.Post("/signup", auth.Signup)
 	authGroup.Post("/verify-otp", auth.VerifyOTP)
@@ -29,41 +32,72 @@ func Setup(
 
 	app.Post("/refresh", auth.RefreshToken)
 
-	// ---------------- Public Products ----------------
+	// ================= PUBLIC PRODUCT ROUTES =================
 	app.Get("/products", productController.GetAllProducts)
+	app.Get("/products/search", productController.SearchProducts)
 	app.Get("/products/:id", productController.GetProductByID)
 
-	// ----------------- User Routes (Protected) -----------------
+	// ================= USER ROUTES (PROTECTED) =================
 	userGroup := app.Group("/user", middleware.AuthMiddleware(jwtManager))
+
+	// Profile
 	userGroup.Get("/profile", auth.GetProfile)
 	userGroup.Put("/profile", auth.UpdateProfile)
 
+	// Payments
+	userGroup.Post("/payment", paymentController.CreatePayment)
+	userGroup.Post("/payment/verify", paymentController.VerifyPayment)
+	userGroup.Get("/payment", paymentController.GetUserPayments)
+	userGroup.Get("/payment/:id", paymentController.GetUserPaymentByID)
+	userGroup.Put("/payment/:id/cancel", paymentController.CancelPayment)
+
+	// ================= CART ROUTES =================
 	cartGroup := app.Group("/cart", middleware.AuthMiddleware(jwtManager))
 	cartGroup.Post("/", cartController.AddToCart)
 	cartGroup.Get("/", cartController.GetCart)
 	cartGroup.Put("/:id", cartController.UpdateCartItem)
 	cartGroup.Delete("/:id", cartController.RemoveCartItem)
 
+	// ================= WISHLIST ROUTES =================
 	wishlistGroup := app.Group("/wishlist", middleware.AuthMiddleware(jwtManager))
 	wishlistGroup.Post("/", wishlistController.AddToWishlist)
 	wishlistGroup.Get("/", wishlistController.GetWishlist)
 	wishlistGroup.Delete("/:product_id", wishlistController.RemoveFromWishlist)
 
+	// ================= ORDER ROUTES =================
 	orderGroup := app.Group("/orders", middleware.AuthMiddleware(jwtManager))
 	orderGroup.Get("/", orderController.GetUserOrders)
 	orderGroup.Post("/", orderController.PlaceOrder)
-	orderGroup.Put("/:id/status", orderController.UpdateOrderStatusUser) // User endpoint to update own order
-	orderGroup.Get("/:id", orderController.GetOrderDetails)              // GET /orders/:id
+	orderGroup.Get("/:id", orderController.GetOrderDetails)
+	orderGroup.Put("/:id/status", orderController.UpdateOrderStatusUser)
+	orderGroup.Put("/:id/cancel", orderController.CancelOrder)
 	orderGroup.Delete("/:id", orderController.DeleteOrder)
-	orderGroup.Put("/:id/cancel", orderController.CancelOrder) // ✅ NEW
 
-	// ----------------- Admin Routes -----------------
+	// ================= ADDRESS ROUTES =================
+	addressGroup := userGroup.Group("/address")
+	addressGroup.Post("/", addressController.CreateAddress)
+	addressGroup.Get("/", addressController.GetAddresses)
+	addressGroup.Put("/:id", addressController.UpdateAddress)
+	addressGroup.Delete("/:id", addressController.DeleteAddress)
+
+	// ================= ADMIN ROUTES =================
 	adminGroup := app.Group("/admin", middleware.AdminAuthMiddleware(jwtManager, pgRepo))
+
+	// Admin Users
 	adminGroup.Put("/users/:id/block", auth.ToggleUserBlock)
+
+	// Admin Products
 	adminGroup.Post("/products", productController.CreateProduct)
+	adminGroup.Patch("/products/:id", productController.UpdateProduct)
 	adminGroup.Delete("/products/:id", productController.DeleteProduct)
 
-	// Admin Order routes
+	// Admin Orders
 	adminGroup.Get("/orders", orderController.GetAllOrders)
-	adminGroup.Put("/order/:id", orderController.UpdateOrderStatusAdmin) // Admin updates any order
+	adminGroup.Put("/order/:id", orderController.UpdateOrderStatusAdmin)
+    
+    
+    adminGroup.Get("/payments", paymentController.GetAllPayments)
+    adminGroup.Get("/payments/:id", paymentController.GetPaymentByIDAdmin)
+
+
 }

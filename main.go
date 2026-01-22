@@ -75,22 +75,33 @@ func main() {
 	wishlistService := services.NewWishlistService(pgRepo)
 	wishlistController := controller.NewWishlistController(wishlistService)
 
+	// -------------------- 1️⃣0️⃣ Orders --------------------
 	orderService := services.NewOrderService(pgRepo)
 	orderController := controller.NewOrderController(orderService)
 
-	// -------------------- 1️⃣1️⃣ Routes --------------------
+	// -------------------- 1️⃣1️⃣ Address --------------------
+	addressService := services.NewAddressService(pgRepo)                // implement this service
+	addressController := controller.NewAddressController(addressService) // implement this controller
+
+    
+    
+    paymentService := services.NewPaymentService(pgRepo)
+    paymentController := controller.NewPaymentController(paymentService)
+	// -------------------- 1️⃣2️⃣ Routes --------------------
 	router.Setup(
 		app,
 		authController,
 		productController,
+        paymentController,
+		addressController, // <-- Add AddressController here
 		jwtManager,
 		pgRepo,
 		cartController,
 		wishlistController,
-        orderController,
+		orderController,
 	)
 
-	// -------------------- 1️⃣2️⃣ Graceful Shutdown --------------------
+	// -------------------- 1️⃣3️⃣ Graceful Shutdown --------------------
 	quit := make(chan os.Signal, 1)
 	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
 

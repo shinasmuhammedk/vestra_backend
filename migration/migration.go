@@ -17,6 +17,8 @@ func Migrate() {
         &model.Wishlist{},
         &model.Order{},
         &model.OrderItem{},
+        &model.UserAddress{},
+        &model.Payment{},
 	); err != nil {
 		log.Fatal("❌ Migration failed:", err)
 	}

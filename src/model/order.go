@@ -13,7 +13,8 @@ type Order struct {
 	Total     int         `json:"total"`
 	Status    string      `json:"status"`
 	Items     []OrderItem `gorm:"foreignKey:OrderID;constraint:OnDelete:CASCADE" json:"items"`
-	CreatedAt time.Time   `json:"CreatedAt"`
+	CreatedAt time.Time   `json:"created_at"`
+	UpdatedAt time.Time  `json:"updated_at"`
 }
 
 func (o *Order) BeforeCreate(tx *gorm.DB) (err error) {

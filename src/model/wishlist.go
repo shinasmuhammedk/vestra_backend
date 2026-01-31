@@ -12,8 +12,8 @@ type Wishlist struct {
 	UserID    uuid.UUID `gorm:"type:uuid;not null" json:"user_id"`
 	ProductID uuid.UUID `gorm:"type:uuid;not null" json:"product_id"`
 	Product   Product   `gorm:"foreignKey:ProductID;references:ID" json:"product"`
-	CreatedAt time.Time
-	UpdatedAt time.Time
+	CreatedAt time.Time `json:"created_at"`
+	UpdatedAt time.Time `json:"updated_at"`
 }
 
 func (w *Wishlist) BeforeCreate(tx *gorm.DB) (err error) {

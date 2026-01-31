@@ -1,337 +1,198 @@
+// controller/order_controller.go
 package controller
 
 import (
+	"fmt"
 	"vestra-ecommerce/src/services"
 	constant "vestra-ecommerce/utils/constants"
 	"vestra-ecommerce/utils/response"
 	"vestra-ecommerce/utils/utils/apperror"
+	validator "vestra-ecommerce/utils/validation"
 
 	"github.com/gofiber/fiber/v2"
 )
 
 type OrderController struct {
-	service *services.OrderService
+	services *services.OrderService
 }
 
-func NewOrderController(service *services.OrderService) *OrderController {
-	return &OrderController{service: service}
+func NewOrderController(s *services.OrderService) *OrderController {
+	return &OrderController{services: s}
 }
-
-/* =======================
-   PLACE ORDER
-   ======================= */
 
 func (oc *OrderController) PlaceOrder(c *fiber.Ctx) error {
 	userID := c.Locals("user_id").(string)
+	
+	var req services.PlaceOrderRequest
+	if err := c.BodyParser(&req); err != nil {
+		return response.Error(c, constant.BADREQUEST, "Invalid request body", "INVALID_BODY", err.Error())
+	}
+    
+    // DEBUG: Check what you're receiving
+    fmt.Printf("DEBUG - AddressID received: %q\n", req.AddressID)
+    fmt.Printf("DEBUG - Type received: %q\n", req.Type)
 
-	order, err := oc.service.PlaceOrder(userID)
+	// Set default type if not provided
+	if req.Type == "" {
+		req.Type = "cart"
+	}
+
+	// Validate request using your custom validator function (not Struct method)
+	if err := validator.Validate(req); err != nil {
+		return response.Error(c, constant.BADREQUEST, "Validation failed", "VALIDATION_ERROR", err.Error())
+	}
+
+	order, err := oc.services.PlaceOrder(userID, req)
 	if err != nil {
 		if appErr, ok := err.(*apperror.AppError); ok {
 			return response.Error(c, appErr.Status, appErr.Message, appErr.Code, nil)
 		}
-
-		return response.Error(
-			c,
-			constant.BADREQUEST,
-			"Failed to place order",
-			"",
-			err.Error(),
-		)
+		return response.Error(c, constant.INTERNALSERVERERROR, "Failed to place order", "ORDER_ERROR", err.Error())
 	}
 
-	return response.Success(
-		c,
-		constant.CREATED,
-		"Order placed successfully",
-		"",
-		order,
-	)
+	return response.Success(c, constant.CREATED, "Order placed successfully", "ORDER_CREATED", order)
 }
 
-/* =======================
-   GET USER ORDERS
-   ======================= */
+func (oc *OrderController) GetMyOrders(c *fiber.Ctx) error {
+	userID := c.Locals("user_id").(string)
+	
+	orders, err := oc.services.GetUserOrders(userID)
+	if err != nil {
+		if appErr, ok := err.(*apperror.AppError); ok {
+			return response.Error(c, appErr.Status, appErr.Message, appErr.Code, nil)
+		}
+		return response.Error(c, constant.INTERNALSERVERERROR, "Failed to fetch orders", "FETCH_ERROR", err.Error())
+	}
+
+	return response.Success(c, constant.SUCCESS, "Orders retrieved successfully", "ORDERS_FETCHED", orders)
+}
+
+func (oc *OrderController) GetOrderDetails(c *fiber.Ctx) error {
+	userID := c.Locals("user_id").(string)
+	orderID := c.Params("id")
+
+	order, err := oc.services.GetOrderDetails(userID, orderID)
+	if err != nil {
+		if appErr, ok := err.(*apperror.AppError); ok {
+			return response.Error(c, appErr.Status, appErr.Message, appErr.Code, nil)
+		}
+		return response.Error(c, constant.INTERNALSERVERERROR, "Failed to fetch order details", "FETCH_ERROR", err.Error())
+	}
+
+	return response.Success(c, constant.SUCCESS, "Order details retrieved", "ORDER_FETCHED", order)
+}
+
+
+// controller/order_controller.go - Add these methods
 
 func (oc *OrderController) GetUserOrders(c *fiber.Ctx) error {
 	userID := c.Locals("user_id").(string)
-
-	orders, err := oc.service.GetOrdersByUser(userID)
-	if err != nil {
-		return response.Error(
-			c,
-			constant.INTERNALSERVERERROR,
-			"Failed to fetch orders",
-			"",
-			err.Error(),
-		)
-	}
-
-	return response.Success(
-		c,
-		constant.SUCCESS,
-		"Orders fetched successfully",
-		"",
-		orders,
-	)
-}
-
-/* =======================
-   GET ALL ORDERS (ADMIN)
-   ======================= */
-
-func (oc *OrderController) GetAllOrders(c *fiber.Ctx) error {
-	orders, err := oc.service.GetAllOrders()
-	if err != nil {
-		return response.Error(
-			c,
-			constant.INTERNALSERVERERROR,
-			"Failed to fetch orders",
-			"",
-			err.Error(),
-		)
-	}
-
-	return response.Success(
-		c,
-		constant.SUCCESS,
-		"All orders fetched successfully",
-		"",
-		orders,
-	)
-}
-
-/* =======================
-   UPDATE ORDER STATUS
-   ======================= */
-
-type UpdateOrderStatusRequest struct {
-	Status string `json:"status"`
-}
-
-func (oc *OrderController) UpdateOrderStatus(c *fiber.Ctx) error {
-	orderID := c.Params("id")
-	if orderID == "" {
-		return response.Error(
-			c,
-			constant.BADREQUEST,
-			"order id is required",
-			"",
-			nil,
-		)
-	}
-
-	var req UpdateOrderStatusRequest
-	if err := c.BodyParser(&req); err != nil {
-		return response.Error(
-			c,
-			constant.BADREQUEST,
-			"Invalid request body",
-			"",
-			nil,
-		)
-	}
-
-	order, err := oc.service.UpdateOrderStatus(orderID, req.Status)
+	
+	orders, err := oc.services.GetUserOrders(userID)
 	if err != nil {
 		if appErr, ok := err.(*apperror.AppError); ok {
 			return response.Error(c, appErr.Status, appErr.Message, appErr.Code, nil)
 		}
-		return response.Error(
-			c,
-			constant.BADREQUEST,
-			"Failed to update order status",
-			"",
-			err.Error(),
-		)
+		return response.Error(c, constant.INTERNALSERVERERROR, "Failed to fetch orders", "FETCH_ERROR", err.Error())
 	}
 
-	return response.Success(
-		c,
-		constant.SUCCESS,
-		"Order status updated",
-		"",
-		order,
-	)
+	return response.Success(c, constant.SUCCESS, "Orders retrieved successfully", "ORDERS_FETCHED", orders)
 }
 
-/* =======================
-   UPDATE ORDER STATUS (ADMIN)
-   ======================= */
+func (oc *OrderController) UpdateOrderStatusUser(c *fiber.Ctx) error {
+	userID := c.Locals("user_id").(string)
+	orderID := c.Params("id")
+
+	var req struct {
+		Status string `json:"status" validate:"required,oneof=CANCELLED"`
+	}
+	
+	if err := c.BodyParser(&req); err != nil {
+		return response.Error(c, constant.BADREQUEST, "Invalid request body", "INVALID_BODY", err.Error())
+	}
+
+	if err := validator.Validate(req); err != nil {
+		return response.Error(c, constant.BADREQUEST, "Validation failed", "VALIDATION_ERROR", err.Error())
+	}
+
+	if err := oc.services.UpdateOrderStatusUser(userID, orderID, req.Status); err != nil {
+		if appErr, ok := err.(*apperror.AppError); ok {
+			return response.Error(c, appErr.Status, appErr.Message, appErr.Code, nil)
+		}
+		return response.Error(c, constant.INTERNALSERVERERROR, "Failed to update order status", "UPDATE_ERROR", err.Error())
+	}
+
+	return response.Success(c, constant.SUCCESS, "Order status updated successfully", "STATUS_UPDATED", nil)
+}
+
+func (oc *OrderController) CancelOrder(c *fiber.Ctx) error {
+	userID := c.Locals("user_id").(string)
+	orderID := c.Params("id")
+
+	if err := oc.services.CancelOrder(userID, orderID); err != nil {
+		if appErr, ok := err.(*apperror.AppError); ok {
+			return response.Error(c, appErr.Status, appErr.Message, appErr.Code, nil)
+		}
+		return response.Error(c, constant.INTERNALSERVERERROR, "Failed to cancel order", "CANCEL_ERROR", err.Error())
+	}
+
+	return response.Success(c, constant.SUCCESS, "Order cancelled successfully", "ORDER_CANCELLED", nil)
+}
+
+func (oc *OrderController) DeleteOrder(c *fiber.Ctx) error {
+	userID := c.Locals("user_id").(string)
+	orderID := c.Params("id")
+
+	if err := oc.services.DeleteOrder(userID, orderID); err != nil {
+		if appErr, ok := err.(*apperror.AppError); ok {
+			return response.Error(c, appErr.Status, appErr.Message, appErr.Code, nil)
+		}
+		return response.Error(c, constant.INTERNALSERVERERROR, "Failed to delete order", "DELETE_ERROR", err.Error())
+	}
+
+	return response.Success(c, constant.SUCCESS, "Order deleted successfully", "ORDER_DELETED", nil)
+}
+
+
+// controller/order_controller.go - Add these admin methods
+
+func (oc *OrderController) GetAllOrders(c *fiber.Ctx) error {
+	// Optional query params for filtering
+	status := c.Query("status")
+	userID := c.Query("user_id")
+	
+	orders, err := oc.services.GetAllOrders(status, userID)
+	if err != nil {
+		if appErr, ok := err.(*apperror.AppError); ok {
+			return response.Error(c, appErr.Status, appErr.Message, appErr.Code, nil)
+		}
+		return response.Error(c, constant.INTERNALSERVERERROR, "Failed to fetch orders", "FETCH_ERROR", err.Error())
+	}
+
+	return response.Success(c, constant.SUCCESS, "Orders retrieved successfully", "ORDERS_FETCHED", orders)
+}
 
 func (oc *OrderController) UpdateOrderStatusAdmin(c *fiber.Ctx) error {
 	orderID := c.Params("id")
-	if orderID == "" {
-		return response.Error(c, constant.BADREQUEST, "order id is required", "", nil)
-	}
 
-	var req UpdateOrderStatusRequest
+	var req struct {
+		Status string `json:"status" validate:"required,oneof=PLACED PROCESSING SHIPPED DELIVERED CANCELLED"`
+	}
+	
 	if err := c.BodyParser(&req); err != nil {
-		return response.Error(c, constant.BADREQUEST, "Invalid request body", "", nil)
+		return response.Error(c, constant.BADREQUEST, "Invalid request body", "INVALID_BODY", err.Error())
 	}
 
-	order, err := oc.service.UpdateOrderStatusByID("", orderID, req.Status, true)
-	if err != nil {
+	if err := validator.Validate(req); err != nil {
+		return response.Error(c, constant.BADREQUEST, "Validation failed", "VALIDATION_ERROR", err.Error())
+	}
+
+	if err := oc.services.UpdateOrderStatusAdmin(orderID, req.Status); err != nil {
 		if appErr, ok := err.(*apperror.AppError); ok {
 			return response.Error(c, appErr.Status, appErr.Message, appErr.Code, nil)
 		}
-		return response.Error(
-			c,
-			constant.BADREQUEST,
-			"Failed to update order status",
-			"",
-			err.Error(),
-		)
+		return response.Error(c, constant.INTERNALSERVERERROR, "Failed to update order status", "UPDATE_ERROR", err.Error())
 	}
 
-	return response.Success(
-		c,
-		constant.SUCCESS,
-		"Order status updated",
-		"",
-		order,
-	)
-}
-
-/* =======================
-   UPDATE ORDER STATUS (USER)
-   ======================= */
-
-func (oc *OrderController) UpdateOrderStatusUser(c *fiber.Ctx) error {
-	orderID := c.Params("id")
-	if orderID == "" {
-		return response.Error(c, constant.BADREQUEST, "order id is required", "", nil)
-	}
-
-	var req UpdateOrderStatusRequest
-	if err := c.BodyParser(&req); err != nil {
-		return response.Error(c, constant.BADREQUEST, "Invalid request body", "", nil)
-	}
-
-	userID := c.Locals("user_id").(string)
-
-	order, err := oc.service.UpdateOrderStatusByID(userID, orderID, req.Status, false)
-	if err != nil {
-		if appErr, ok := err.(*apperror.AppError); ok {
-			return response.Error(c, appErr.Status, appErr.Message, appErr.Code, nil)
-		}
-		return response.Error(
-			c,
-			constant.BADREQUEST,
-			"Failed to update order status",
-			"",
-			err.Error(),
-		)
-	}
-
-	return response.Success(
-		c,
-		constant.SUCCESS,
-		"Order status updated",
-		"",
-		order,
-	)
-}
-
-/* =======================
-   GET ORDER DETAILS
-   ======================= */
-
-func (oc *OrderController) GetOrderDetails(c *fiber.Ctx) error {
-	orderID := c.Params("id")
-	if orderID == "" {
-		return response.Error(c, constant.BADREQUEST, "order id is required", "", nil)
-	}
-
-	userID := c.Locals("user_id").(string)
-
-	order, err := oc.service.GetOrderByID(userID, orderID)
-	if err != nil {
-		if appErr, ok := err.(*apperror.AppError); ok {
-			return response.Error(c, appErr.Status, appErr.Message, appErr.Code, nil)
-		}
-		return response.Error(
-			c,
-			constant.BADREQUEST,
-			"Failed to fetch order",
-			"",
-			err.Error(),
-		)
-	}
-
-	return response.Success(
-		c,
-		constant.SUCCESS,
-		"Order fetched successfully",
-		"",
-		order,
-	)
-}
-
-/* =======================
-   DELETE ORDER
-   ======================= */
-
-func (oc *OrderController) DeleteOrder(c *fiber.Ctx) error {
-	orderID := c.Params("id")
-	if orderID == "" {
-		return response.Error(c, constant.BADREQUEST, "order id is required", "", nil)
-	}
-
-	userID := c.Locals("user_id").(string)
-
-	if err := oc.service.DeleteOrder(userID, orderID); err != nil {
-		if appErr, ok := err.(*apperror.AppError); ok {
-			return response.Error(c, appErr.Status, appErr.Message, appErr.Code, nil)
-		}
-		return response.Error(
-			c,
-			constant.BADREQUEST,
-			"Failed to delete order",
-			"",
-			err.Error(),
-		)
-	}
-
-	return response.Success(
-		c,
-		constant.SUCCESS,
-		"Order deleted successfully",
-		"",
-		nil,
-	)
-}
-
-/* =======================
-   CANCEL ORDER
-   ======================= */
-
-func (oc *OrderController) CancelOrder(c *fiber.Ctx) error {
-	orderID := c.Params("id")
-	if orderID == "" {
-		return response.Error(c, constant.BADREQUEST, "order id is required", "", nil)
-	}
-
-	userID := c.Locals("user_id").(string)
-
-	order, err := oc.service.CancelOrder(userID, orderID)
-	if err != nil {
-		if appErr, ok := err.(*apperror.AppError); ok {
-			return response.Error(c, appErr.Status, appErr.Message, appErr.Code, nil)
-		}
-		return response.Error(
-			c,
-			constant.BADREQUEST,
-			"Failed to cancel order",
-			"",
-			err.Error(),
-		)
-	}
-
-	return response.Success(
-		c,
-		constant.SUCCESS,
-		"Order cancelled successfully",
-		"",
-		order,
-	)
+	return response.Success(c, constant.SUCCESS, "Order status updated successfully", "STATUS_UPDATED", nil)
 }

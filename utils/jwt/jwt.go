@@ -26,9 +26,10 @@ func NewJWTManager(accessSecret, refreshSecret string, accessTTL, refreshTTL tim
 }
 
 // GenerateAccessToken generates a JWT access token
-func (j *JWTManager) GenerateAccessToken(userID string) (string, error) {
+func (j *JWTManager) GenerateAccessToken(userID string, role string) (string, error) {
 	claims := jwt.MapClaims{
 		"user_id": userID,
+		"role":    role,
 		"exp":     time.Now().Add(j.AccessTTL).Unix(),
 		"iat":     time.Now().Unix(),
 	}
@@ -38,9 +39,10 @@ func (j *JWTManager) GenerateAccessToken(userID string) (string, error) {
 }
 
 // GenerateRefreshToken generates a JWT refresh token
-func (j *JWTManager) GenerateRefreshToken(userID string) (string, error) {
+func (j *JWTManager) GenerateRefreshToken(userID string, role string) (string, error) {
 	claims := jwt.MapClaims{
 		"user_id": userID,
+		"role":    role,
 		"exp":     time.Now().Add(j.RefreshTTL).Unix(),
 		"iat":     time.Now().Unix(),
 	}
@@ -48,7 +50,6 @@ func (j *JWTManager) GenerateRefreshToken(userID string) (string, error) {
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 	return token.SignedString([]byte(j.RefreshSecret))
 }
-
 
 func (j *JWTManager) ValidateRefreshToken(tokenStr string) (map[string]interface{}, error) {
 	token, err := jwt.Parse(tokenStr, func(token *jwt.Token) (interface{}, error) {

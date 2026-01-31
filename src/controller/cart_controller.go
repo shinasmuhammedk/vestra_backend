@@ -18,6 +18,24 @@ func NewCartController(service *services.CartService) *CartController {
 }
 
 /* =======================
+   HELPER: GET USER ID
+   ======================= */
+
+func getUserID(c *fiber.Ctx) (string, error) {
+	userID, ok := c.Locals("user_id").(string)
+	if !ok || userID == "" {
+		return "", response.Error(
+			c,
+			constant.UNAUTHORIZED,
+			"Unauthorized",
+			"",
+			nil,
+		)
+	}
+	return userID, nil
+}
+
+/* =======================
    ADD TO CART
    ======================= */
 
@@ -28,7 +46,10 @@ type AddToCartRequest struct {
 }
 
 func (cc *CartController) AddToCart(c *fiber.Ctx) error {
-	userID := c.Locals("user_id").(string)
+	userID, err := getUserID(c)
+	if err != nil {
+		return err
+	}
 
 	var req AddToCartRequest
 	if err := c.BodyParser(&req); err != nil {
@@ -79,7 +100,10 @@ func (cc *CartController) AddToCart(c *fiber.Ctx) error {
    ======================= */
 
 func (cc *CartController) GetCart(c *fiber.Ctx) error {
-	userID := c.Locals("user_id").(string)
+	userID, err := getUserID(c)
+	if err != nil {
+		return err
+	}
 
 	cart, err := cc.service.GetUserCart(userID)
 	if err != nil {
@@ -115,9 +139,12 @@ type UpdateCartItemRequest struct {
 }
 
 func (cc *CartController) UpdateCartItem(c *fiber.Ctx) error {
-	userID := c.Locals("user_id").(string)
-	itemID := c.Params("id")
+	userID, err := getUserID(c)
+	if err != nil {
+		return err
+	}
 
+	itemID := c.Params("id")
 	if itemID == "" {
 		return response.Error(
 			c,
@@ -177,6 +204,11 @@ func (cc *CartController) UpdateCartItem(c *fiber.Ctx) error {
    ======================= */
 
 func (cc *CartController) RemoveCartItem(c *fiber.Ctx) error {
+	_, err := getUserID(c)
+	if err != nil {
+		return err
+	}
+
 	itemID := c.Params("id")
 	if itemID == "" {
 		return response.Error(

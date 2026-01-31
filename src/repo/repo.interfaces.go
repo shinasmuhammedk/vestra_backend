@@ -23,4 +23,10 @@ type IPgSQLRepository interface {
 	Exec(sql string, values ...interface{}) *gorm.DB
 	FindByIdWithPreload(obj interface{}, id interface{}, preloads ...string) error
 	FindWhereWithPreload(obj interface{}, query string, args []interface{}, preloads ...string) error
+    FindAllWithPreload(obj interface{}, preloads ...string) error
+
+    
+    Begin() *gorm.DB
+	Commit(tx *gorm.DB) error
+	Rollback(tx *gorm.DB) error
 }

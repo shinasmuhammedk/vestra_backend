@@ -147,7 +147,7 @@ func (c *UserAuthController) Login(ctx *fiber.Ctx) error {
 		)
 	}
 
-	accessToken, err := c.jwtManager.GenerateAccessToken(user.ID.String())
+	accessToken, err := c.jwtManager.GenerateAccessToken(user.ID.String(), user.Role)
 	if err != nil {
 		return response.Error(
 			ctx,
@@ -158,7 +158,7 @@ func (c *UserAuthController) Login(ctx *fiber.Ctx) error {
 		)
 	}
 
-	refreshToken, err := c.jwtManager.GenerateRefreshToken(user.ID.String())
+	refreshToken, err := c.jwtManager.GenerateRefreshToken(user.ID.String(), user.Role)
 	if err != nil {
 		return response.Error(
 			ctx,
@@ -221,8 +221,15 @@ func (c *UserAuthController) RefreshToken(ctx *fiber.Ctx) error {
 			nil,
 		)
 	}
+    
+    // ✅ Extract role from claims
+	role, ok := claims["role"].(string)
+	if !ok || role == "" {
+		// Optional: default role if missing
+		role = "user"
+	}
 
-	accessToken, err := c.jwtManager.GenerateAccessToken(userID)
+	accessToken, err := c.jwtManager.GenerateAccessToken(userID,role)
 	if err != nil {
 		return response.Error(
 			ctx,
@@ -504,5 +511,96 @@ func (c *UserAuthController) ToggleUserBlock(ctx *fiber.Ctx) error {
 		"User block status toggled",
 		"",
 		updatedUser,
+	)
+}
+
+
+
+
+func (c *UserAuthController) GetAllUsers(ctx *fiber.Ctx) error {
+	users, err := c.authService.GetAllUsers()
+	if err != nil {
+		if appErr, ok := err.(*apperror.AppError); ok {
+			return response.Error(
+				ctx,
+				appErr.Status,
+				appErr.Message,
+				appErr.Code,
+				nil,
+			)
+		}
+
+		return response.Error(
+			ctx,
+			constant.INTERNALSERVERERROR,
+			"Failed to fetch users",
+			"",
+			err.Error(),
+		)
+	}
+
+	return response.Success(
+		ctx,
+		constant.SUCCESS,
+		"Users fetched successfully",
+		"",
+		users,
+	)
+}
+
+
+
+func (c *UserAuthController) DeleteUserByID(ctx *fiber.Ctx) error {
+	// 1️⃣ Get target user ID
+	targetID := ctx.Params("id")
+	if targetID == "" {
+		return response.Error(
+			ctx,
+			constant.BADREQUEST,
+			"User ID is required",
+			"",
+			nil,
+		)
+	}
+
+	// 2️⃣ Prevent admin deleting themselves (important safety)
+	currentUserID := ctx.Locals("user_id").(string)
+	if currentUserID == targetID {
+		return response.Error(
+			ctx,
+			constant.FORBIDDEN,
+			"Admin cannot delete own account",
+			"",
+			nil,
+		)
+	}
+
+	// 3️⃣ Call service
+	if err := c.authService.DeleteUserByID(targetID); err != nil {
+		if appErr, ok := err.(*apperror.AppError); ok {
+			return response.Error(
+				ctx,
+				appErr.Status,
+				appErr.Message,
+				appErr.Code,
+				nil,
+			)
+		}
+
+		return response.Error(
+			ctx,
+			constant.INTERNALSERVERERROR,
+			"Failed to delete user",
+			"",
+			err.Error(),
+		)
+	}
+
+	return response.Success(
+		ctx,
+		constant.SUCCESS,
+		"User deleted successfully",
+		"",
+		nil,
 	)
 }

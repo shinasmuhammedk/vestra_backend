@@ -1,6 +1,7 @@
 package model
 
 import (
+	"time"
 
 	"github.com/google/uuid"
 	"gorm.io/gorm"
@@ -15,7 +16,9 @@ type OrderItem struct {
 	Price     int       `json:"price"`
 
 	// 🔹 This tells GORM the relation
-	Product Product `gorm:"foreignKey:ProductID" json:"product"`
+	Product   Product   `gorm:"foreignKey:ProductID" json:"product"`
+	CreatedAt time.Time `json:"created_at"`
+	UpdatedAt time.Time `json:"updated_at"`
 }
 
 func (oi *OrderItem) BeforeCreate(tx *gorm.DB) (err error) {

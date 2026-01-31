@@ -122,45 +122,38 @@ func (pc *ProductController) CreateProduct(c *fiber.Ctx) error {
 	)
 }
 
-/* =======================
-   GET ALL PRODUCTS
-   ======================= */
+
 
 func (pc *ProductController) GetAllProducts(c *fiber.Ctx) error {
-	filter := services.ProductFilter{
-		Category: c.Query("category"),
-		Search:   c.Query("q"),          // for name/description search
-		Size:     c.Query("size"),       // S, M, L, etc
-	}
+    filter := services.ProductFilter{
+        Category: c.Query("category"),
+        Search:   c.Query("q"),
+        Size:     c.Query("size"),      // xs, s, m, l, xl, 2xl
+        KitType:  c.Query("kit_type"),  // home, away, third
+        League:   c.Query("league"),    // laliga, premier, spl
+    }
 
-	if minPrice := c.Query("min_price"); minPrice != "" {
-		filter.MinPrice, _ = strconv.Atoi(minPrice)
-	}
+    // Parse numeric fields (simplified for brevity)
+    page, _ := strconv.Atoi(c.Query("page", "1"))
+    pageSize, _ := strconv.Atoi(c.Query("page_size", "10"))
+    filter.MinPrice, _ = strconv.Atoi(c.Query("min_price"))
+    filter.MaxPrice, _ = strconv.Atoi(c.Query("max_price"))
 
-	if maxPrice := c.Query("max_price"); maxPrice != "" {
-		filter.MaxPrice, _ = strconv.Atoi(maxPrice)
-	}
+    products, total, err := pc.service.GetAllProducts(
+        filter, page, pageSize, 
+        c.Query("sort_by", "price"), 
+        c.Query("sort_order", "asc"),
+    )
 
-	products, err := pc.service.GetAllProducts(filter)
-	if err != nil {
-		return response.Error(
-			c,
-			constant.INTERNALSERVERERROR,
-			"Failed to fetch products",
-			"",
-			err.Error(),
-		)
-	}
+    if err != nil {
+        return c.Status(500).JSON(fiber.Map{"error": err.Error()})
+    }
 
-	return response.Success(
-		c,
-		constant.SUCCESS,
-		"Products fetched successfully",
-		"",
-		products,
-	)
+    return c.JSON(fiber.Map{
+        "data": products,
+        "total": total,
+    })
 }
-
 
 
 /* =======================

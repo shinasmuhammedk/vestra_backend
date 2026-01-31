@@ -39,7 +39,7 @@ var (
 	// WITHDRAW = "WITHDRAW"
 
 	// Optional: Payment or process states
-	// PROCESSING = "PROCESSING"
+	PROCESSING = "PROCESSING"
 	CANCELLED  = "CANCELLED"
 	PLACED     = "PLACED"
 	SHIPPED    = "SHIPPED"

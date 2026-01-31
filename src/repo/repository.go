@@ -24,7 +24,6 @@ func GetPgSQLRepository() IPgSQLRepository {
 	return IPgSQLRepo
 }
 
-
 // Insert data
 func (r *PgSQLRepository) Insert(req interface{}) error {
 	if err := database.PgSQLDB.Debug().Create(req).Error; err != nil {
@@ -118,11 +117,9 @@ func (r *PgSQLRepository) Raw(query string, args ...interface{}) *gorm.DB {
 	return database.PgSQLDB.Raw(query, args...)
 }
 
-
 func (r *PgSQLRepository) Exec(sql string, values ...interface{}) *gorm.DB {
 	return database.PgSQLDB.Exec(sql, values...)
 }
-
 
 func (r *PgSQLRepository) FindByIdWithPreload(obj interface{}, id interface{}, preloads ...string) error {
 	db := database.PgSQLDB
@@ -138,4 +135,24 @@ func (r *PgSQLRepository) FindWhereWithPreload(obj interface{}, query string, ar
 		db = db.Preload(preload)
 	}
 	return db.Where(query, args...).Find(obj).Error
+}
+
+func (r *PgSQLRepository) FindAllWithPreload(obj interface{}, preloads ...string) error {
+	db := database.PgSQLDB
+	for _, preload := range preloads {
+		db = db.Preload(preload)
+	}
+	return db.Find(obj).Error
+}
+
+func (r *PgSQLRepository) Begin() *gorm.DB {
+	return database.PgSQLDB.Begin()
+}
+
+func (r *PgSQLRepository) Commit(tx *gorm.DB) error {
+	return tx.Commit().Error
+}
+
+func (r *PgSQLRepository) Rollback(tx *gorm.DB) error {
+	return tx.Rollback().Error
 }

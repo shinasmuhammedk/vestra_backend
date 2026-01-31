@@ -1,9 +1,12 @@
 package services
 
 import (
+	"fmt"
+	"strings"
 	"vestra-ecommerce/src/model"
 	"vestra-ecommerce/src/repo"
 	constant "vestra-ecommerce/utils/constants"
+	database "vestra-ecommerce/utils/databases"
 	"vestra-ecommerce/utils/utils/apperror"
 )
 
@@ -39,11 +42,13 @@ type UpdateProductInput struct {
 
 
 type ProductFilter struct {
-	Category string
-	MinPrice int
-	MaxPrice int
-	Search   string
-	Size     string
+    Category  string
+    Search    string
+    Size      string
+    KitType   string // "home", "away", "third"
+    League    string // "laliga", "premier", "spl", etc.
+    MinPrice  int
+    MaxPrice  int
 }
 
 
@@ -71,55 +76,91 @@ func (s *ProductService) CreateProduct(product *model.Product) error {
 	return nil
 }
 
-/* =======================
-   GET PRODUCTS
-   ======================= */
 
-func (s *ProductService) GetAllProducts(filter ProductFilter) ([]model.Product, error) {
-	var products []model.Product
+func (s *ProductService) GetAllProducts(
+    filter ProductFilter,
+    page, pageSize int,
+    sortBy, sortOrder string,
+) ([]model.Product, int64, error) {
 
-	query := "1 = 1"
-	args := []interface{}{}
+    var (
+        ids        []string
+        products   []model.Product
+        totalCount int64
+    )
 
-	if filter.Category != "" {
-		query += " AND category = ?"
-		args = append(args, filter.Category)
-	}
+    db := database.PgSQLDB.Table("products p")
 
-	if filter.MinPrice > 0 {
-		query += " AND price >= ?"
-		args = append(args, filter.MinPrice)
-	}
+    // -------- FILTERS --------
+    if filter.Search != "" {
+        search := "%" + filter.Search + "%"
+        db = db.Where("(p.name ILIKE ? OR p.description ILIKE ?)", search, search)
+    }
 
-	if filter.MaxPrice > 0 {
-		query += " AND price <= ?"
-		args = append(args, filter.MaxPrice)
-	}
+    // New Jersey-Specific Filters
+    if filter.KitType != "" {
+        db = db.Where("p.kit_type = ?", filter.KitType)
+    }
 
-	if filter.Search != "" {
-		query += " AND (name ILIKE ? OR description ILIKE ?)"
-		search := "%" + filter.Search + "%"
-		args = append(args, search, search)
-	}
+    if filter.League != "" {
+        db = db.Where("p.league = ?", filter.League)
+    }
 
-	if filter.Size != "" {
-		query += `
-			AND id IN (
-				SELECT product_id
-				FROM product_sizes
-				WHERE size = ?
-			)
-		`
-		args = append(args, filter.Size)
-	}
+    if filter.MinPrice > 0 {
+        db = db.Where("p.price >= ?", filter.MinPrice)
+    }
 
-	err := s.repo.FindWhereWithPreload(&products, query, args, "Sizes")
-	if err != nil {
-		return nil, err
-	}
+    if filter.MaxPrice > 0 {
+        db = db.Where("p.price <= ?", filter.MaxPrice)
+    }
 
-	return products, nil
+    // Size Filter (Using JOIN for better performance)
+    if filter.Size != "" {
+        db = db.Joins("JOIN product_sizes ps ON ps.product_id = p.id").
+               Where("ps.size = ?", filter.Size)
+    }
+
+    // Category Join
+    if filter.Category != "" {
+        db = db.Joins("JOIN product_categories pc ON pc.product_id = p.id").
+               Joins("JOIN categories c ON c.id = pc.category_id").
+               Where("c.slug = ? OR c.name = ?", filter.Category, filter.Category)
+    }
+
+    // -------- COUNT & PAGINATION --------
+    db.Select("COUNT(DISTINCT p.id)").Count(&totalCount)
+
+    offset := (page - 1) * pageSize
+    
+    // Sort logic
+    sortCol := "p.price" // Default
+    if sortBy == "name" { sortCol = "p.name" }
+    if sortBy == "created_at" { sortCol = "p.created_at" }
+
+    // Step 1: Get IDs
+    if err := db.Select("p.id").
+        Group("p.id, " + sortCol).
+        Order(sortCol + " " + sortOrder).
+        Limit(pageSize).Offset(offset).
+        Pluck("p.id", &ids).Error; err != nil {
+        return nil, 0, err
+    }
+
+    if len(ids) == 0 { return []model.Product{}, totalCount, nil }
+
+    // Step 2: Fetch full data with ordered UUIDs
+    var quotedIds []string
+    for _, id := range ids { quotedIds = append(quotedIds, fmt.Sprintf("'%s'", id)) }
+    
+    err := database.PgSQLDB.Model(&model.Product{}).
+        Where("id IN ?", ids).
+        Preload("Sizes").
+        Order(fmt.Sprintf("array_position(ARRAY[%s]::uuid[], id)", strings.Join(quotedIds, ","))).
+        Find(&products).Error
+
+    return products, totalCount, err
 }
+
 
 
 func (s *ProductService) GetProductByID(id string) (*model.Product, error) {

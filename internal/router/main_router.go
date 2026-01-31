@@ -34,6 +34,7 @@ func Setup(
 
 	// ================= PUBLIC PRODUCT ROUTES =================
 	app.Get("/products", productController.GetAllProducts)
+    // page nations, 
 	app.Get("/products/search", productController.SearchProducts)
 	app.Get("/products/:id", productController.GetProductByID)
 
@@ -84,7 +85,9 @@ func Setup(
 	adminGroup := app.Group("/admin", middleware.AdminAuthMiddleware(jwtManager, pgRepo))
 
 	// Users
+    adminGroup.Get("/users", auth.GetAllUsers)
 	adminGroup.Put("/users/:id/block", auth.ToggleUserBlock)
+    adminGroup.Delete("/users/:id", auth.DeleteUserByID)
 
 	// Products
 	adminGroup.Post("/products", productController.CreateProduct)
@@ -93,7 +96,8 @@ func Setup(
 
 	// Orders
 	adminGroup.Get("/orders", orderController.GetAllOrders)
-	adminGroup.Put("/order/:id", orderController.UpdateOrderStatusAdmin)
+    adminGroup.Put("/order/:id", orderController.UpdateOrderStatusAdmin)
+	adminGroup.Put("/order/:id/status", orderController.UpdateOrderStatusAdmin)
 
 	// Payments
 	adminGroup.Get("/payments", paymentController.GetAllPayments)

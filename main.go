@@ -13,6 +13,7 @@ import (
 
 	"vestra-ecommerce/config"
 	"vestra-ecommerce/internal/router"
+	"vestra-ecommerce/middleware"
 	"vestra-ecommerce/migration"
 	"vestra-ecommerce/src/controller"
 	"vestra-ecommerce/src/repo"
@@ -20,6 +21,7 @@ import (
 	database "vestra-ecommerce/utils/databases"
 	"vestra-ecommerce/utils/email"
 	"vestra-ecommerce/utils/jwt"
+	validator "vestra-ecommerce/utils/validation"
 )
 
 func main() {
@@ -39,6 +41,8 @@ func main() {
 	// -------------------- 4️⃣ Email --------------------
 	email.Init(cfg.SMTP)
 
+    
+    validator.Init()
 	// -------------------- 5️⃣ Migrations --------------------
 	migration.Migrate()
 
@@ -46,6 +50,7 @@ func main() {
 	app := fiber.New(fiber.Config{
 		Prefork: cfg.Server.Prefork,
 	})
+    app.Use(middleware.CORSMiddleware())
 
 	app.Get("/health", func(c *fiber.Ctx) error {
 		return c.SendString("OK 🚀")

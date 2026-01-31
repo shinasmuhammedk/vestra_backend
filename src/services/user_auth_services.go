@@ -41,7 +41,7 @@ func (s *UserAuthService) Signup(name, userEmail, password string) error {
 	if err := s.userRepo.FindOneWhere(&existing, "email = ?", userEmail); err == nil {
 		return apperror.New(
 			constant.BADREQUEST,
-            "",
+			"",
 			"Email already exists",
 		)
 	}
@@ -126,11 +126,10 @@ func (s *UserAuthService) VerifyOTP(userEmail, otp string) error {
 func generateOTP() string {
 	return fmt.Sprintf("%06d", rand.Intn(1000000))
 }
-
 func (s *UserAuthService) Login(email, password string) (*model.User, error) {
 	var user model.User
 
-	// 1. Find user by email
+	// 1️⃣ Find user by email
 	if err := s.userRepo.FindOneWhere(&user, "email = ?", email); err != nil {
 		return nil, apperror.New(
 			constant.UNAUTHORIZED,
@@ -139,7 +138,7 @@ func (s *UserAuthService) Login(email, password string) (*model.User, error) {
 		)
 	}
 
-	// 2. Check if verified
+	// 2️⃣ Check if verified
 	if !user.IsVerified {
 		return nil, apperror.New(
 			constant.UNAUTHORIZED,
@@ -148,7 +147,16 @@ func (s *UserAuthService) Login(email, password string) (*model.User, error) {
 		)
 	}
 
-	// 3. Compare password
+	// 3️⃣ Check if blocked
+	if user.IsBlocked {
+		return nil, apperror.New(
+			constant.FORBIDDEN,
+			"",
+			"Your account has been blocked. Contact support.",
+		)
+	}
+
+	// 4️⃣ Compare password
 	if err := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(password)); err != nil {
 		return nil, apperror.New(
 			constant.UNAUTHORIZED,
@@ -157,7 +165,7 @@ func (s *UserAuthService) Login(email, password string) (*model.User, error) {
 		)
 	}
 
-	// 4. Return user (tokens generated in controller)
+	// 5️⃣ Return user (tokens generated in controller)
 	return &user, nil
 }
 
@@ -339,4 +347,55 @@ func (s *UserAuthService) GetByID(userID string) (*model.User, error) {
 	}
 
 	return &user, nil
+}
+
+
+
+func (s *UserAuthService) GetAllUsers() ([]model.User, error) {
+	var users []model.User
+
+	if err := s.userRepo.FindAll(&users); err != nil {
+		return nil, apperror.New(
+			constant.INTERNALSERVERERROR,
+			"",
+			"Failed to fetch users",
+		)
+	}
+
+	return users, nil
+}
+
+
+
+func (s *UserAuthService) DeleteUserByID(userID string) error {
+	var user model.User
+
+	// 1️⃣ Check if user exists
+	if err := s.userRepo.FindById(&user, userID); err != nil {
+		return apperror.New(
+			constant.NOTFOUND,
+			"",
+			"User not found",
+		)
+	}
+
+	// 2️⃣ Prevent deleting admin users (optional but recommended)
+	if user.Role == "admin" {
+		return apperror.New(
+			constant.FORBIDDEN,
+			"",
+			"Admin users cannot be deleted",
+		)
+	}
+
+	// 3️⃣ Delete user
+	if err := s.userRepo.Delete(&model.User{}, userID); err != nil {
+		return apperror.New(
+			constant.INTERNALSERVERERROR,
+			"",
+			"Failed to delete user",
+		)
+	}
+
+	return nil
 }

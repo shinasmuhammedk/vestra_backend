@@ -1,0 +1,1484 @@
+[DEBUG] 2026/02/02 10:03:15 main.go:54: Vestra backend started
+[DEBUG] 2026/02/02 10:05:51 main.go:54: Vestra backend started
+[DEBUG] 2026/02/02 10:06:17 user_auth_controller.go:135: Login request received: shinaskdk@gmail.com[DEBUG] 2026/02/02 10:15:19 main.go:38: Logger initialized
+[DEBUG] 2026/02/02 10:15:19 main.go:42: Database connection initialized
+[DEBUG] 2026/02/02 10:15:19 main.go:47: Repository layer initialized
+[DEBUG] 2026/02/02 10:15:19 main.go:51: Email service initialized
+[DEBUG] 2026/02/02 10:15:19 main.go:55: Validator initialized
+[DEBUG] 2026/02/02 10:15:19 main.go:59: Database migration completed
+[DEBUG] 2026/02/02 10:15:19 main.go:68: Fiber app initialized with CORS middleware
+[DEBUG] 2026/02/02 10:15:19 main.go:82: JWT manager initialized
+[DEBUG] 2026/02/02 10:15:19 main.go:114: All services and controllers initialized
+[DEBUG] 2026/02/02 10:15:19 main.go:130: Routes registered successfully
+[DEBUG] 2026/02/02 10:15:19 main.go:136: Server starting on port 3000
+[DEBUG] 2026/02/02 11:35:21 user_auth_controller.go:135: Login request received: anshadvelladath123@gmail.com
+[DEBUG] 2026/02/02 11:36:18 user_auth_controller.go:135: Login request received: shinaskdk@gmail.com
+[DEBUG] 2026/02/02 11:41:05 main.go:148: Shutdown signal received
+[DEBUG] 2026/02/02 11:41:05 main.go:160: Database connection closed
+[DEBUG] 2026/02/02 11:41:05 main.go:163: Server gracefully stopped
+[DEBUG] 2026/02/02 11:42:22 main.go:38: Logger initialized
+[DEBUG] 2026/02/02 11:42:22 database.go:34: Connecting to PostgreSQL database
+[DEBUG] 2026/02/02 11:42:23 database.go:57: PostgreSQL database connected successfully
+[DEBUG] 2026/02/02 11:42:23 main.go:42: Database connection initialized
+[DEBUG] 2026/02/02 11:42:23 main.go:47: Repository layer initialized
+[DEBUG] 2026/02/02 11:42:23 email.go:16: SMTP initialized with host: smtp.gmail.com, user: shinaskdk@gmail.com
+[DEBUG] 2026/02/02 11:42:23 main.go:51: Email service initialized
+[DEBUG] 2026/02/02 11:42:23 main.go:55: Validator initialized
+[DEBUG] 2026/02/02 11:42:23 main.go:59: Database migration completed
+[DEBUG] 2026/02/02 11:42:23 main.go:68: Fiber app initialized with CORS middleware
+[DEBUG] 2026/02/02 11:42:23 jwt.go:21: JWTManager initialized
+[DEBUG] 2026/02/02 11:42:23 main.go:82: JWT manager initialized
+[DEBUG] 2026/02/02 11:42:23 main.go:114: All services and controllers initialized
+[DEBUG] 2026/02/02 11:42:23 main.go:130: Routes registered successfully
+[DEBUG] 2026/02/02 11:42:23 main.go:136: Server starting on port 3000
+[DEBUG] 2026/02/02 11:43:22 jwt.go:32: Generating access token
+[DEBUG] 2026/02/02 11:43:22 jwt.go:53: Generating refresh token
+[DEBUG] 2026/02/02 11:43:22 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 11:43:22 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 11:43:22 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 11:43:22 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 11:43:23 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 11:43:24 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 11:43:24 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 11:43:34 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 11:43:34 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 11:43:51 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 11:43:51 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 11:47:37 main.go:148: Shutdown signal received
+[DEBUG] 2026/02/02 11:47:37 main.go:160: Database connection closed
+[DEBUG] 2026/02/02 11:47:37 main.go:163: Server gracefully stopped
+[DEBUG] 2026/02/02 11:47:45 main.go:38: Logger initialized
+[DEBUG] 2026/02/02 11:47:45 database.go:34: Connecting to PostgreSQL database
+[DEBUG] 2026/02/02 11:47:45 database.go:57: PostgreSQL database connected successfully
+[DEBUG] 2026/02/02 11:47:45 main.go:42: Database connection initialized
+[DEBUG] 2026/02/02 11:47:45 main.go:47: Repository layer initialized
+[DEBUG] 2026/02/02 11:47:45 email.go:16: SMTP initialized with host: smtp.gmail.com, user: shinaskdk@gmail.com
+[DEBUG] 2026/02/02 11:47:45 main.go:51: Email service initialized
+[DEBUG] 2026/02/02 11:47:45 main.go:55: Validator initialized
+[DEBUG] 2026/02/02 11:47:45 main.go:59: Database migration completed
+[DEBUG] 2026/02/02 11:47:45 main.go:68: Fiber app initialized with CORS middleware
+[DEBUG] 2026/02/02 11:47:45 jwt.go:21: JWTManager initialized
+[DEBUG] 2026/02/02 11:47:45 main.go:82: JWT manager initialized
+[DEBUG] 2026/02/02 11:47:45 main.go:114: All services and controllers initialized
+[DEBUG] 2026/02/02 11:47:45 main.go:130: Routes registered successfully
+[DEBUG] 2026/02/02 11:47:45 main.go:136: Server starting on port 3000
+[DEBUG] 2026/02/02 11:48:29 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 11:48:29 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 11:54:49 main.go:148: Shutdown signal received
+[DEBUG] 2026/02/02 11:54:49 main.go:160: Database connection closed
+[DEBUG] 2026/02/02 11:54:49 main.go:163: Server gracefully stopped
+[DEBUG] 2026/02/02 11:54:56 main.go:38: Logger initialized
+[DEBUG] 2026/02/02 11:54:56 database.go:34: Connecting to PostgreSQL database
+[DEBUG] 2026/02/02 11:54:56 database.go:57: PostgreSQL database connected successfully
+[DEBUG] 2026/02/02 11:54:56 main.go:42: Database connection initialized
+[DEBUG] 2026/02/02 11:54:56 main.go:47: Repository layer initialized
+[DEBUG] 2026/02/02 11:54:56 email.go:16: SMTP initialized with host: smtp.gmail.com, user: shinaskdk@gmail.com
+[DEBUG] 2026/02/02 11:54:56 main.go:51: Email service initialized
+[DEBUG] 2026/02/02 11:54:56 main.go:55: Validator initialized
+[DEBUG] 2026/02/02 11:54:57 main.go:59: Database migration completed
+[DEBUG] 2026/02/02 11:54:57 main.go:68: Fiber app initialized with CORS middleware
+[DEBUG] 2026/02/02 11:54:57 jwt.go:21: JWTManager initialized
+[DEBUG] 2026/02/02 11:54:57 main.go:82: JWT manager initialized
+[DEBUG] 2026/02/02 11:54:57 main.go:114: All services and controllers initialized
+[DEBUG] 2026/02/02 11:54:57 main.go:130: Routes registered successfully
+[DEBUG] 2026/02/02 11:54:57 main.go:136: Server starting on port 3000
+[DEBUG] 2026/02/02 11:55:05 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 11:55:05 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 11:55:08 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 11:55:08 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 11:56:16 main.go:148: Shutdown signal received
+[DEBUG] 2026/02/02 11:56:24 main.go:160: Database connection closed
+[DEBUG] 2026/02/02 11:56:24 main.go:163: Server gracefully stopped
+[DEBUG] 2026/02/02 11:56:32 main.go:38: Logger initialized
+[DEBUG] 2026/02/02 11:56:32 database.go:34: Connecting to PostgreSQL database
+[DEBUG] 2026/02/02 11:56:32 database.go:57: PostgreSQL database connected successfully
+[DEBUG] 2026/02/02 11:56:32 main.go:42: Database connection initialized
+[DEBUG] 2026/02/02 11:56:32 main.go:47: Repository layer initialized
+[DEBUG] 2026/02/02 11:56:32 email.go:16: SMTP initialized with host: smtp.gmail.com, user: shinaskdk@gmail.com
+[DEBUG] 2026/02/02 11:56:32 main.go:51: Email service initialized
+[DEBUG] 2026/02/02 11:56:32 main.go:55: Validator initialized
+[DEBUG] 2026/02/02 11:58:22 main.go:38: Logger initialized
+[DEBUG] 2026/02/02 11:58:22 database.go:34: Connecting to PostgreSQL database
+[DEBUG] 2026/02/02 11:58:22 database.go:57: PostgreSQL database connected successfully
+[DEBUG] 2026/02/02 11:58:22 main.go:42: Database connection initialized
+[DEBUG] 2026/02/02 11:58:22 main.go:47: Repository layer initialized
+[DEBUG] 2026/02/02 11:58:22 email.go:16: SMTP initialized with host: smtp.gmail.com, user: shinaskdk@gmail.com
+[DEBUG] 2026/02/02 11:58:22 main.go:51: Email service initialized
+[DEBUG] 2026/02/02 11:58:22 main.go:55: Validator initialized
+[DEBUG] 2026/02/02 11:58:22 main.go:59: Database migration completed
+[DEBUG] 2026/02/02 11:58:22 main.go:68: Fiber app initialized with CORS middleware
+[DEBUG] 2026/02/02 11:58:22 jwt.go:21: JWTManager initialized
+[DEBUG] 2026/02/02 11:58:22 main.go:82: JWT manager initialized
+[DEBUG] 2026/02/02 11:58:22 main.go:114: All services and controllers initialized
+[DEBUG] 2026/02/02 11:58:22 main.go:130: Routes registered successfully
+[DEBUG] 2026/02/02 11:58:22 main.go:136: Server starting on port 3000
+[DEBUG] 2026/02/02 11:58:52 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 11:58:52 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 11:59:08 jwt.go:32: Generating access token
+[DEBUG] 2026/02/02 11:59:08 jwt.go:53: Generating refresh token
+[DEBUG] 2026/02/02 11:59:08 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 11:59:08 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 11:59:08 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 11:59:08 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 11:59:08 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 11:59:12 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 11:59:12 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 12:08:12 main.go:148: Shutdown signal received
+[DEBUG] 2026/02/02 12:08:12 main.go:160: Database connection closed
+[DEBUG] 2026/02/02 12:08:12 main.go:163: Server gracefully stopped
+[DEBUG] 2026/02/02 12:08:18 main.go:38: Logger initialized
+[DEBUG] 2026/02/02 12:08:18 database.go:34: Connecting to PostgreSQL database
+[DEBUG] 2026/02/02 12:08:18 database.go:57: PostgreSQL database connected successfully
+[DEBUG] 2026/02/02 12:08:18 main.go:42: Database connection initialized
+[DEBUG] 2026/02/02 12:08:18 main.go:47: Repository layer initialized
+[DEBUG] 2026/02/02 12:08:18 email.go:16: SMTP initialized with host: smtp.gmail.com, user: shinaskdk@gmail.com
+[DEBUG] 2026/02/02 12:08:18 main.go:51: Email service initialized
+[DEBUG] 2026/02/02 12:08:18 main.go:55: Validator initialized
+[DEBUG] 2026/02/02 12:08:19 main.go:59: Database migration completed
+[DEBUG] 2026/02/02 12:08:19 main.go:68: Fiber app initialized with CORS middleware
+[DEBUG] 2026/02/02 12:08:19 jwt.go:21: JWTManager initialized
+[DEBUG] 2026/02/02 12:08:19 main.go:82: JWT manager initialized
+[DEBUG] 2026/02/02 12:08:19 main.go:114: All services and controllers initialized
+[DEBUG] 2026/02/02 12:08:19 main.go:130: Routes registered successfully
+[DEBUG] 2026/02/02 12:08:19 main.go:136: Server starting on port 3000
+[DEBUG] 2026/02/02 12:08:28 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 12:08:28 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 12:08:41 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 12:08:41 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 12:08:43 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 12:08:43 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 12:09:10 jwt.go:32: Generating access token
+[DEBUG] 2026/02/02 12:09:10 jwt.go:53: Generating refresh token
+[DEBUG] 2026/02/02 12:09:11 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 12:09:11 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 12:09:11 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 12:09:14 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 12:09:14 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 12:09:14 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 12:09:14 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 12:09:14 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 12:09:14 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 12:09:17 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 12:09:17 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 12:09:17 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 12:09:19 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 12:09:19 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 12:09:34 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 12:09:34 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 12:09:34 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 12:09:42 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 12:09:42 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 12:09:42 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 12:09:42 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 12:09:42 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 12:09:42 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 12:09:43 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 12:09:43 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 12:09:43 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 12:09:43 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 12:09:43 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 12:09:43 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 12:09:49 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 12:09:49 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 12:09:49 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 12:09:49 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 12:09:49 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 12:09:49 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 12:09:49 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 12:09:49 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 12:09:49 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 12:16:03 main.go:148: Shutdown signal received
+[DEBUG] 2026/02/02 12:16:03 main.go:160: Database connection closed
+[DEBUG] 2026/02/02 12:16:03 main.go:163: Server gracefully stopped
+[DEBUG] 2026/02/02 12:16:10 main.go:38: Logger initialized
+[DEBUG] 2026/02/02 12:16:10 database.go:34: Connecting to PostgreSQL database
+[DEBUG] 2026/02/02 12:16:10 database.go:57: PostgreSQL database connected successfully
+[DEBUG] 2026/02/02 12:16:10 main.go:42: Database connection initialized
+[DEBUG] 2026/02/02 12:16:10 main.go:47: Repository layer initialized
+[DEBUG] 2026/02/02 12:16:10 email.go:16: SMTP initialized with host: smtp.gmail.com, user: shinaskdk@gmail.com
+[DEBUG] 2026/02/02 12:16:10 main.go:51: Email service initialized
+[DEBUG] 2026/02/02 12:16:10 main.go:55: Validator initialized
+[DEBUG] 2026/02/02 12:16:10 main.go:59: Database migration completed
+[DEBUG] 2026/02/02 12:16:10 main.go:68: Fiber app initialized with CORS middleware
+[DEBUG] 2026/02/02 12:16:10 jwt.go:21: JWTManager initialized
+[DEBUG] 2026/02/02 12:16:10 main.go:82: JWT manager initialized
+[DEBUG] 2026/02/02 12:16:10 main.go:114: All services and controllers initialized
+[DEBUG] 2026/02/02 12:16:10 main.go:130: Routes registered successfully
+[DEBUG] 2026/02/02 12:16:10 main.go:136: Server starting on port 3000
+[DEBUG] 2026/02/02 12:16:19 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 12:16:19 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 12:16:20 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 12:16:20 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 12:16:20 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 12:18:23 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 12:18:23 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 12:18:23 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 12:18:23 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 12:18:23 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 12:18:23 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 12:18:24 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 12:18:24 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 12:18:24 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 12:18:24 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 12:18:24 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 12:18:24 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 12:18:29 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 12:18:29 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 12:18:29 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 12:18:29 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 12:18:29 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 12:18:29 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 12:18:29 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 12:18:29 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 12:18:29 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 12:18:34 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 12:18:34 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 12:18:35 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 12:18:35 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 12:18:35 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 12:18:36 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 12:18:36 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 12:18:36 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 12:18:36 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 12:18:36 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 12:18:36 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 12:18:38 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 12:18:38 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 12:18:38 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 12:18:38 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 12:18:38 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 12:18:38 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 12:18:41 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 12:18:41 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 12:18:41 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 12:18:42 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 12:18:42 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 12:18:42 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 12:18:42 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 12:18:42 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 12:18:42 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 12:57:00 jwt.go:32: Generating access token
+[DEBUG] 2026/02/02 12:57:00 jwt.go:53: Generating refresh token
+[DEBUG] 2026/02/02 12:57:00 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 12:57:00 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 12:57:00 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 12:57:02 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 12:57:02 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 12:57:02 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 12:57:02 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 12:57:02 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 12:57:02 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 12:57:04 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 12:57:04 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 12:57:04 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 12:57:04 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 12:57:04 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 12:57:04 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 12:57:06 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 12:57:06 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 12:57:06 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 12:57:06 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 12:57:06 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 12:57:06 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 12:57:06 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 12:57:06 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 12:57:13 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 12:57:13 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 12:57:13 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 12:57:13 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 12:57:13 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 12:57:13 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 12:57:16 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 12:57:16 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 12:57:16 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 12:57:16 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 12:57:16 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 12:57:16 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 12:57:16 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 12:57:16 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 12:57:35 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 12:57:35 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 12:57:35 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 12:57:35 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 12:57:35 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 12:57:35 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 12:57:38 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 12:57:38 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:05:28 main.go:148: Shutdown signal received
+[DEBUG] 2026/02/02 13:05:28 main.go:160: Database connection closed
+[DEBUG] 2026/02/02 13:05:28 main.go:163: Server gracefully stopped
+[DEBUG] 2026/02/02 13:05:40 main.go:38: Logger initialized
+[DEBUG] 2026/02/02 13:05:40 database.go:34: Connecting to PostgreSQL database
+[DEBUG] 2026/02/02 13:05:40 database.go:57: PostgreSQL database connected successfully
+[DEBUG] 2026/02/02 13:05:40 main.go:42: Database connection initialized
+[DEBUG] 2026/02/02 13:05:40 main.go:47: Repository layer initialized
+[DEBUG] 2026/02/02 13:05:40 email.go:16: SMTP initialized with host: smtp.gmail.com, user: shinaskdk@gmail.com
+[DEBUG] 2026/02/02 13:05:40 main.go:51: Email service initialized
+[DEBUG] 2026/02/02 13:05:40 main.go:55: Validator initialized
+[DEBUG] 2026/02/02 13:05:40 main.go:59: Database migration completed
+[DEBUG] 2026/02/02 13:05:40 main.go:68: Fiber app initialized with CORS middleware
+[DEBUG] 2026/02/02 13:05:40 jwt.go:21: JWTManager initialized
+[DEBUG] 2026/02/02 13:05:40 main.go:82: JWT manager initialized
+[DEBUG] 2026/02/02 13:05:40 main.go:114: All services and controllers initialized
+[DEBUG] 2026/02/02 13:05:40 main.go:130: Routes registered successfully
+[DEBUG] 2026/02/02 13:05:40 main.go:136: Server starting on port 3000
+[DEBUG] 2026/02/02 13:05:47 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:05:47 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:05:47 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:05:49 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:05:49 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 13:05:49 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 13:05:49 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:05:49 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 13:05:49 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 13:05:50 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:05:50 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 13:05:50 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 13:05:50 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:05:50 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 13:05:50 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 13:06:09 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:06:09 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:06:23 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:06:23 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:06:23 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:06:25 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:06:25 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 13:06:25 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 13:06:25 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:06:25 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 13:06:25 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 13:06:27 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:06:27 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 13:06:27 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 13:06:27 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:06:27 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 13:06:27 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 13:07:38 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:07:38 wishlist_service.go:25: AddToWishlist called
+[DEBUG] 2026/02/02 13:07:38 wishlist_service.go:57: Product added to wishlist successfully
+[DEBUG] 2026/02/02 13:07:39 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:07:39 wishlist_service.go:86: RemoveFromWishlist called
+[DEBUG] 2026/02/02 13:07:39 wishlist_service.go:116: Wishlist item removed successfully
+[DEBUG] 2026/02/02 13:07:42 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:07:42 wishlist_service.go:25: AddToWishlist called
+[DEBUG] 2026/02/02 13:07:42 wishlist_service.go:57: Product added to wishlist successfully
+[DEBUG] 2026/02/02 13:07:42 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:07:42 wishlist_service.go:86: RemoveFromWishlist called
+[DEBUG] 2026/02/02 13:07:42 wishlist_service.go:116: Wishlist item removed successfully
+[DEBUG] 2026/02/02 13:07:49 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:07:50 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:07:51 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:07:51 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:07:52 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:07:52 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:07:52 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:07:52 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:07:52 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:07:52 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:07:53 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:07:53 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:07:53 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:07:53 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:07:53 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:07:53 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:07:54 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:07:54 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:07:54 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:07:54 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:07:54 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:07:54 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:07:55 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:07:55 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:07:55 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:07:55 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:07:55 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:07:55 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:07:58 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:07:58 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:07:58 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:07:58 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:07:58 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:07:59 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:07:59 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:07:59 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:07:59 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:04 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:04 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:04 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:11 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:11 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:11 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:11 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:11 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:11 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:11 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:11 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:11 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:11 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:11 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:11 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:11 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:11 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:11 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:12 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:12 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:12 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:16 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:16 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:16 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:16 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:16 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:16 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:17 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:17 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:17 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:17 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:17 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:17 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:17 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:17 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:17 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:17 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:17 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:17 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:18 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:18 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:18 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:18 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:18 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:18 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:18 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:18 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:18 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:18 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:18 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:18 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:19 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:19 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:19 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:19 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:19 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:19 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:19 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:19 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:19 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:19 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:19 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:19 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:19 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:19 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:19 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:19 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:19 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:19 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:20 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:20 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:20 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:20 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:20 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:20 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:20 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:20 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:20 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:20 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:20 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:20 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:20 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:20 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:20 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:21 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:21 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:21 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:21 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:21 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:21 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:21 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:21 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:21 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:21 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:21 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:21 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:21 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:21 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:21 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:22 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:22 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:22 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:22 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:22 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:22 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:22 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:22 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:22 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:22 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:22 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:22 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:22 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:22 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:23 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:23 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:23 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:23 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:23 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:23 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:23 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:23 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:23 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:23 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:23 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:23 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:23 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:24 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:24 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:24 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:30 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:30 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 13:08:30 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 13:08:30 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:30 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 13:08:30 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 13:08:47 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:52 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:52 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:08:52 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:09:26 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:09:26 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 13:09:26 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 13:09:26 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:09:26 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 13:09:26 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 13:09:31 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:09:31 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:09:36 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:09:36 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 13:09:36 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 13:09:36 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:09:36 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 13:09:36 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 13:51:57 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:51:57 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:58:34 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:58:34 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:58:47 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:58:47 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:58:53 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:58:53 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:58:55 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:58:55 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:58:57 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:58:58 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:58:58 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:59:02 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:59:02 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:59:09 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:59:09 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:59:39 jwt.go:32: Generating access token
+[DEBUG] 2026/02/02 13:59:39 jwt.go:53: Generating refresh token
+[DEBUG] 2026/02/02 13:59:39 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:59:39 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 13:59:39 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 13:59:41 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:59:41 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 13:59:41 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 13:59:41 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:59:41 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 13:59:41 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 13:59:43 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:59:43 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 13:59:43 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 13:59:44 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:59:44 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 13:59:44 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 13:59:45 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 13:59:45 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:00:21 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:00:21 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:00:21 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:00:21 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:00:21 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:00:21 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:00:29 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:00:29 wishlist_service.go:25: AddToWishlist called
+[DEBUG] 2026/02/02 14:00:29 wishlist_service.go:57: Product added to wishlist successfully
+[DEBUG] 2026/02/02 14:00:31 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:00:31 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:00:39 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:00:39 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:00:39 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:00:41 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:00:41 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:00:41 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:00:41 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:00:41 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:00:41 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:00:43 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:00:43 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:00:43 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:00:43 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:00:43 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:00:43 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:00:48 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:00:48 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:00:49 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:00:49 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:00:49 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:00:50 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:00:50 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:00:50 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:00:50 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:00:50 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:00:50 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:00:53 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:00:53 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:00:53 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:00:53 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:00:53 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:00:53 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:01:29 jwt.go:32: Generating access token
+[DEBUG] 2026/02/02 14:01:29 jwt.go:53: Generating refresh token
+[DEBUG] 2026/02/02 14:01:29 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:01:29 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:01:29 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:01:29 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:01:29 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:01:31 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:01:31 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:01:43 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:01:43 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:01:54 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:01:54 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:02:30 jwt.go:32: Generating access token
+[DEBUG] 2026/02/02 14:02:30 jwt.go:53: Generating refresh token
+[DEBUG] 2026/02/02 14:02:30 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:02:30 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:02:30 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:02:32 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:02:32 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:02:32 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:02:32 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:02:32 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:02:32 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:02:34 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:02:34 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:02:34 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:02:34 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:02:34 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:02:34 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:02:38 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:02:38 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:02:40 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:02:40 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:02:40 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:02:42 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:02:42 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:02:42 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:02:42 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:02:42 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:02:42 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:02:43 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:02:43 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:02:43 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:02:43 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:02:43 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:02:43 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:23:15 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:23:15 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:23:36 jwt.go:32: Generating access token
+[DEBUG] 2026/02/02 14:23:36 jwt.go:53: Generating refresh token
+[DEBUG] 2026/02/02 14:23:36 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:23:36 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:23:36 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:23:39 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:23:39 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:23:39 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:23:39 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:23:39 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:23:39 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:23:40 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:23:40 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:23:40 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:23:40 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:23:40 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:23:40 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:23:41 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:23:41 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:23:42 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:23:42 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:23:42 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:24:34 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:24:34 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:24:34 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:24:34 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:24:34 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:24:34 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:24:35 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:24:35 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:24:35 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:24:35 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:24:35 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:24:35 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:35:25 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:35:25 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:35:26 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:35:26 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:35:26 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:35:29 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:35:29 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:35:29 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:35:29 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:35:29 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:35:29 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:35:30 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:35:30 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:35:30 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:35:30 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:35:30 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:35:30 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:35:35 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:35:35 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:35:36 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:35:36 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:35:36 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:35:38 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:35:38 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:35:40 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:35:40 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:35:40 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:35:40 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:35:40 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:35:40 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:35:47 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:35:47 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:35:53 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:35:53 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:35:53 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:35:55 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:35:55 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:35:55 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:35:55 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:35:55 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:35:55 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:35:56 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:35:56 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:35:56 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:35:56 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:35:56 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:35:56 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:36:06 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:36:06 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:36:20 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:36:20 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:36:20 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:36:20 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:36:20 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:36:20 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:36:29 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:36:29 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:36:47 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:36:47 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:36:47 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:36:47 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:36:47 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:36:47 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:36:55 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:36:55 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:37:17 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:37:17 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:37:17 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:37:17 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:37:17 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:37:17 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:37:29 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:37:29 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:37:36 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:37:36 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:37:36 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:37:36 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:37:36 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:37:36 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:37:36 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:37:36 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:37:36 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:37:36 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:37:36 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:37:36 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:37:37 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:37:37 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:37:37 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:37:37 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:37:37 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:37:37 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:37:39 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:37:39 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:37:42 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:37:42 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:37:42 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:37:44 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:37:44 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:37:44 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:37:44 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:37:44 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:37:44 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:37:47 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:37:47 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:37:47 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:37:47 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:37:47 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:37:47 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:39:05 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:39:05 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:40:26 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:40:27 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:42:19 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:42:19 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:42:19 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:46:34 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:46:57 jwt.go:32: Generating access token
+[DEBUG] 2026/02/02 14:46:57 jwt.go:53: Generating refresh token
+[DEBUG] 2026/02/02 14:46:57 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:46:57 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:46:57 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:46:58 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:46:58 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:46:58 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:46:58 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:46:58 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:46:58 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:46:59 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:46:59 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:46:59 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:46:59 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:46:59 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:46:59 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:47:01 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:47:06 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:47:06 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:47:06 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:47:08 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:47:08 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:47:08 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:47:08 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:47:08 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:47:08 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:47:09 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:47:09 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:47:09 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:47:09 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:47:09 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:47:09 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:47:21 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:47:23 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:47:23 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:47:23 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:47:23 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:47:23 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:47:23 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:50:34 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:50:34 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:50:34 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:50:34 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:50:34 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:50:34 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:50:35 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:50:35 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:50:35 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:50:35 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:50:35 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:50:35 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:50:37 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:50:37 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:50:37 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:50:37 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:50:37 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:50:37 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:50:38 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:50:38 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:50:38 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:50:38 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:50:38 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:50:38 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:50:40 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:50:40 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:50:40 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:50:40 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:50:40 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:50:40 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:50:41 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:50:41 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:50:41 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:50:41 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:50:41 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:50:41 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:50:43 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:50:43 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:50:43 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:50:43 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:50:43 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:50:43 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:50:44 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:50:44 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:50:44 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:50:44 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:50:44 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:50:44 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:50:47 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:50:47 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:50:47 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:50:47 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:50:47 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:50:47 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:50:49 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:50:49 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:50:49 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:50:49 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:50:49 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:50:49 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:50:52 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:50:52 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:50:52 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:50:52 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:50:52 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:50:52 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:50:54 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:50:54 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:50:54 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:50:54 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:50:54 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:50:54 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:50:54 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:50:54 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:50:54 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:50:54 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:50:54 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:50:54 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:50:54 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:50:54 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:50:54 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:50:54 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:50:54 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:50:54 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:50:56 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:50:56 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:50:56 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:50:56 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:50:56 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:50:56 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:50:58 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:50:58 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:50:58 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:50:58 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:50:58 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:50:58 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:51:01 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:51:01 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:51:01 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:51:01 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:51:01 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:51:01 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:51:01 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:51:01 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:51:01 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:51:01 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:51:01 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:51:01 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:51:01 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:51:01 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:51:01 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:51:01 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:51:01 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:51:01 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:51:01 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:51:01 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:51:01 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:51:02 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:51:02 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:51:02 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:51:02 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:51:02 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:51:02 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:51:02 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:51:02 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:51:02 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:51:02 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:51:02 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:51:02 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:51:02 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:51:02 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:51:02 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:51:02 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:51:02 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:51:02 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:51:02 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:51:02 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:51:02 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:51:02 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:51:02 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:51:02 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:51:02 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:51:02 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:51:02 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:51:02 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:51:02 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:51:02 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:51:02 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:51:02 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:51:02 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:51:02 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:51:02 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:51:02 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:51:02 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:51:02 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:51:02 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:51:02 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:51:02 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:51:02 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:51:02 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:51:02 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:51:02 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:51:02 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:51:02 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:51:02 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:51:02 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:51:02 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:51:02 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:51:03 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:51:03 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:51:03 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:51:03 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:51:03 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:51:03 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:51:03 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:51:03 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:51:03 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:51:04 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:51:04 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:51:04 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:51:04 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:51:04 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:51:04 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:51:05 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:51:05 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:51:05 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:51:05 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:51:05 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:51:05 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:51:08 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:51:08 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:51:08 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:51:08 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:51:08 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:51:08 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:51:15 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:51:15 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:51:15 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:51:15 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:51:15 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:51:15 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:51:27 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:51:27 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:51:27 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:10 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:24 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:29 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:29 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 14:57:29 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 14:57:31 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:31 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:31 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:33 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:33 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:33 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:33 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:33 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:33 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:34 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:34 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:34 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:34 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:34 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:34 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:34 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:34 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:34 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:35 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:35 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:35 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:36 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:36 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:36 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:36 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:36 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:36 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:36 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:36 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:36 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:37 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:37 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:37 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:37 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:37 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:37 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:37 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:37 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:37 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:37 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:37 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:37 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:38 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:38 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:38 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:38 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:38 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:38 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:38 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:38 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:38 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:38 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:38 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:38 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:39 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:39 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:39 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:39 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:39 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:39 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:39 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:39 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:39 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:40 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:40 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:41 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:41 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:41 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:42 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:42 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:42 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:42 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:42 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:42 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:42 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:42 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:42 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:43 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:43 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:43 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:43 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:43 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:43 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:43 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:43 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:43 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:57:44 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:58:08 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:58:08 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 14:58:08 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:16:21 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:16:21 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:16:35 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:16:35 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:16:43 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:16:43 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:17:26 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:17:26 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:17:49 jwt.go:32: Generating access token
+[DEBUG] 2026/02/02 15:17:49 jwt.go:53: Generating refresh token
+[DEBUG] 2026/02/02 15:17:49 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:17:49 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 15:17:49 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 15:17:51 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:17:51 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 15:17:51 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 15:17:51 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:17:51 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 15:17:51 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 15:19:16 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:19:16 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:19:16 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:19:16 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:23:15 jwt.go:32: Generating access token
+[DEBUG] 2026/02/02 15:23:15 jwt.go:53: Generating refresh token
+[DEBUG] 2026/02/02 15:23:15 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:23:15 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 15:23:15 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 15:23:35 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:23:35 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 15:23:35 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 15:23:35 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:23:35 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 15:23:35 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 15:23:37 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:23:37 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 15:23:37 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 15:23:37 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:23:37 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 15:23:37 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 15:23:47 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:23:49 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:23:50 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:23:50 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:23:52 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:23:52 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 15:23:52 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 15:23:52 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:23:52 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 15:23:52 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 15:23:53 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:23:53 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 15:23:53 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 15:23:53 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:23:53 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 15:23:53 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 15:26:22 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:26:22 wishlist_service.go:25: AddToWishlist called
+[DEBUG] 2026/02/02 15:26:22 wishlist_service.go:57: Product added to wishlist successfully
+[DEBUG] 2026/02/02 15:26:35 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:26:35 wishlist_service.go:86: RemoveFromWishlist called
+[DEBUG] 2026/02/02 15:26:35 wishlist_service.go:116: Wishlist item removed successfully
+[DEBUG] 2026/02/02 15:28:19 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:28:19 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 15:28:19 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 15:28:19 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:28:19 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 15:28:19 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 15:29:08 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:29:08 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:29:08 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:29:25 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:29:25 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 15:29:25 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 15:29:25 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:29:25 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 15:29:25 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 15:29:26 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:29:26 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 15:29:26 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 15:29:26 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:29:26 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 15:29:26 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 15:29:28 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:29:32 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:29:32 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:29:32 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:29:43 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:29:43 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 15:29:43 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 15:29:43 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:29:43 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 15:29:43 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 15:29:46 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:29:46 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:29:47 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:29:47 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 15:29:47 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 15:29:47 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:29:47 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 15:29:47 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 15:29:48 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:29:48 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:29:49 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:29:49 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 15:29:49 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 15:29:49 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:29:49 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 15:29:49 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 15:29:51 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:29:51 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:30:10 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:30:10 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 15:30:10 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 15:30:10 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:30:10 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 15:30:10 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 15:30:11 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:30:11 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 15:30:11 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 15:30:11 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:30:11 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 15:30:11 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 15:30:13 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:30:13 wishlist_service.go:25: AddToWishlist called
+[DEBUG] 2026/02/02 15:30:13 wishlist_service.go:57: Product added to wishlist successfully
+[DEBUG] 2026/02/02 15:30:14 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:30:14 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 15:30:14 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 15:30:14 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:30:14 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 15:30:14 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 15:30:22 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:30:22 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:30:24 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:30:24 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 15:30:24 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 15:30:24 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:30:24 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 15:30:24 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 15:30:26 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:30:26 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:30:27 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:30:27 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 15:30:27 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 15:30:27 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:30:27 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 15:30:27 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 15:30:28 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:30:28 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:30:29 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:30:29 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 15:30:29 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 15:30:29 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:30:29 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 15:30:29 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 15:30:34 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:30:34 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:30:36 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:30:36 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 15:30:36 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 15:30:36 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:30:36 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 15:30:36 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 15:30:38 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:30:38 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:30:40 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:30:40 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 15:30:40 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 15:30:40 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:30:40 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 15:30:40 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 15:30:48 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:30:48 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:30:50 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:30:50 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 15:30:50 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 15:30:50 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:30:50 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 15:30:50 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 15:30:53 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:30:53 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:30:56 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:30:56 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 15:30:56 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 15:30:56 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:30:56 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 15:30:56 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 15:31:00 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:31:00 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 15:31:00 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 15:31:00 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:31:00 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 15:31:00 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 15:31:02 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:31:02 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 15:31:02 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 15:31:02 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:31:02 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 15:31:02 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 15:31:03 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:31:03 wishlist_service.go:25: AddToWishlist called
+[DEBUG] 2026/02/02 15:31:03 wishlist_service.go:57: Product added to wishlist successfully
+[DEBUG] 2026/02/02 15:31:04 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:31:04 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 15:31:04 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 15:31:04 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:31:04 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 15:31:04 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 15:31:06 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:31:06 wishlist_service.go:25: AddToWishlist called
+[DEBUG] 2026/02/02 15:31:06 wishlist_service.go:57: Product added to wishlist successfully
+[DEBUG] 2026/02/02 15:31:07 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:31:07 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 15:31:07 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 15:31:07 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:31:07 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 15:31:07 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 15:31:42 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:31:42 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 15:31:42 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 15:31:42 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:31:42 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 15:31:42 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 15:31:55 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:31:55 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 15:31:55 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 15:31:55 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:31:55 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 15:31:55 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 15:32:45 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:32:45 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 15:32:45 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 15:32:45 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:32:45 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 15:32:45 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 15:33:13 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:33:13 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 15:33:13 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 15:33:13 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:33:13 wishlist_service.go:63: GetWishlist called
+[DEBUG] 2026/02/02 15:33:13 wishlist_service.go:80: Wishlist fetched successfully
+[DEBUG] 2026/02/02 15:34:23 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:34:31 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:34:36 jwt.go:32: Generating access token
+[DEBUG] 2026/02/02 15:34:36 jwt.go:53: Generating refresh token
+[DEBUG] 2026/02/02 15:34:52 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:38:21 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:38:21 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 15:48:28 main.go:148: Shutdown signal received
+[DEBUG] 2026/02/02 15:48:28 main.go:160: Database connection closed
+[DEBUG] 2026/02/02 15:48:28 main.go:163: Server gracefully stopped
+[DEBUG] 2026/02/02 15:48:38 main.go:38: Logger initialized
+[DEBUG] 2026/02/02 15:48:38 database.go:34: Connecting to PostgreSQL database
+[DEBUG] 2026/02/02 15:48:39 database.go:57: PostgreSQL database connected successfully
+[DEBUG] 2026/02/02 15:48:39 main.go:42: Database connection initialized
+[DEBUG] 2026/02/02 15:48:39 main.go:47: Repository layer initialized
+[DEBUG] 2026/02/02 15:48:39 email.go:16: SMTP initialized with host: smtp.gmail.com, user: shinaskdk@gmail.com
+[DEBUG] 2026/02/02 15:48:39 main.go:51: Email service initialized
+[DEBUG] 2026/02/02 15:48:39 main.go:55: Validator initialized
+[DEBUG] 2026/02/02 15:48:39 main.go:59: Database migration completed
+[DEBUG] 2026/02/02 15:48:39 main.go:68: Fiber app initialized with CORS middleware
+[DEBUG] 2026/02/02 15:48:39 jwt.go:21: JWTManager initialized
+[DEBUG] 2026/02/02 15:48:39 main.go:82: JWT manager initialized
+[DEBUG] 2026/02/02 15:48:39 main.go:114: All services and controllers initialized
+[DEBUG] 2026/02/02 15:48:39 main.go:130: Routes registered successfully
+[DEBUG] 2026/02/02 15:48:39 main.go:136: Server starting on port 3000
+[DEBUG] 2026/02/02 15:50:13 main.go:148: Shutdown signal received
+[DEBUG] 2026/02/02 15:50:23 main.go:154: Server shutdown failed: context deadline exceeded
+[DEBUG] 2026/02/02 15:50:23 main.go:160: Database connection closed
+[DEBUG] 2026/02/02 15:50:23 main.go:163: Server gracefully stopped
+[DEBUG] 2026/02/02 15:50:30 main.go:38: Logger initialized
+[DEBUG] 2026/02/02 15:50:30 database.go:34: Connecting to PostgreSQL database
+[DEBUG] 2026/02/02 15:50:30 database.go:57: PostgreSQL database connected successfully
+[DEBUG] 2026/02/02 15:50:30 main.go:42: Database connection initialized
+[DEBUG] 2026/02/02 15:50:30 main.go:47: Repository layer initialized
+[DEBUG] 2026/02/02 15:50:30 email.go:16: SMTP initialized with host: smtp.gmail.com, user: shinaskdk@gmail.com
+[DEBUG] 2026/02/02 15:50:30 main.go:51: Email service initialized
+[DEBUG] 2026/02/02 15:50:30 main.go:55: Validator initialized
+[DEBUG] 2026/02/02 15:50:30 main.go:59: Database migration completed
+[DEBUG] 2026/02/02 15:50:30 main.go:68: Fiber app initialized with CORS middleware
+[DEBUG] 2026/02/02 15:50:30 jwt.go:21: JWTManager initialized
+[DEBUG] 2026/02/02 15:50:30 main.go:82: JWT manager initialized
+[DEBUG] 2026/02/02 15:50:30 main.go:114: All services and controllers initialized
+[DEBUG] 2026/02/02 15:50:30 main.go:130: Routes registered successfully
+[DEBUG] 2026/02/02 15:50:30 main.go:136: Server starting on port 3000
+[DEBUG] 2026/02/02 15:52:49 main.go:148: Shutdown signal received
+[DEBUG] 2026/02/02 15:52:49 main.go:160: Database connection closed
+[DEBUG] 2026/02/02 15:52:49 main.go:163: Server gracefully stopped
+[DEBUG] 2026/02/02 15:53:00 main.go:38: Logger initialized
+[DEBUG] 2026/02/02 15:53:00 database.go:34: Connecting to PostgreSQL database
+[DEBUG] 2026/02/02 15:53:00 database.go:57: PostgreSQL database connected successfully
+[DEBUG] 2026/02/02 15:53:00 main.go:42: Database connection initialized
+[DEBUG] 2026/02/02 15:53:00 main.go:47: Repository layer initialized
+[DEBUG] 2026/02/02 15:53:00 email.go:16: SMTP initialized with host: smtp.gmail.com, user: shinaskdk@gmail.com
+[DEBUG] 2026/02/02 15:53:00 main.go:51: Email service initialized
+[DEBUG] 2026/02/02 15:53:00 main.go:55: Validator initialized
+[DEBUG] 2026/02/02 15:53:01 main.go:59: Database migration completed
+[DEBUG] 2026/02/02 15:53:01 main.go:68: Fiber app initialized with CORS middleware
+[DEBUG] 2026/02/02 15:53:01 jwt.go:21: JWTManager initialized
+[DEBUG] 2026/02/02 15:53:01 main.go:82: JWT manager initialized
+[DEBUG] 2026/02/02 15:53:01 main.go:114: All services and controllers initialized
+[DEBUG] 2026/02/02 15:53:01 main.go:130: Routes registered successfully
+[DEBUG] 2026/02/02 15:53:01 main.go:136: Server starting on port 3000
+[DEBUG] 2026/02/02 16:30:16 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 16:47:04 jwt.go:103: Validating access token
+[DEBUG] 2026/02/02 18:16:30 main.go:148: Shutdown signal received
+[DEBUG] 2026/02/02 18:16:30 main.go:160: Database connection closed
+[DEBUG] 2026/02/02 18:16:30 main.go:163: Server gracefully stopped

@@ -1,7 +1,9 @@
 package controller
 
 import (
+	"math"
 	"strconv"
+	"strings"
 	"vestra-ecommerce/src/model"
 	"vestra-ecommerce/src/services"
 	constant "vestra-ecommerce/utils/constants"
@@ -130,28 +132,52 @@ func (pc *ProductController) GetAllProducts(c *fiber.Ctx) error {
         Search:   c.Query("q"),
         Size:     c.Query("size"),      // xs, s, m, l, xl, 2xl
         KitType:  c.Query("kit_type"),  // home, away, third
-        League:   c.Query("league"),    // laliga, premier, spl
+        League:   strings.ToLower(c.Query("league")),    // laliga, premier, spl
     }
 
-    // Parse numeric fields (simplified for brevity)
+    // Parse numeric fields with validation
     page, _ := strconv.Atoi(c.Query("page", "1"))
+    if page < 1 {
+        page = 1
+    }
+    
     pageSize, _ := strconv.Atoi(c.Query("page_size", "10"))
+    if pageSize < 1 || pageSize > 100 {
+        pageSize = 10 // Max 100 items per page
+    }
+    
     filter.MinPrice, _ = strconv.Atoi(c.Query("min_price"))
     filter.MaxPrice, _ = strconv.Atoi(c.Query("max_price"))
 
     products, total, err := pc.service.GetAllProducts(
-        filter, page, pageSize, 
-        c.Query("sort_by", "price"), 
-        c.Query("sort_order", "asc"),
+        filter, 
+        page, 
+        pageSize, 
+        c.Query("sort_by", "created_at"), // Changed default to created_at
+        c.Query("sort_order", "desc"),    // Changed default to desc
     )
 
     if err != nil {
         return c.Status(500).JSON(fiber.Map{"error": err.Error()})
     }
 
+    // Calculate pagination metadata
+    totalPages := int(math.Ceil(float64(total) / float64(pageSize)))
+    hasNext := page < totalPages
+    hasPrev := page > 1
+
     return c.JSON(fiber.Map{
         "data": products,
-        "total": total,
+        "pagination": fiber.Map{
+            "current_page":  page,
+            "page_size":     pageSize,
+            "total_items":   total,
+            "total_pages":   totalPages,
+            "has_next":      hasNext,
+            "has_previous":  hasPrev,
+            "next_page":     page + 1,
+            "previous_page": page - 1,
+        },
     })
 }
 
@@ -314,7 +340,7 @@ func (pc *ProductController) UpdateProduct(c *fiber.Ctx) error {
 
 func (pc *ProductController) SearchProducts(c *fiber.Ctx) error {
 	query := c.Query("q")
-	league := c.Query("league")
+	league := strings.ToLower(c.Query("league"))
 	kitType := c.Query("kit_type")
 
 	products, err := pc.service.SearchProducts(query, league, kitType, nil)

@@ -1,9 +1,9 @@
-// service/order_service.go
 package services
 
 import (
-	// "fmt" // Uncomment if you add stock checks back
 	"errors"
+	"fmt"
+	"time"
 	"vestra-ecommerce/src/model"
 	"vestra-ecommerce/src/repo"
 	constant "vestra-ecommerce/utils/constants"
@@ -14,11 +14,11 @@ import (
 )
 
 type PlaceOrderRequest struct {
-	Type      string `json:"type" validate:"required,oneof=cart direct"` // "cart" or "direct"
-	ProductID string `json:"product_id"`                                 // for direct orders
-	Quantity  int    `json:"quantity"`                                   // for direct orders
-	Size      string `json:"size"`                                       // for direct orders
-	AddressID string `json:"address_id" validate:"omitempty,uuid"`
+	Type      string `json:"type" validate:"required,oneof=cart direct"`
+	ProductID string `json:"product_id"`
+	Quantity  int    `json:"quantity"`
+	Size      string `json:"size"`
+	AddressID string `json:"address_id" validate:"required,uuid"`
 }
 
 type OrderService struct {
@@ -29,7 +29,12 @@ func NewOrderService(r repo.IPgSQLRepository) *OrderService {
 	return &OrderService{repo: r}
 }
 
+// PlaceOrder handles both cart checkout and direct buy
 func (s *OrderService) PlaceOrder(userID string, req PlaceOrderRequest) (*model.Order, error) {
+	// DEBUG: Log what we received
+	fmt.Printf("DEBUG PlaceOrder START: UserID=%s, Type=%s, ProductID=%s, Size=%s, Qty=%d\n", 
+		userID, req.Type, req.ProductID, req.Size, req.Quantity)
+
 	uID, err := uuid.Parse(userID)
 	if err != nil {
 		return nil, apperror.New(constant.BADREQUEST, "INVALID_USER_ID", "Invalid user ID format")
@@ -55,7 +60,6 @@ func (s *OrderService) PlaceOrder(userID string, req PlaceOrderRequest) (*model.
 		return nil, apperror.New(constant.INTERNALSERVERERROR, "TRANSACTION_ERROR", "Failed to start transaction")
 	}
 
-	// Defer rollback in case of panic or error
 	defer func() {
 		if r := recover(); r != nil {
 			s.repo.Rollback(tx)
@@ -67,6 +71,21 @@ func (s *OrderService) PlaceOrder(userID string, req PlaceOrderRequest) (*model.
 
 	switch req.Type {
 	case "direct":
+		// Validate direct order inputs
+		if req.Size == "" {
+			s.repo.Rollback(tx)
+			return nil, apperror.New(constant.BADREQUEST, "SIZE_REQUIRED", "Size is required for direct orders")
+		}
+		if req.ProductID == "" {
+			s.repo.Rollback(tx)
+			return nil, apperror.New(constant.BADREQUEST, "PRODUCT_REQUIRED", "Product ID is required for direct orders")
+		}
+		if req.Quantity <= 0 {
+			s.repo.Rollback(tx)
+			return nil, apperror.New(constant.BADREQUEST, "QUANTITY_REQUIRED", "Quantity must be greater than 0")
+		}
+
+		fmt.Printf("DEBUG: Processing DIRECT order for Size=%s\n", req.Size)
 		items, calcTotal, err := s.processDirectOrder(tx, req)
 		if err != nil {
 			s.repo.Rollback(tx)
@@ -74,7 +93,9 @@ func (s *OrderService) PlaceOrder(userID string, req PlaceOrderRequest) (*model.
 		}
 		orderItems = items
 		total = calcTotal
+
 	case "cart":
+		fmt.Printf("DEBUG: Processing CART order\n")
 		items, calcTotal, err := s.processCartOrder(tx, uID)
 		if err != nil {
 			s.repo.Rollback(tx)
@@ -82,6 +103,7 @@ func (s *OrderService) PlaceOrder(userID string, req PlaceOrderRequest) (*model.
 		}
 		orderItems = items
 		total = calcTotal
+
 	default:
 		s.repo.Rollback(tx)
 		return nil, apperror.New(constant.BADREQUEST, "INVALID_ORDER_TYPE", "Order type must be 'cart' or 'direct'")
@@ -89,10 +111,12 @@ func (s *OrderService) PlaceOrder(userID string, req PlaceOrderRequest) (*model.
 
 	// Create Order
 	order := model.Order{
-		UserID: uID,
-		// AddressID: addressID, // Uncomment if your Order model has this field
-		Total:  total,
-		Status: constant.PLACED,
+		ID:        uuid.New(),
+		UserID:    uID,
+		Total:     total,
+		Status:    constant.PLACED,
+		CreatedAt: time.Now(),
+		UpdatedAt: time.Now(),
 	}
 
 	if err := tx.Create(&order).Error; err != nil {
@@ -102,23 +126,15 @@ func (s *OrderService) PlaceOrder(userID string, req PlaceOrderRequest) (*model.
 
 	// Create Order Items
 	for i := range orderItems {
+		orderItems[i].ID = uuid.New()
 		orderItems[i].OrderID = order.ID
+		orderItems[i].CreatedAt = time.Now()
+		orderItems[i].UpdatedAt = time.Now()
 
 		if err := tx.Create(&orderItems[i]).Error; err != nil {
 			s.repo.Rollback(tx)
 			return nil, apperror.New(constant.INTERNALSERVERERROR, "ORDER_ITEM_ERROR", "Failed to create order items")
 		}
-
-		// TODO: Add stock management here once you add Stock field to Product model
-		// Uncomment below lines after adding `Stock int` to model.Product:
-		/*
-			if err := tx.Model(&model.Product{}).
-				Where("id = ?", orderItems[i].ProductID).
-				UpdateColumn("stock", gorm.Expr("stock - ?", orderItems[i].Quantity)).Error; err != nil {
-				s.repo.Rollback(tx)
-				return nil, apperror.New(constant.INTERNALSERVERERROR, "STOCK_UPDATE_ERROR", "Failed to update inventory")
-			}
-		*/
 	}
 
 	// Clear cart if cart order
@@ -134,6 +150,8 @@ func (s *OrderService) PlaceOrder(userID string, req PlaceOrderRequest) (*model.
 		return nil, apperror.New(constant.INTERNALSERVERERROR, "COMMIT_ERROR", "Failed to finalize order")
 	}
 
+	fmt.Printf("DEBUG: Order placed successfully! OrderID=%s\n", order.ID)
+
 	// Fetch complete order with relations
 	var fullOrder model.Order
 	if err := s.repo.FindByIdWithPreload(&fullOrder, order.ID, "Items.Product"); err != nil {
@@ -143,11 +161,8 @@ func (s *OrderService) PlaceOrder(userID string, req PlaceOrderRequest) (*model.
 	return &fullOrder, nil
 }
 
+// processDirectOrder handles Buy Now functionality with stock deduction
 func (s *OrderService) processDirectOrder(tx *gorm.DB, req PlaceOrderRequest) ([]model.OrderItem, int, error) {
-	if req.ProductID == "" || req.Quantity <= 0 {
-		return nil, 0, apperror.New(constant.BADREQUEST, "INVALID_PRODUCT", "Product ID and valid quantity required")
-	}
-
 	productID, err := uuid.Parse(req.ProductID)
 	if err != nil {
 		return nil, 0, apperror.New(constant.BADREQUEST, "INVALID_PRODUCT_ID", "Invalid product ID format")
@@ -161,20 +176,45 @@ func (s *OrderService) processDirectOrder(tx *gorm.DB, req PlaceOrderRequest) ([
 		return nil, 0, apperror.New(constant.INTERNALSERVERERROR, "DB_ERROR", "Failed to fetch product")
 	}
 
-	// TODO: Add stock validation here once Stock field is added to Product model
-	// Uncomment below lines after adding `Stock int` to model.Product:
-	/*
-		if product.Stock < req.Quantity {
-			return nil, 0, apperror.New(constant.BADREQUEST, "INSUFFICIENT_STOCK",
-				fmt.Sprintf("Only %d items available in stock", product.Stock))
+	// CRITICAL: Check stock BEFORE any deduction
+	var productSize model.ProductSize
+	if err := tx.Where("product_id = ? AND size = ?", productID, req.Size).First(&productSize).Error; err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			return nil, 0, apperror.New(constant.BADREQUEST, "SIZE_NOT_FOUND", 
+				fmt.Sprintf("Size %s is not available for this product", req.Size))
 		}
-	*/
+		return nil, 0, apperror.New(constant.INTERNALSERVERERROR, "DB_ERROR", "Failed to check stock")
+	}
+
+	fmt.Printf("DEBUG processDirectOrder: Found size %s with quantity %d, ordering %d\n", 
+		productSize.Size, productSize.Quantity, req.Quantity)
+
+	// Validate sufficient stock
+	if productSize.Quantity < req.Quantity {
+		return nil, 0, apperror.New(constant.BADREQUEST, "INSUFFICIENT_STOCK",
+			fmt.Sprintf("Only %d items available in size %s (you requested %d)", 
+				productSize.Quantity, req.Size, req.Quantity))
+	}
+
+	// DEDUCT STOCK - Use the ID from the fetched record
+	if err := tx.Model(&model.ProductSize{}).
+		Where("id = ?", productSize.ID).
+		UpdateColumn("quantity", gorm.Expr("quantity - ?", req.Quantity)).
+		UpdateColumn("updated_at", time.Now()).Error; err != nil {
+		return nil, 0, apperror.New(constant.INTERNALSERVERERROR, "STOCK_UPDATE_ERROR", "Failed to deduct inventory")
+	}
+
+	fmt.Printf("DEBUG: Deducted %d from size %s. New quantity: %d\n", 
+		req.Quantity, req.Size, productSize.Quantity - req.Quantity)
 
 	item := model.OrderItem{
+		ID:        uuid.New(),
 		ProductID: productID,
 		Size:      req.Size,
 		Quantity:  req.Quantity,
 		Price:     product.Price,
+		CreatedAt: time.Now(),
+		UpdatedAt: time.Now(),
 	}
 
 	total := product.Price * req.Quantity
@@ -182,6 +222,7 @@ func (s *OrderService) processDirectOrder(tx *gorm.DB, req PlaceOrderRequest) ([
 	return []model.OrderItem{item}, total, nil
 }
 
+// processCartOrder handles cart checkout with stock deduction for each item
 func (s *OrderService) processCartOrder(tx *gorm.DB, userID uuid.UUID) ([]model.OrderItem, int, error) {
 	var cart model.Cart
 	if err := tx.First(&cart, "user_id = ?", userID).Error; err != nil {
@@ -204,20 +245,39 @@ func (s *OrderService) processCartOrder(tx *gorm.DB, userID uuid.UUID) ([]model.
 	total := 0
 
 	for _, item := range cartItems {
-		// TODO: Add stock validation here once Stock field is added to Product model
-		// Uncomment below lines after adding `Stock int` to model.Product:
-		/*
-			if item.Product.Stock < item.Quantity {
-				return nil, 0, apperror.New(constant.BADREQUEST, "INSUFFICIENT_STOCK",
-					"Insufficient stock for product: "+item.Product.Name)
+		// Check and deduct stock for each cart item
+		var productSize model.ProductSize
+		if err := tx.Where("product_id = ? AND size = ?", item.ProductID, item.Size).First(&productSize).Error; err != nil {
+			if errors.Is(err, gorm.ErrRecordNotFound) {
+				return nil, 0, apperror.New(constant.BADREQUEST, "SIZE_NOT_FOUND",
+					fmt.Sprintf("Size %s is no longer available for %s", item.Size, item.Product.Name))
 			}
-		*/
+			return nil, 0, apperror.New(constant.INTERNALSERVERERROR, "DB_ERROR", "Failed to check stock")
+		}
+
+		if productSize.Quantity < item.Quantity {
+			return nil, 0, apperror.New(constant.BADREQUEST, "INSUFFICIENT_STOCK",
+				fmt.Sprintf("Only %d items available in size %s for %s. Please reduce quantity or remove item.",
+					productSize.Quantity, item.Size, item.Product.Name))
+		}
+
+		// Deduct stock
+		if err := tx.Model(&model.ProductSize{}).
+			Where("id = ?", productSize.ID).
+			UpdateColumn("quantity", gorm.Expr("quantity - ?", item.Quantity)).
+			UpdateColumn("updated_at", time.Now()).Error; err != nil {
+			return nil, 0, apperror.New(constant.INTERNALSERVERERROR, "STOCK_UPDATE_ERROR",
+				fmt.Sprintf("Failed to update stock for %s", item.Product.Name))
+		}
 
 		orderItems = append(orderItems, model.OrderItem{
+			ID:        uuid.New(),
 			ProductID: item.ProductID,
 			Size:      item.Size,
 			Quantity:  item.Quantity,
 			Price:     item.Product.Price,
+			CreatedAt: time.Now(),
+			UpdatedAt: time.Now(),
 		})
 
 		total += item.Product.Price * item.Quantity
@@ -226,6 +286,7 @@ func (s *OrderService) processCartOrder(tx *gorm.DB, userID uuid.UUID) ([]model.
 	return orderItems, total, nil
 }
 
+// GetUserOrders retrieves all orders for a user
 func (s *OrderService) GetUserOrders(userID string) ([]model.Order, error) {
 	uID, err := uuid.Parse(userID)
 	if err != nil {
@@ -240,6 +301,7 @@ func (s *OrderService) GetUserOrders(userID string) ([]model.Order, error) {
 	return orders, nil
 }
 
+// GetOrderDetails retrieves a specific order with items
 func (s *OrderService) GetOrderDetails(userID string, orderID string) (*model.Order, error) {
 	uID, err := uuid.Parse(userID)
 	if err != nil {
@@ -259,7 +321,6 @@ func (s *OrderService) GetOrderDetails(userID string, orderID string) (*model.Or
 		return nil, apperror.New(constant.INTERNALSERVERERROR, "DB_ERROR", "Failed to fetch order")
 	}
 
-	// Load relations
 	if err := s.repo.FindByIdWithPreload(&order, order.ID, "Items.Product"); err != nil {
 		return nil, apperror.New(constant.INTERNALSERVERERROR, "DB_ERROR", "Failed to load order details")
 	}
@@ -267,9 +328,8 @@ func (s *OrderService) GetOrderDetails(userID string, orderID string) (*model.Or
 	return &order, nil
 }
 
-// service/order_service.go - Add these methods
-
-func (s *OrderService) UpdateOrderStatusUser(userID string, orderID string, status string) error {
+// CancelOrder cancels an order and restores stock
+func (s *OrderService) CancelOrder(userID string, orderID string) error {
 	uID, err := uuid.Parse(userID)
 	if err != nil {
 		return apperror.New(constant.BADREQUEST, "INVALID_USER_ID", "Invalid user ID")
@@ -280,38 +340,66 @@ func (s *OrderService) UpdateOrderStatusUser(userID string, orderID string, stat
 		return apperror.New(constant.BADREQUEST, "INVALID_ORDER_ID", "Invalid order ID")
 	}
 
+	tx := s.repo.Begin()
+	if tx.Error != nil {
+		return apperror.New(constant.INTERNALSERVERERROR, "TRANSACTION_ERROR", "Failed to start transaction")
+	}
+
+	defer func() {
+		if r := recover(); r != nil {
+			s.repo.Rollback(tx)
+		}
+	}()
+
 	var order model.Order
-	if err := s.repo.FindOneWhere(&order, "id = ? AND user_id = ?", oID, uID); err != nil {
+	if err := tx.First(&order, "id = ? AND user_id = ?", oID, uID).Error; err != nil {
+		s.repo.Rollback(tx)
 		if errors.Is(err, gorm.ErrRecordNotFound) {
-			return apperror.New(constant.NOTFOUND, "ORDER_NOT_FOUND", "Order not found or does not belong to user")
+			return apperror.New(constant.NOTFOUND, "ORDER_NOT_FOUND", "Order not found")
 		}
 		return apperror.New(constant.INTERNALSERVERERROR, "DB_ERROR", "Failed to fetch order")
 	}
 
-	// Users can only cancel orders, not change to other statuses
-	if status != constant.CANCELLED {
-		return apperror.New(constant.BADREQUEST, "INVALID_STATUS", "Users can only cancel orders")
+	// Can only cancel if not already delivered/cancelled
+	if order.Status == constant.DELIVERED || order.Status == constant.CANCELLED {
+		s.repo.Rollback(tx)
+		return apperror.New(constant.BADREQUEST, "INVALID_OPERATION", "Cannot cancel delivered or already cancelled orders")
 	}
 
-	// Can only cancel if order is still in PLACED status
-	if order.Status != constant.PLACED {
-		return apperror.New(constant.BADREQUEST, "INVALID_OPERATION", "Cannot cancel order that is already processed or shipped")
+	// Restore stock for all items
+	var orderItems []model.OrderItem
+	if err := tx.Where("order_id = ?", order.ID).Find(&orderItems).Error; err != nil {
+		s.repo.Rollback(tx)
+		return apperror.New(constant.INTERNALSERVERERROR, "DB_ERROR", "Failed to fetch order items")
 	}
 
-	if err := s.repo.UpdateByFields(&order, order.ID, map[string]interface{}{
-		"status": status,
-	}); err != nil {
-		return apperror.New(constant.INTERNALSERVERERROR, "UPDATE_ERROR", "Failed to update order status")
+	for _, item := range orderItems {
+		if err := tx.Model(&model.ProductSize{}).
+			Where("product_id = ? AND size = ?", item.ProductID, item.Size).
+			UpdateColumn("quantity", gorm.Expr("quantity + ?", item.Quantity)).
+			UpdateColumn("updated_at", time.Now()).Error; err != nil {
+			s.repo.Rollback(tx)
+			return apperror.New(constant.INTERNALSERVERERROR, "STOCK_RESTORE_ERROR", "Failed to restore inventory")
+		}
+	}
+
+	// Update order status
+	if err := tx.Model(&order).Updates(map[string]interface{}{
+		"status":     constant.CANCELLED,
+		"updated_at": time.Now(),
+	}).Error; err != nil {
+		s.repo.Rollback(tx)
+		return apperror.New(constant.INTERNALSERVERERROR, "UPDATE_ERROR", "Failed to cancel order")
+	}
+
+	if err := s.repo.Commit(tx); err != nil {
+		return apperror.New(constant.INTERNALSERVERERROR, "COMMIT_ERROR", "Failed to finalize cancellation")
 	}
 
 	return nil
 }
 
-func (s *OrderService) CancelOrder(userID string, orderID string) error {
-	// Essentially the same as updating status to cancelled
-	return s.UpdateOrderStatusUser(userID, orderID, constant.CANCELLED)
-}
-
+// DeleteOrder deletes a cancelled order
 func (s *OrderService) DeleteOrder(userID string, orderID string) error {
 	uID, err := uuid.Parse(userID)
 	if err != nil {
@@ -326,22 +414,19 @@ func (s *OrderService) DeleteOrder(userID string, orderID string) error {
 	var order model.Order
 	if err := s.repo.FindOneWhere(&order, "id = ? AND user_id = ?", oID, uID); err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
-			return apperror.New(constant.NOTFOUND, "ORDER_NOT_FOUND", "Order not found or does not belong to user")
+			return apperror.New(constant.NOTFOUND, "ORDER_NOT_FOUND", "Order not found")
 		}
 		return apperror.New(constant.INTERNALSERVERERROR, "DB_ERROR", "Failed to fetch order")
 	}
 
-	// Only allow deletion of cancelled orders or placed orders (not shipped/delivered)
-	if order.Status != constant.PLACED && order.Status != constant.CANCELLED {
-		return apperror.New(constant.BADREQUEST, "INVALID_OPERATION", "Cannot delete order that is being processed or already shipped")
+	if order.Status != constant.CANCELLED {
+		return apperror.New(constant.BADREQUEST, "INVALID_OPERATION", "Can only delete cancelled orders")
 	}
 
-	// Delete order items first (foreign key constraint)
 	if err := s.repo.Exec("DELETE FROM order_items WHERE order_id = ?", oID).Error; err != nil {
 		return apperror.New(constant.INTERNALSERVERERROR, "DELETE_ERROR", "Failed to delete order items")
 	}
 
-	// Delete order
 	if err := s.repo.Delete(&model.Order{}, oID); err != nil {
 		return apperror.New(constant.INTERNALSERVERERROR, "DELETE_ERROR", "Failed to delete order")
 	}
@@ -349,36 +434,38 @@ func (s *OrderService) DeleteOrder(userID string, orderID string) error {
 	return nil
 }
 
-// service/order_service.go - Add these admin methods
+// Admin Functions
 
 func (s *OrderService) GetAllOrders(statusFilter, userIDFilter string) ([]model.Order, error) {
 	var orders []model.Order
-	var err error
+	var args []interface{}
+	var query string
 
-	// Build query based on filters
 	if statusFilter != "" && userIDFilter != "" {
-		// Both filters provided
 		uID, err := uuid.Parse(userIDFilter)
 		if err != nil {
 			return nil, apperror.New(constant.BADREQUEST, "INVALID_USER_ID", "Invalid user ID filter")
 		}
-		err = s.repo.FindWhereWithPreload(&orders, "status = ? AND user_id = ?", []interface{}{statusFilter, uID}, "Items.Product", "User")
+		query = "status = ? AND user_id = ?"
+		args = []interface{}{statusFilter, uID}
 	} else if statusFilter != "" {
-		// Only status filter
-		err = s.repo.FindWhereWithPreload(&orders, "status = ?", []interface{}{statusFilter}, "Items.Product", "User")
+		query = "status = ?"
+		args = []interface{}{statusFilter}
 	} else if userIDFilter != "" {
-		// Only user filter
 		uID, err := uuid.Parse(userIDFilter)
 		if err != nil {
 			return nil, apperror.New(constant.BADREQUEST, "INVALID_USER_ID", "Invalid user ID filter")
 		}
-		err = s.repo.FindWhereWithPreload(&orders, "user_id = ?", []interface{}{uID}, "Items.Product", "User")
+		query = "user_id = ?"
+		args = []interface{}{uID}
 	} else {
-		// No filters - get all
-		err = s.repo.FindAllWithPreload(&orders, "Items.Product", "User")
+		if err := s.repo.FindAllWithPreload(&orders, "Items.Product"); err != nil {
+			return nil, apperror.New(constant.INTERNALSERVERERROR, "DB_ERROR", "Failed to fetch orders")
+		}
+		return orders, nil
 	}
 
-	if err != nil {
+	if err := s.repo.FindWhereWithPreload(&orders, query, args, "Items.Product"); err != nil {
 		return nil, apperror.New(constant.INTERNALSERVERERROR, "DB_ERROR", "Failed to fetch orders")
 	}
 
@@ -399,42 +486,57 @@ func (s *OrderService) UpdateOrderStatusAdmin(orderID string, status string) err
 		return apperror.New(constant.INTERNALSERVERERROR, "DB_ERROR", "Failed to fetch order")
 	}
 
-	// Validate status transition (optional business logic)
-	validTransitions := map[string][]string{
-		// constant.PLACED:     {constant.PROCESSING, constant.CANCELLED},
-		// constant.PROCESSING: {constant.SHIPPED, constant.CANCELLED},
-		constant.SHIPPED:   {constant.DELIVERED},
-		constant.DELIVERED: {},
-		constant.CANCELLED: {},
-	}
-
-	allowedStatuses, exists := validTransitions[order.Status]
-	if !exists {
-		return apperror.New(constant.BADREQUEST, "INVALID_STATUS", "Current order status is invalid")
-	}
-
-	// Check if the new status is allowed from current status
-	isValid := false
-	for _, allowed := range allowedStatuses {
-		if allowed == status {
-			isValid = true
-			break
+	// If cancelling, restore stock
+	if status == constant.CANCELLED && order.Status != constant.CANCELLED {
+		tx := s.repo.Begin()
+		if tx.Error != nil {
+			return apperror.New(constant.INTERNALSERVERERROR, "TRANSACTION_ERROR", "Failed to start transaction")
 		}
+
+		var orderItems []model.OrderItem
+		if err := tx.Where("order_id = ?", order.ID).Find(&orderItems).Error; err != nil {
+			s.repo.Rollback(tx)
+			return apperror.New(constant.INTERNALSERVERERROR, "DB_ERROR", "Failed to fetch order items")
+		}
+
+		for _, item := range orderItems {
+			if err := tx.Model(&model.ProductSize{}).
+				Where("product_id = ? AND size = ?", item.ProductID, item.Size).
+				UpdateColumn("quantity", gorm.Expr("quantity + ?", item.Quantity)).
+				UpdateColumn("updated_at", time.Now()).Error; err != nil {
+				s.repo.Rollback(tx)
+				return apperror.New(constant.INTERNALSERVERERROR, "STOCK_RESTORE_ERROR", "Failed to restore inventory")
+			}
+		}
+
+		if err := tx.Model(&order).Updates(map[string]interface{}{
+			"status":     status,
+			"updated_at": time.Now(),
+		}).Error; err != nil {
+			s.repo.Rollback(tx)
+			return apperror.New(constant.INTERNALSERVERERROR, "UPDATE_ERROR", "Failed to update order status")
+		}
+
+		if err := s.repo.Commit(tx); err != nil {
+			return apperror.New(constant.INTERNALSERVERERROR, "COMMIT_ERROR", "Failed to finalize update")
+		}
+		return nil
 	}
 
-	// Admin can force status update even if not in valid transitions,
-	// but we warn about it. Remove this check if admin should have full freedom.
-	if !isValid && order.Status != status {
-		// If you want strict validation, uncomment below:
-		// return apperror.New(constant.BADREQUEST, "INVALID_TRANSITION",
-		//     fmt.Sprintf("Cannot transition from %s to %s", order.Status, status))
-	}
-
+	// Normal status update
 	if err := s.repo.UpdateByFields(&order, order.ID, map[string]interface{}{
-		"status": status,
+		"status":     status,
+		"updated_at": time.Now(),
 	}); err != nil {
 		return apperror.New(constant.INTERNALSERVERERROR, "UPDATE_ERROR", "Failed to update order status")
 	}
 
 	return nil
+}
+
+func (s *OrderService) UpdateOrderStatusUser(userID string, orderID string, status string) error {
+	if status != constant.CANCELLED {
+		return apperror.New(constant.BADREQUEST, "UNAUTHORIZED", "Users can only cancel orders")
+	}
+	return s.CancelOrder(userID, orderID)
 }

@@ -2,32 +2,31 @@ package email
 
 import (
 	"fmt"
-	"log"
 	"net/smtp"
 
 	"vestra-ecommerce/config"
+	"vestra-ecommerce/utils/logging"
 )
 
-var smtpCfg config.SMTPConfig
+var smtpCfg config.SMTPConfig // Holds SMTP configuration loaded from app config
 
-// Init sets the SMTP config from app.yaml
+// Init initializes SMTP configuration
 func Init(cfg config.SMTPConfig) {
 	smtpCfg = cfg
-	log.Printf("[email] SMTP initialized with host: %s, user: %s\n", smtpCfg.Host, smtpCfg.Username)
+	logging.Debug.Printf("SMTP initialized with host: %s, user: %s\n", smtpCfg.Host, smtpCfg.Username)
 }
 
-// SendOTP sends an OTP email to the recipient
+// SendOTP sends an OTP email to the given recipient
 func SendOTP(to string, otp string) error {
-	// Envelope sender (must match authenticated username)
-	from := smtpCfg.Username
 
-	// From header
-	fromHeader := smtpCfg.From
+	from := smtpCfg.Username // SMTP authenticated sender address
+
+	fromHeader := smtpCfg.From // Email From header value
 	if fromHeader == "" {
 		fromHeader = from
 	}
 
-	// RFC 5322-compliant message
+	// RFC 5322 compliant email message
 	msg := fmt.Sprintf(
 		"From: %s\r\n"+
 			"To: %s\r\n"+
@@ -38,19 +37,16 @@ func SendOTP(to string, otp string) error {
 		fromHeader, to, otp,
 	)
 
-	// SMTP server address
-	addr := fmt.Sprintf("%s:%d", smtpCfg.Host, smtpCfg.Port)
+	addr := fmt.Sprintf("%s:%d", smtpCfg.Host, smtpCfg.Port) // SMTP server address
 
-	// Authentication
-	auth := smtp.PlainAuth("", smtpCfg.Username, smtpCfg.Password, smtpCfg.Host)
+	auth := smtp.PlainAuth("", smtpCfg.Username, smtpCfg.Password, smtpCfg.Host) // SMTP authentication
 
-	// Send email
-	err := smtp.SendMail(addr, auth, from, []string{to}, []byte(msg))
-	if err != nil {
-		log.Printf("[email] Failed to send OTP to %s: %v\n", to, err)
+	// Send email using SMTP
+	if err := smtp.SendMail(addr, auth, from, []string{to}, []byte(msg)); err != nil {
+		logging.Error.Printf("Failed to send OTP to %s: %v\n", to, err)
 		return err
 	}
 
-	log.Printf("[email] OTP sent successfully to %s\n", to)
+	logging.Debug.Printf("OTP sent successfully to %s\n", to)
 	return nil
 }

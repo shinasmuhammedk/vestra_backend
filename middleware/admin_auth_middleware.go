@@ -8,16 +8,21 @@ import (
 	"vestra-ecommerce/src/repo"
 	constant "vestra-ecommerce/utils/constants"
 	"vestra-ecommerce/utils/jwt"
+	"vestra-ecommerce/utils/logging"
 	"vestra-ecommerce/utils/response"
 )
 
-// AdminAuthMiddleware protects admin routes
+// AdminAuthMiddleware protects admin-only routes
 func AdminAuthMiddleware(jwtManager *jwt.JWTManager, repo repo.IPgSQLRepository) fiber.Handler {
+	logging.Debug.Println("AdminAuthMiddleware initialized")
+	
 	return func(ctx *fiber.Ctx) error {
+		logging.Debug.Println("AdminAuthMiddleware processing request")
 
-		// 1️⃣ Get Authorization header
+		// Get Authorization header
 		authHeader := ctx.Get("Authorization")
 		if authHeader == "" {
+			logging.Error.Println("AdminAuthMiddleware - Authorization header missing")
 			return response.Error(
 				ctx,
 				constant.UNAUTHORIZED,
@@ -26,10 +31,12 @@ func AdminAuthMiddleware(jwtManager *jwt.JWTManager, repo repo.IPgSQLRepository)
 				nil,
 			)
 		}
+		logging.Debug.Printf("Admin auth header received: %s...", authHeader[:min(20, len(authHeader))])
 
-		// 2️⃣ Validate format: Bearer <token>
+		// Validate format: Bearer <token>
 		parts := strings.Split(authHeader, " ")
 		if len(parts) != 2 || parts[0] != "Bearer" {
+			logging.Error.Printf("AdminAuthMiddleware - Invalid authorization header format")
 			return response.Error(
 				ctx,
 				constant.UNAUTHORIZED,
@@ -39,9 +46,12 @@ func AdminAuthMiddleware(jwtManager *jwt.JWTManager, repo repo.IPgSQLRepository)
 			)
 		}
 
-		// 3️⃣ Validate token
-		claims, err := jwtManager.ValidateAccessToken(parts[1])
+		// Validate token
+		token := parts[1]
+		logging.Debug.Printf("Admin token validation (first 10 chars): %s...", token[:min(10, len(token))])
+		claims, err := jwtManager.ValidateAccessToken(token)
 		if err != nil {
+			logging.Error.Printf("AdminAuthMiddleware - Token validation failed: %v", err)
 			return response.Error(
 				ctx,
 				constant.UNAUTHORIZED,
@@ -51,9 +61,10 @@ func AdminAuthMiddleware(jwtManager *jwt.JWTManager, repo repo.IPgSQLRepository)
 			)
 		}
 
-		// 4️⃣ Extract user_id from claims
+		// Extract user_id from claims
 		userID, ok := claims["user_id"].(string)
 		if !ok || userID == "" {
+			logging.Error.Println("AdminAuthMiddleware - Invalid token claims, user_id missing")
 			return response.Error(
 				ctx,
 				constant.UNAUTHORIZED,
@@ -62,10 +73,12 @@ func AdminAuthMiddleware(jwtManager *jwt.JWTManager, repo repo.IPgSQLRepository)
 				nil,
 			)
 		}
+		logging.Debug.Printf("Token validated, checking admin permissions for user: %s", userID)
 
-		// 5️⃣ Fetch user from DB
+		// Fetch user from DB
 		var user model.User
 		if err := repo.FindById(&user, userID); err != nil {
+			logging.Error.Printf("AdminAuthMiddleware - User not found: %s", userID)
 			return response.Error(
 				ctx,
 				constant.UNAUTHORIZED,
@@ -75,8 +88,21 @@ func AdminAuthMiddleware(jwtManager *jwt.JWTManager, repo repo.IPgSQLRepository)
 			)
 		}
 
-		// 6️⃣ Check if role is admin
+		// Check if user is blocked
+		if user.IsBlocked {
+			logging.Error.Printf("AdminAuthMiddleware - User is blocked: %s", userID)
+			return response.Error(
+				ctx,
+				constant.FORBIDDEN,
+				"Your account has been blocked",
+				"USER_BLOCKED",
+				nil,
+			)
+		}
+
+		// Check if user is admin
 		if user.Role != "admin" {
+			logging.Error.Printf("AdminAuthMiddleware - Non-admin user attempted admin access: %s, Role: %s", userID, user.Role)
 			return response.Error(
 				ctx,
 				constant.FORBIDDEN,
@@ -86,10 +112,12 @@ func AdminAuthMiddleware(jwtManager *jwt.JWTManager, repo repo.IPgSQLRepository)
 			)
 		}
 
-		// 7️⃣ Store user info in context for later use
+		// Store user info in context for later use
 		ctx.Locals("user_id", userID)
 		ctx.Locals("role", user.Role)
-
+		
+		logging.Debug.Printf("AdminAuthMiddleware passed - Admin user: %s authenticated", userID)
 		return ctx.Next()
 	}
 }
+

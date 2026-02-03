@@ -3,7 +3,6 @@ package main
 import (
 	"context"
 	"fmt"
-	"log"
 	"os"
 	"os/signal"
 	"syscall"
@@ -27,15 +26,15 @@ import (
 
 func main() {
 
-	// 1️⃣ Load application configuration
-	cfg, err := config.LoadConfig("app.yaml")
-	if err != nil {
-		log.Fatal("❌ Failed to load config:", err)
-	}
-
-	// 2️⃣ Initialize Logger (MUST be early)
+	// 1️⃣ INIT LOGGER — MUST BE FIRST
 	logging.InitLogger()
 	logging.Debug.Println("Logger initialized")
+
+	// 2️⃣ Load application configuration
+	cfg, err := config.LoadConfig("app.yaml")
+	if err != nil {
+		logging.Error.Fatalf("Failed to load config: %v", err)
+	}
 
 	// 3️⃣ Initialize Database
 	db := database.GetInstancepostgres(cfg)
@@ -67,7 +66,7 @@ func main() {
 	app.Use(middleware.CORSMiddleware())
 	logging.Debug.Println("Fiber app initialized with CORS middleware")
 
-	// Health check endpoint
+	// Health check
 	app.Get("/health", func(c *fiber.Ctx) error {
 		return c.SendString("OK 🚀")
 	})
@@ -83,31 +82,24 @@ func main() {
 
 	// 🔟 Initialize Services & Controllers
 
-	// Auth
 	authService := services.NewUserAuthService(pgRepo, 5)
 	authController := controller.NewUserAuthController(authService, jwtManager)
 
-	// Products
 	productService := services.NewProductService(pgRepo)
 	productController := controller.NewProductController(productService)
 
-	// Cart
 	cartService := services.NewCartService(pgRepo)
 	cartController := controller.NewCartController(cartService)
 
-	// Wishlist
 	wishlistService := services.NewWishlistService(pgRepo)
 	wishlistController := controller.NewWishlistController(wishlistService)
 
-	// Orders
 	orderService := services.NewOrderService(pgRepo)
 	orderController := controller.NewOrderController(orderService)
 
-	// Address
 	addressService := services.NewAddressService(pgRepo)
 	addressController := controller.NewAddressController(addressService)
 
-	// Payment
 	paymentService := services.NewPaymentService(pgRepo)
 	paymentController := controller.NewPaymentController(paymentService)
 
@@ -129,29 +121,28 @@ func main() {
 
 	logging.Debug.Println("Routes registered successfully")
 
-	// 1️⃣2️⃣ Start Server (Graceful Startup)
+	// 1️⃣2️⃣ Start Server
 	port := cfg.Server.Port
 
 	go func() {
 		logging.Debug.Printf("Server starting on port %d\n", port)
 		if err := app.Listen(fmt.Sprintf(":%d", port)); err != nil {
-			logging.Debug.Println("Server stopped with error:", err)
+			logging.Error.Printf("Server stopped with error: %v\n", err)
 		}
 	}()
 
-	
-	// 1️⃣3️⃣ Graceful Shutdown Handling
+	// 1️⃣3️⃣ Graceful Shutdown
 	quit := make(chan os.Signal, 1)
 	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
-
 	<-quit
+
 	logging.Debug.Println("Shutdown signal received")
 
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
 	if err := app.ShutdownWithContext(ctx); err != nil {
-		logging.Debug.Println("Server shutdown failed:", err)
+		logging.Error.Printf("Server shutdown failed: %v\n", err)
 	}
 
 	sqlDB, err := db.DB()

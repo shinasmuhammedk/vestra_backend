@@ -26,7 +26,7 @@ func (s *CartService) AddToCart(
 	size string,
 	quantity int,
 ) error {
-	logging.Debug.Printf("Adding to cart - user: %s, product: %s, size: %s, qty: %d", 
+	logging.Debug.Printf("Adding to cart - user: %s, product: %s, size: %s, qty: %d",
 		userID, productID, size, quantity)
 
 	// Validate user UUID
@@ -79,9 +79,9 @@ func (s *CartService) AddToCart(
 	if err == nil {
 		// Update quantity for existing item
 		newQty := item.Quantity + quantity
-		logging.Debug.Printf("Updating existing cart item %s quantity: %d -> %d", 
+		logging.Debug.Printf("Updating existing cart item %s quantity: %d -> %d",
 			item.ID, item.Quantity, newQty)
-		
+
 		return s.repo.UpdateByFields(
 			&model.CartItem{},
 			item.ID,
@@ -124,10 +124,17 @@ func (s *CartService) GetUserCart(userID string) (*model.Cart, error) {
 	}
 
 	var cart model.Cart
-	err = s.repo.Raw(
-		"SELECT * FROM carts WHERE user_id = ?",
-		uID,
-	).Preload("Items").First(&cart).Error
+
+	err = s.repo.DB().
+		Preload("Items.Product").
+		Where("user_id = ?", uID).
+		First(&cart).Error
+	logging.Debug.Printf("CART DEBUG: %+v", cart)
+    for _, item := range cart.Items {
+	logging.Debug.Printf("ITEM: %+v", item)
+	logging.Debug.Printf("PRODUCT: %+v", item.Product)
+}
+
 
 	if err != nil {
 		logging.Debug.Printf("Cart not found for user: %s", userID)

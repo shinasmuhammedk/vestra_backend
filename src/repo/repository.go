@@ -248,3 +248,7 @@ func (r *PgSQLRepository) Rollback(tx *gorm.DB) error {
 	logging.Debug.Println("Transaction rolled back")
 	return nil
 }
+
+func (r *PgSQLRepository) DB() *gorm.DB {
+	return database.PgSQLDB
+}

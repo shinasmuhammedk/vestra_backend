@@ -19,7 +19,7 @@ import (
 // init initializes the random seed for OTP generation
 func init() {
 	rand.Seed(time.Now().UnixNano())
-	logging.Debug.Println("Random seed initialized for OTP generation")
+	// logging.Debug.Println("Random seed initialized for OTP generation")
 }
 
 // UserAuthService handles all authentication-related business logic

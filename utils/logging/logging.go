@@ -2,49 +2,29 @@ package logging
 
 import (
 	"log"
-	"os"
+	"gopkg.in/natefinch/lumberjack.v2"
 )
 
-// Debug logger writes debug-level logs to debug.log
 var Debug *log.Logger
-
-// Error logger writes error-level logs to error.log
 var Error *log.Logger
 
-// InitLogger initializes debug and error loggers
 func InitLogger() {
-
-	// Open or create debug.log file
-	debugFile, err := os.OpenFile(
-		"log/debug.log",
-		os.O_APPEND|os.O_CREATE|os.O_WRONLY,
-		0644,
-	)
-	if err != nil {
-		log.Fatalf("failed to open debug.log: %v", err)
+	debugWriter := &lumberjack.Logger{
+		Filename:   "log/debug.log",
+		MaxSize:    10,   // 10 MB max
+		MaxBackups: 3,    // keep 3 old files
+		MaxAge:     7,    // delete after 7 days
+		Compress:   true, // gzip old files
 	}
 
-	// Open or create error.log file
-	errorFile, err := os.OpenFile(
-		"log/error.log",
-		os.O_APPEND|os.O_CREATE|os.O_WRONLY,
-		0644,
-	)
-	if err != nil {
-		log.Fatalf("failed to open error.log: %v", err)
+	errorWriter := &lumberjack.Logger{
+		Filename:   "log/error.log",
+		MaxSize:    10,
+		MaxBackups: 3,
+		MaxAge:     7,
+		Compress:   true,
 	}
 
-	// Initialize debug logger
-	Debug = log.New(
-		debugFile,
-		"[DEBUG] ",
-		log.Ldate|log.Ltime|log.Lshortfile,
-	)
-
-	// Initialize error logger
-	Error = log.New(
-		errorFile,
-		"[ERROR] ",
-		log.Ldate|log.Ltime|log.Lshortfile,
-	)
+	Debug = log.New(debugWriter, "[DEBUG] ", log.Ldate|log.Ltime|log.Lshortfile)
+	Error = log.New(errorWriter, "[ERROR] ", log.Ldate|log.Ltime|log.Lshortfile)
 }

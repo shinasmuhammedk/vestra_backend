@@ -1,6 +1,7 @@
 package controller
 
 import (
+
 	"github.com/gofiber/fiber/v2"
 
 	"vestra-ecommerce/src/services"
@@ -76,7 +77,7 @@ func (c *UserAuthController) Signup(ctx *fiber.Ctx) error {
 	}
 
 	logging.Debug.Printf("Signup attempt for email: %s", req.Email)
-	
+
 	if err := c.authService.Signup(req.Name, req.Email, req.Password); err != nil {
 		if appErr, ok := err.(*apperror.AppError); ok {
 			logging.Error.Printf("Signup failed: %s - %s", appErr.Code, appErr.Message)
@@ -119,7 +120,7 @@ func (c *UserAuthController) VerifyOTP(ctx *fiber.Ctx) error {
 	}
 
 	logging.Debug.Printf("Verifying OTP for email: %s", req.Email)
-	
+
 	if err := c.authService.VerifyOTP(req.Email, req.OTP); err != nil {
 		if appErr, ok := err.(*apperror.AppError); ok {
 			logging.Error.Printf("VerifyOTP failed: %s - %s", appErr.Code, appErr.Message)
@@ -205,6 +206,30 @@ func (c *UserAuthController) Login(ctx *fiber.Ctx) error {
 		)
 	}
 
+	// set access token cookie
+	ctx.Cookie(&fiber.Cookie{
+		Name:     "access_token",
+		Value:    accessToken,
+        Path: "/",
+		HTTPOnly: true,
+		Secure:   false, // change to true in production
+		SameSite: "Lax",
+		MaxAge:   900, // 15 minutes
+	})
+
+	// set refresh token cookie
+	ctx.Cookie(&fiber.Cookie{
+		Name:     "refresh_token",
+		Value:    refreshToken,
+        Path: "/",
+		HTTPOnly: true,
+		Secure:   false,
+		SameSite: "Lax",
+		MaxAge:   604800, // 7 days
+	})
+    
+
+
 	logging.Debug.Printf("Tokens generated successfully for user: %s", user.ID)
 	return response.Success(
 		ctx,
@@ -222,19 +247,19 @@ func (c *UserAuthController) Login(ctx *fiber.Ctx) error {
 func (c *UserAuthController) RefreshToken(ctx *fiber.Ctx) error {
 	logging.Debug.Println("RefreshToken endpoint called")
 
-	var req refreshRequest
-	if err := ctx.BodyParser(&req); err != nil {
-		logging.Error.Printf("RefreshToken - Invalid request body: %v", err)
+	refreshToken := ctx.Cookies("refresh_token")
+
+	if refreshToken == "" {
 		return response.Error(
 			ctx,
-			constant.BADREQUEST,
-			"Invalid request payload",
+			constant.UNAUTHORIZED,
+			"Refresh token missing",
 			"",
 			nil,
 		)
 	}
 
-	claims, err := c.jwtManager.ValidateRefreshToken(req.RefreshToken)
+	claims, err := c.jwtManager.ValidateRefreshToken(refreshToken)
 	if err != nil {
 		logging.Error.Printf("Invalid refresh token: %v", err)
 		return response.Error(
@@ -257,7 +282,7 @@ func (c *UserAuthController) RefreshToken(ctx *fiber.Ctx) error {
 			nil,
 		)
 	}
-    
+
 	role, ok := claims["role"].(string)
 	if !ok || role == "" {
 		role = "user"
@@ -275,6 +300,17 @@ func (c *UserAuthController) RefreshToken(ctx *fiber.Ctx) error {
 			err.Error(),
 		)
 	}
+
+	// set new access token cookie
+	ctx.Cookie(&fiber.Cookie{
+		Name:     "access_token",
+		Value:    accessToken,
+        Path: "/",
+		HTTPOnly: true,
+		Secure:   false,
+		SameSite: "Lax",
+		MaxAge:   900,
+	})
 
 	logging.Debug.Printf("Access token refreshed for user: %s", userID)
 	return response.Success(
@@ -305,7 +341,7 @@ func (c *UserAuthController) ForgotPassword(ctx *fiber.Ctx) error {
 	}
 
 	logging.Debug.Printf("Forgot password request for email: %s", req.Email)
-	
+
 	if err := c.authService.ForgotPassword(req.Email); err != nil {
 		if appErr, ok := err.(*apperror.AppError); ok {
 			logging.Error.Printf("ForgotPassword failed: %s - %s", appErr.Code, appErr.Message)
@@ -361,7 +397,7 @@ func (c *UserAuthController) ResetPassword(ctx *fiber.Ctx) error {
 	}
 
 	logging.Debug.Printf("Resetting password for email: %s", req.Email)
-	
+
 	if err := c.authService.ResetPassword(
 		req.Email,
 		req.OTP,
@@ -409,7 +445,7 @@ func (c *UserAuthController) GetProfile(ctx *fiber.Ctx) error {
 	}
 
 	logging.Debug.Printf("Fetching profile for user: %s", userID)
-	
+
 	user, err := c.authService.GetProfile(userID.(string))
 	if err != nil {
 		if appErr, ok := err.(*apperror.AppError); ok {
@@ -477,7 +513,7 @@ func (c *UserAuthController) UpdateProfile(ctx *fiber.Ctx) error {
 	}
 
 	logging.Debug.Printf("Updating profile for user: %s, new name: %s", userID, req.Name)
-	
+
 	user, err := c.authService.UpdateProfile(userID.(string), req.Name)
 	if err != nil {
 		if appErr, ok := err.(*apperror.AppError); ok {
@@ -521,7 +557,7 @@ func (c *UserAuthController) ToggleUserBlock(ctx *fiber.Ctx) error {
 	}
 
 	logging.Debug.Printf("Admin user checking permissions: %s", currentUserID)
-	
+
 	currentUser, err := c.authService.GetByID(currentUserID.(string))
 	if err != nil {
 		logging.Error.Printf("Failed to get current user: %v", err)
@@ -533,7 +569,7 @@ func (c *UserAuthController) ToggleUserBlock(ctx *fiber.Ctx) error {
 			nil,
 		)
 	}
-	
+
 	if currentUser.Role != "admin" {
 		logging.Error.Printf("Non-admin user attempted to toggle block: %s", currentUserID)
 		return response.Error(
@@ -558,7 +594,7 @@ func (c *UserAuthController) ToggleUserBlock(ctx *fiber.Ctx) error {
 	}
 
 	logging.Debug.Printf("Admin %s toggling block for user: %s", currentUserID, targetID)
-	
+
 	updatedUser, err := c.authService.ToggleUserBlock(targetID)
 	if err != nil {
 		if appErr, ok := err.(*apperror.AppError); ok {
@@ -651,7 +687,7 @@ func (c *UserAuthController) DeleteUserByID(ctx *fiber.Ctx) error {
 	}
 
 	logging.Debug.Printf("Admin %s deleting user: %s", currentUserID, targetID)
-	
+
 	if err := c.authService.DeleteUserByID(targetID); err != nil {
 		if appErr, ok := err.(*apperror.AppError); ok {
 			logging.Error.Printf("DeleteUserByID failed: %s - %s", appErr.Code, appErr.Message)
@@ -682,4 +718,42 @@ func (c *UserAuthController) DeleteUserByID(ctx *fiber.Ctx) error {
 		"",
 		nil,
 	)
+}
+
+
+
+// Logout clears auth cookies
+func (c *UserAuthController) Logout(ctx *fiber.Ctx) error {
+    logging.Debug.Println("Logout endpoint called")
+
+    // Clear access token cookie
+    ctx.Cookie(&fiber.Cookie{
+        Name:     "access_token",
+        Value:    "",
+        Path:     "/",
+        HTTPOnly: true,
+        Secure:   false,
+        SameSite: "Lax",
+        MaxAge:   -1, // ← deletes the cookie
+    })
+
+    // Clear refresh token cookie
+    ctx.Cookie(&fiber.Cookie{
+        Name:     "refresh_token",
+        Value:    "",
+        Path:     "/",
+        HTTPOnly: true,
+        Secure:   false,
+        SameSite: "Lax",
+        MaxAge:   -1, // ← deletes the cookie
+    })
+
+    logging.Debug.Println("Logout successful - cookies cleared")
+    return response.Success(
+        ctx,
+        constant.SUCCESS,
+        "Logged out successfully",
+        "",
+        nil,
+    )
 }

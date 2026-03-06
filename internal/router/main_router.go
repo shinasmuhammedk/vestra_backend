@@ -33,7 +33,7 @@ func Setup(
 	authGroup.Post("/login", auth.Login)
 	authGroup.Post("/forgot-password", auth.ForgotPassword)
 	authGroup.Post("/reset-password", auth.ResetPassword)
-
+    authGroup.Post("/logout", auth.Logout)
 	app.Post("/refresh", auth.RefreshToken)
 	logging.Debug.Printf("Auth routes configured: 6 endpoints")
 

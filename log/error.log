@@ -1,187 +1,87 @@
-[ERROR] 2026/02/02 11:58:52 jwt.go:117: Invalid access token
-[ERROR] 2026/02/02 11:58:52 jwt.go:117: Invalid access token
-[ERROR] 2026/02/02 13:51:57 jwt.go:117: Invalid access token
-[ERROR] 2026/02/02 13:51:57 jwt.go:117: Invalid access token
-[ERROR] 2026/02/02 13:58:34 jwt.go:117: Invalid access token
-[ERROR] 2026/02/02 13:58:34 jwt.go:117: Invalid access token
-[ERROR] 2026/02/02 13:58:47 jwt.go:117: Invalid access token
-[ERROR] 2026/02/02 13:58:47 jwt.go:117: Invalid access token
-[ERROR] 2026/02/02 13:58:53 jwt.go:117: Invalid access token
-[ERROR] 2026/02/02 13:58:53 jwt.go:117: Invalid access token
-[ERROR] 2026/02/02 13:58:55 jwt.go:117: Invalid access token
-[ERROR] 2026/02/02 13:58:55 jwt.go:117: Invalid access token
-[ERROR] 2026/02/02 13:58:57 jwt.go:117: Invalid access token
-[ERROR] 2026/02/02 13:58:58 jwt.go:117: Invalid access token
-[ERROR] 2026/02/02 13:58:58 jwt.go:117: Invalid access token
-[ERROR] 2026/02/02 13:59:02 jwt.go:117: Invalid access token
-[ERROR] 2026/02/02 13:59:02 jwt.go:117: Invalid access token
-[ERROR] 2026/02/02 13:59:09 jwt.go:117: Invalid access token
-[ERROR] 2026/02/02 13:59:09 jwt.go:117: Invalid access token
-[ERROR] 2026/02/02 14:23:15 jwt.go:117: Invalid access token
-[ERROR] 2026/02/02 14:23:15 jwt.go:117: Invalid access token
-[ERROR] 2026/02/02 14:39:05 jwt.go:117: Invalid access token
-[ERROR] 2026/02/02 14:39:05 jwt.go:117: Invalid access token
-[ERROR] 2026/02/02 14:40:26 jwt.go:117: Invalid access token
-[ERROR] 2026/02/02 14:40:27 jwt.go:117: Invalid access token
-[ERROR] 2026/02/02 14:42:19 jwt.go:117: Invalid access token
-[ERROR] 2026/02/02 14:42:19 jwt.go:117: Invalid access token
-[ERROR] 2026/02/02 14:42:19 jwt.go:117: Invalid access token
-[ERROR] 2026/02/02 14:46:34 jwt.go:117: Invalid access token
-[ERROR] 2026/02/02 15:16:21 jwt.go:117: Invalid access token
-[ERROR] 2026/02/02 15:16:21 jwt.go:117: Invalid access token
-[ERROR] 2026/02/02 15:16:35 jwt.go:117: Invalid access token
-[ERROR] 2026/02/02 15:16:35 jwt.go:117: Invalid access token
-[ERROR] 2026/02/02 15:16:43 jwt.go:117: Invalid access token
-[ERROR] 2026/02/02 15:16:43 jwt.go:117: Invalid access token
-[ERROR] 2026/02/02 15:17:26 jwt.go:117: Invalid access token
-[ERROR] 2026/02/02 15:17:26 jwt.go:117: Invalid access token
-[ERROR] 2026/02/02 15:34:23 jwt.go:117: Invalid access token
-[ERROR] 2026/02/02 15:34:31 jwt.go:117: Invalid access token
-[ERROR] 2026/02/02 15:38:21 jwt.go:117: Invalid access token
-[ERROR] 2026/02/02 15:38:21 jwt.go:117: Invalid access token
-[ERROR] 2026/02/02 16:30:16 jwt.go:117: Invalid access token
-[ERROR] 2026/02/02 16:47:04 jwt.go:117: Invalid access token
-[ERROR] 2026/02/03 09:44:44 product_services.go:160: Failed to get product IDs: ERROR: for SELECT DISTINCT, ORDER BY expressions must appear in select list (SQLSTATE 42P10)
-[ERROR] 2026/02/03 09:44:44 product_services.go:160: Failed to get product IDs: ERROR: for SELECT DISTINCT, ORDER BY expressions must appear in select list (SQLSTATE 42P10)
-[ERROR] 2026/02/03 09:44:50 product_services.go:160: Failed to get product IDs: ERROR: for SELECT DISTINCT, ORDER BY expressions must appear in select list (SQLSTATE 42P10)
-[ERROR] 2026/02/03 09:44:50 product_services.go:160: Failed to get product IDs: ERROR: for SELECT DISTINCT, ORDER BY expressions must appear in select list (SQLSTATE 42P10)
-[ERROR] 2026/02/03 09:48:29 product_services.go:181: Failed to load product details: Categories: unsupported relations for schema Product
-[ERROR] 2026/02/03 09:48:29 product_services.go:181: Failed to load product details: Categories: unsupported relations for schema Product
-[ERROR] 2026/02/03 09:48:31 product_services.go:181: Failed to load product details: Categories: unsupported relations for schema Product
-[ERROR] 2026/02/03 09:48:31 product_services.go:181: Failed to load product details: Categories: unsupported relations for schema Product
-[ERROR] 2026/02/03 10:03:32 jwt.go:117: Invalid access token
-[ERROR] 2026/02/03 10:03:32 auth_middleware.go:54: AuthMiddleware - Token validation failed: invalid token
-[ERROR] 2026/02/03 10:21:21 auth_middleware.go:25: AuthMiddleware - Authorization header missing
-[ERROR] 2026/02/03 10:21:21 auth_middleware.go:25: AuthMiddleware - Authorization header missing
-[ERROR] 2026/02/03 10:21:21 auth_middleware.go:25: AuthMiddleware - Authorization header missing
-[ERROR] 2026/02/03 10:21:21 auth_middleware.go:25: AuthMiddleware - Authorization header missing
-[ERROR] 2026/02/03 10:21:21 auth_middleware.go:25: AuthMiddleware - Authorization header missing
-[ERROR] 2026/02/03 10:21:21 auth_middleware.go:25: AuthMiddleware - Authorization header missing
-[ERROR] 2026/02/03 10:21:43 auth_middleware.go:25: AuthMiddleware - Authorization header missing
-[ERROR] 2026/02/03 10:21:43 auth_middleware.go:25: AuthMiddleware - Authorization header missing
-[ERROR] 2026/02/03 10:21:43 auth_middleware.go:25: AuthMiddleware - Authorization header missing
-[ERROR] 2026/02/03 10:21:43 auth_middleware.go:25: AuthMiddleware - Authorization header missing
-[ERROR] 2026/02/03 10:21:43 auth_middleware.go:25: AuthMiddleware - Authorization header missing
-[ERROR] 2026/02/03 10:21:43 auth_middleware.go:25: AuthMiddleware - Authorization header missing
-[ERROR] 2026/02/03 10:43:00 jwt.go:117: Invalid access token
-[ERROR] 2026/02/03 10:43:00 auth_middleware.go:54: AuthMiddleware - Token validation failed: invalid token
-[ERROR] 2026/02/03 10:43:01 jwt.go:117: Invalid access token
-[ERROR] 2026/02/03 10:43:01 auth_middleware.go:54: AuthMiddleware - Token validation failed: invalid token
-[ERROR] 2026/02/03 10:43:02 jwt.go:117: Invalid access token
-[ERROR] 2026/02/03 10:43:02 auth_middleware.go:54: AuthMiddleware - Token validation failed: invalid token
-[ERROR] 2026/02/03 10:43:02 jwt.go:117: Invalid access token
-[ERROR] 2026/02/03 10:43:02 auth_middleware.go:54: AuthMiddleware - Token validation failed: invalid token
-[ERROR] 2026/02/03 10:43:27 jwt.go:117: Invalid access token
-[ERROR] 2026/02/03 10:43:27 auth_middleware.go:54: AuthMiddleware - Token validation failed: invalid token
-[ERROR] 2026/02/03 10:43:27 jwt.go:117: Invalid access token
-[ERROR] 2026/02/03 10:43:27 auth_middleware.go:54: AuthMiddleware - Token validation failed: invalid token
-[ERROR] 2026/02/03 10:43:32 jwt.go:117: Invalid access token
-[ERROR] 2026/02/03 10:43:32 auth_middleware.go:54: AuthMiddleware - Token validation failed: invalid token
-[ERROR] 2026/02/03 10:43:32 jwt.go:117: Invalid access token
-[ERROR] 2026/02/03 10:43:32 auth_middleware.go:54: AuthMiddleware - Token validation failed: invalid token
-[ERROR] 2026/02/03 11:03:20 jwt.go:117: Invalid access token
-[ERROR] 2026/02/03 11:03:20 auth_middleware.go:54: AuthMiddleware - Token validation failed: invalid token
-[ERROR] 2026/02/03 11:03:45 jwt.go:117: Invalid access token
-[ERROR] 2026/02/03 11:03:45 auth_middleware.go:54: AuthMiddleware - Token validation failed: invalid token
-[ERROR] 2026/02/03 11:07:21 user_auth_services.go:223: Login failed - User not verified: jasilbca@gmail.com
-[ERROR] 2026/02/03 11:07:21 user_auth_controller.go:169: Login failed:  - User not verified
-[ERROR] 2026/02/03 13:06:38 auth_middleware.go:25: AuthMiddleware - Authorization header missing
-[ERROR] 2026/02/03 13:06:38 auth_middleware.go:25: AuthMiddleware - Authorization header missing
-[ERROR] 2026/02/03 13:06:38 auth_middleware.go:25: AuthMiddleware - Authorization header missing
-[ERROR] 2026/02/03 13:06:38 auth_middleware.go:25: AuthMiddleware - Authorization header missing
-[ERROR] 2026/02/03 13:06:38 auth_middleware.go:25: AuthMiddleware - Authorization header missing
-[ERROR] 2026/02/03 13:06:38 auth_middleware.go:25: AuthMiddleware - Authorization header missing
-[ERROR] 2026/02/03 13:40:44 user_auth_services.go:212: Login failed - User not found: anshadvelaldath123@gmail.com
-[ERROR] 2026/02/03 13:40:44 user_auth_controller.go:169: Login failed:  - Invalid email or password
-[ERROR] 2026/02/03 14:51:54 jwt.go:117: Invalid access token
-[ERROR] 2026/02/03 14:51:54 auth_middleware.go:54: AuthMiddleware - Token validation failed: invalid token
-[ERROR] 2026/02/03 14:51:54 jwt.go:117: Invalid access token
-[ERROR] 2026/02/03 14:51:54 auth_middleware.go:54: AuthMiddleware - Token validation failed: invalid token
-[ERROR] 2026/02/03 14:52:22 jwt.go:117: Invalid access token
-[ERROR] 2026/02/03 14:52:22 auth_middleware.go:54: AuthMiddleware - Token validation failed: invalid token
-[ERROR] 2026/02/03 14:52:22 jwt.go:117: Invalid access token
-[ERROR] 2026/02/03 14:52:22 auth_middleware.go:54: AuthMiddleware - Token validation failed: invalid token
-[ERROR] 2026/02/03 14:53:38 jwt.go:117: Invalid access token
-[ERROR] 2026/02/03 14:53:38 auth_middleware.go:54: AuthMiddleware - Token validation failed: invalid token
-[ERROR] 2026/02/03 15:19:07 jwt.go:117: Invalid access token
-[ERROR] 2026/02/03 15:19:07 auth_middleware.go:54: AuthMiddleware - Token validation failed: invalid token
-[ERROR] 2026/02/03 15:41:37 jwt.go:117: Invalid access token
-[ERROR] 2026/02/03 15:41:37 auth_middleware.go:54: AuthMiddleware - Token validation failed: invalid token
-[ERROR] 2026/02/03 15:42:47 jwt.go:117: Invalid access token
-[ERROR] 2026/02/03 15:42:47 auth_middleware.go:54: AuthMiddleware - Token validation failed: invalid token
-[ERROR] 2026/02/03 15:42:47 jwt.go:117: Invalid access token
-[ERROR] 2026/02/03 15:42:47 auth_middleware.go:54: AuthMiddleware - Token validation failed: invalid token
-[ERROR] 2026/02/03 15:45:56 auth_middleware.go:25: AuthMiddleware - Authorization header missing
-[ERROR] 2026/02/03 15:45:56 auth_middleware.go:25: AuthMiddleware - Authorization header missing
-[ERROR] 2026/02/03 15:45:56 auth_middleware.go:25: AuthMiddleware - Authorization header missing
-[ERROR] 2026/02/03 15:45:56 auth_middleware.go:25: AuthMiddleware - Authorization header missing
-[ERROR] 2026/02/03 15:45:56 auth_middleware.go:25: AuthMiddleware - Authorization header missing
-[ERROR] 2026/02/03 15:45:56 auth_middleware.go:25: AuthMiddleware - Authorization header missing
-[ERROR] 2026/02/03 15:58:40 user_auth_services.go:245: Login failed - Invalid password for: anshadvelladath123@gmail.com
-[ERROR] 2026/02/03 15:58:40 user_auth_controller.go:169: Login failed:  - Invalid email or password
-[ERROR] 2026/02/03 16:01:25 jwt.go:117: Invalid access token
-[ERROR] 2026/02/03 16:01:25 admin_auth_middleware.go:54: AdminAuthMiddleware - Token validation failed: invalid token
-[ERROR] 2026/02/03 16:01:27 jwt.go:117: Invalid access token
-[ERROR] 2026/02/03 16:01:27 admin_auth_middleware.go:54: AdminAuthMiddleware - Token validation failed: invalid token
-[ERROR] 2026/02/03 16:01:27 jwt.go:117: Invalid access token
-[ERROR] 2026/02/03 16:01:27 admin_auth_middleware.go:54: AdminAuthMiddleware - Token validation failed: invalid token
-[ERROR] 2026/02/03 16:01:49 jwt.go:117: Invalid access token
-[ERROR] 2026/02/03 16:01:49 admin_auth_middleware.go:54: AdminAuthMiddleware - Token validation failed: invalid token
-[ERROR] 2026/02/03 16:01:55 jwt.go:117: Invalid access token
-[ERROR] 2026/02/03 16:01:55 admin_auth_middleware.go:54: AdminAuthMiddleware - Token validation failed: invalid token
-[ERROR] 2026/02/03 16:02:23 auth_middleware.go:25: AuthMiddleware - Authorization header missing
-[ERROR] 2026/02/03 16:02:23 auth_middleware.go:25: AuthMiddleware - Authorization header missing
-[ERROR] 2026/02/03 16:02:23 auth_middleware.go:25: AuthMiddleware - Authorization header missing
-[ERROR] 2026/02/03 16:02:23 auth_middleware.go:25: AuthMiddleware - Authorization header missing
-[ERROR] 2026/02/03 16:02:23 auth_middleware.go:25: AuthMiddleware - Authorization header missing
-[ERROR] 2026/02/03 16:02:23 auth_middleware.go:25: AuthMiddleware - Authorization header missing
-[ERROR] 2026/02/03 16:03:54 repository.go:35: Insert failed for *model.ProductSize: ERROR: duplicate key value violates unique constraint "idx_product_size" (SQLSTATE 23505)
-[ERROR] 2026/02/03 16:04:10 repository.go:35: Insert failed for *model.ProductSize: ERROR: duplicate key value violates unique constraint "idx_product_size" (SQLSTATE 23505)
-[ERROR] 2026/02/03 16:04:23 repository.go:35: Insert failed for *model.ProductSize: ERROR: duplicate key value violates unique constraint "idx_product_size" (SQLSTATE 23505)
-[ERROR] 2026/02/03 16:05:19 repository.go:35: Insert failed for *model.ProductSize: ERROR: duplicate key value violates unique constraint "idx_product_size" (SQLSTATE 23505)
-[ERROR] 2026/02/03 16:08:08 repository.go:35: Insert failed for *model.ProductSize: ERROR: duplicate key value violates unique constraint "idx_product_size" (SQLSTATE 23505)
-[ERROR] 2026/02/03 16:08:15 repository.go:35: Insert failed for *model.ProductSize: ERROR: duplicate key value violates unique constraint "idx_product_size" (SQLSTATE 23505)
-[ERROR] 2026/02/03 16:18:11 jwt.go:117: Invalid access token
-[ERROR] 2026/02/03 16:18:11 auth_middleware.go:54: AuthMiddleware - Token validation failed: invalid token
-[ERROR] 2026/02/03 16:18:11 jwt.go:117: Invalid access token
-[ERROR] 2026/02/03 16:18:11 auth_middleware.go:54: AuthMiddleware - Token validation failed: invalid token
-[ERROR] 2026/02/03 16:18:11 jwt.go:117: Invalid access token
-[ERROR] 2026/02/03 16:18:11 auth_middleware.go:54: AuthMiddleware - Token validation failed: invalid token
-[ERROR] 2026/02/03 16:22:52 jwt.go:117: Invalid access token
-[ERROR] 2026/02/03 16:22:52 auth_middleware.go:54: AuthMiddleware - Token validation failed: invalid token
-[ERROR] 2026/02/03 16:22:52 jwt.go:117: Invalid access token
-[ERROR] 2026/02/03 16:22:52 auth_middleware.go:54: AuthMiddleware - Token validation failed: invalid token
-[ERROR] 2026/02/03 16:23:35 jwt.go:117: Invalid access token
-[ERROR] 2026/02/03 16:23:35 auth_middleware.go:54: AuthMiddleware - Token validation failed: invalid token
-[ERROR] 2026/02/03 16:23:35 jwt.go:117: Invalid access token
-[ERROR] 2026/02/03 16:23:35 auth_middleware.go:54: AuthMiddleware - Token validation failed: invalid token
-[ERROR] 2026/02/03 16:23:38 jwt.go:117: Invalid access token
-[ERROR] 2026/02/03 16:23:38 auth_middleware.go:54: AuthMiddleware - Token validation failed: invalid token
-[ERROR] 2026/02/03 16:23:38 jwt.go:117: Invalid access token
-[ERROR] 2026/02/03 16:23:38 auth_middleware.go:54: AuthMiddleware - Token validation failed: invalid token
-[ERROR] 2026/02/03 16:23:45 jwt.go:117: Invalid access token
-[ERROR] 2026/02/03 16:23:45 auth_middleware.go:54: AuthMiddleware - Token validation failed: invalid token
-[ERROR] 2026/02/03 16:23:45 jwt.go:117: Invalid access token
-[ERROR] 2026/02/03 16:23:45 auth_middleware.go:54: AuthMiddleware - Token validation failed: invalid token
-[ERROR] 2026/02/03 16:25:39 auth_middleware.go:25: AuthMiddleware - Authorization header missing
-[ERROR] 2026/02/03 16:25:39 auth_middleware.go:25: AuthMiddleware - Authorization header missing
-[ERROR] 2026/02/03 16:25:39 auth_middleware.go:25: AuthMiddleware - Authorization header missing
-[ERROR] 2026/02/03 16:25:39 auth_middleware.go:25: AuthMiddleware - Authorization header missing
-[ERROR] 2026/02/03 16:25:39 auth_middleware.go:25: AuthMiddleware - Authorization header missing
-[ERROR] 2026/02/03 16:25:39 auth_middleware.go:25: AuthMiddleware - Authorization header missing
-[ERROR] 2026/02/03 16:31:37 auth_middleware.go:25: AuthMiddleware - Authorization header missing
-[ERROR] 2026/02/03 16:31:37 jwt.go:117: Invalid access token
-[ERROR] 2026/02/03 16:31:37 admin_auth_middleware.go:54: AdminAuthMiddleware - Token validation failed: invalid token
-[ERROR] 2026/02/03 16:31:37 auth_middleware.go:25: AuthMiddleware - Authorization header missing
-[ERROR] 2026/02/03 16:31:37 jwt.go:117: Invalid access token
-[ERROR] 2026/02/03 16:31:37 admin_auth_middleware.go:54: AdminAuthMiddleware - Token validation failed: invalid token
-[ERROR] 2026/02/03 16:31:37 auth_middleware.go:25: AuthMiddleware - Authorization header missing
-[ERROR] 2026/02/03 16:31:37 auth_middleware.go:25: AuthMiddleware - Authorization header missing
-[ERROR] 2026/02/03 16:31:47 auth_middleware.go:25: AuthMiddleware - Authorization header missing
-[ERROR] 2026/02/03 16:31:47 auth_middleware.go:25: AuthMiddleware - Authorization header missing
-[ERROR] 2026/02/03 16:31:47 auth_middleware.go:25: AuthMiddleware - Authorization header missing
-[ERROR] 2026/02/03 16:31:47 auth_middleware.go:25: AuthMiddleware - Authorization header missing
-[ERROR] 2026/02/03 16:31:47 jwt.go:117: Invalid access token
-[ERROR] 2026/02/03 16:31:47 admin_auth_middleware.go:54: AdminAuthMiddleware - Token validation failed: invalid token
-[ERROR] 2026/02/03 16:31:47 jwt.go:117: Invalid access token
-[ERROR] 2026/02/03 16:31:47 admin_auth_middleware.go:54: AdminAuthMiddleware - Token validation failed: invalid token
+[ERROR] 2026/03/06 11:57:00 jwt.go:117: Invalid access token
+[ERROR] 2026/03/06 11:57:00 auth_middleware.go:64: AuthMiddleware - Token validation failed: invalid token
+[ERROR] 2026/03/06 11:57:42 main.go:145: Server shutdown failed: context deadline exceeded
+[ERROR] 2026/03/06 12:01:34 jwt.go:117: Invalid access token
+[ERROR] 2026/03/06 12:01:34 admin_auth_middleware.go:49: AdminAuthMiddleware - Token validation failed: invalid token
+[ERROR] 2026/03/06 12:01:34 auth_middleware.go:34: AuthMiddleware - No token found in cookie or Authorization header
+[ERROR] 2026/03/06 12:01:34 auth_middleware.go:34: AuthMiddleware - No token found in cookie or Authorization header
+[ERROR] 2026/03/06 12:05:27 jwt.go:117: Invalid access token
+[ERROR] 2026/03/06 12:05:27 admin_auth_middleware.go:49: AdminAuthMiddleware - Token validation failed: invalid token
+[ERROR] 2026/03/06 12:05:27 auth_middleware.go:34: AuthMiddleware - No token found in cookie or Authorization header
+[ERROR] 2026/03/06 12:05:27 auth_middleware.go:34: AuthMiddleware - No token found in cookie or Authorization header
+[ERROR] 2026/03/06 12:05:33 jwt.go:117: Invalid access token
+[ERROR] 2026/03/06 12:05:33 admin_auth_middleware.go:49: AdminAuthMiddleware - Token validation failed: invalid token
+[ERROR] 2026/03/06 12:05:33 auth_middleware.go:34: AuthMiddleware - No token found in cookie or Authorization header
+[ERROR] 2026/03/06 12:05:34 auth_middleware.go:34: AuthMiddleware - No token found in cookie or Authorization header
+[ERROR] 2026/03/06 12:06:10 auth_middleware.go:34: AuthMiddleware - No token found in cookie or Authorization header
+[ERROR] 2026/03/06 12:06:10 jwt.go:117: Invalid access token
+[ERROR] 2026/03/06 12:06:10 admin_auth_middleware.go:49: AdminAuthMiddleware - Token validation failed: invalid token
+[ERROR] 2026/03/06 12:06:10 auth_middleware.go:34: AuthMiddleware - No token found in cookie or Authorization header
+[ERROR] 2026/03/06 12:07:08 jwt.go:117: Invalid access token
+[ERROR] 2026/03/06 12:07:08 admin_auth_middleware.go:49: AdminAuthMiddleware - Token validation failed: invalid token
+[ERROR] 2026/03/06 12:07:08 auth_middleware.go:34: AuthMiddleware - No token found in cookie or Authorization header
+[ERROR] 2026/03/06 12:07:08 auth_middleware.go:34: AuthMiddleware - No token found in cookie or Authorization header
+[ERROR] 2026/03/06 12:08:05 admin_auth_middleware.go:32: AdminAuthMiddleware - No token found in cookie or Authorization header
+[ERROR] 2026/03/06 12:08:12 auth_middleware.go:34: AuthMiddleware - No token found in cookie or Authorization header
+[ERROR] 2026/03/06 12:08:12 jwt.go:117: Invalid access token
+[ERROR] 2026/03/06 12:08:12 admin_auth_middleware.go:49: AdminAuthMiddleware - Token validation failed: invalid token
+[ERROR] 2026/03/06 12:08:12 auth_middleware.go:34: AuthMiddleware - No token found in cookie or Authorization header
+[ERROR] 2026/03/06 12:10:56 admin_auth_middleware.go:32: AdminAuthMiddleware - No token found in cookie or Authorization header
+[ERROR] 2026/03/06 12:11:11 admin_auth_middleware.go:32: AdminAuthMiddleware - No token found in cookie or Authorization header
+[ERROR] 2026/03/06 12:11:30 admin_auth_middleware.go:32: AdminAuthMiddleware - No token found in cookie or Authorization header
+[ERROR] 2026/03/06 12:11:30 jwt.go:117: Invalid access token
+[ERROR] 2026/03/06 12:11:30 admin_auth_middleware.go:49: AdminAuthMiddleware - Token validation failed: invalid token
+[ERROR] 2026/03/06 12:11:30 admin_auth_middleware.go:32: AdminAuthMiddleware - No token found in cookie or Authorization header
+[ERROR] 2026/03/06 13:26:23 auth_middleware.go:34: AuthMiddleware - No token found in cookie or Authorization header
+[ERROR] 2026/03/06 13:26:24 jwt.go:117: Invalid access token
+[ERROR] 2026/03/06 13:26:24 admin_auth_middleware.go:49: AdminAuthMiddleware - Token validation failed: invalid token
+[ERROR] 2026/03/06 13:26:24 admin_auth_middleware.go:32: AdminAuthMiddleware - No token found in cookie or Authorization header
+[ERROR] 2026/03/06 13:26:24 admin_auth_middleware.go:32: AdminAuthMiddleware - No token found in cookie or Authorization header
+[ERROR] 2026/03/06 13:32:55 jwt.go:117: Invalid access token
+[ERROR] 2026/03/06 13:32:55 admin_auth_middleware.go:49: AdminAuthMiddleware - Token validation failed: invalid token
+[ERROR] 2026/03/06 13:32:55 admin_auth_middleware.go:32: AdminAuthMiddleware - No token found in cookie or Authorization header
+[ERROR] 2026/03/06 13:32:55 admin_auth_middleware.go:32: AdminAuthMiddleware - No token found in cookie or Authorization header
+[ERROR] 2026/03/06 13:39:14 auth_middleware.go:34: AuthMiddleware - No token found in cookie or Authorization header
+[ERROR] 2026/03/06 13:39:17 auth_middleware.go:34: AuthMiddleware - No token found in cookie or Authorization header
+[ERROR] 2026/03/06 13:39:58 jwt.go:117: Invalid access token
+[ERROR] 2026/03/06 13:39:58 admin_auth_middleware.go:49: AdminAuthMiddleware - Token validation failed: invalid token
+[ERROR] 2026/03/06 13:39:58 admin_auth_middleware.go:32: AdminAuthMiddleware - No token found in cookie or Authorization header
+[ERROR] 2026/03/06 13:39:59 admin_auth_middleware.go:32: AdminAuthMiddleware - No token found in cookie or Authorization header
+[ERROR] 2026/03/06 13:48:10 admin_auth_middleware.go:32: AdminAuthMiddleware - No token found in cookie or Authorization header
+[ERROR] 2026/03/06 13:48:50 admin_auth_middleware.go:32: AdminAuthMiddleware - No token found in cookie or Authorization header
+[ERROR] 2026/03/06 13:48:54 admin_auth_middleware.go:32: AdminAuthMiddleware - No token found in cookie or Authorization header
+[ERROR] 2026/03/06 13:48:54 jwt.go:117: Invalid access token
+[ERROR] 2026/03/06 13:48:54 admin_auth_middleware.go:49: AdminAuthMiddleware - Token validation failed: invalid token
+[ERROR] 2026/03/06 13:48:54 admin_auth_middleware.go:32: AdminAuthMiddleware - No token found in cookie or Authorization header
+[ERROR] 2026/03/06 13:48:56 admin_auth_middleware.go:32: AdminAuthMiddleware - No token found in cookie or Authorization header
+[ERROR] 2026/03/06 13:48:58 admin_auth_middleware.go:32: AdminAuthMiddleware - No token found in cookie or Authorization header
+[ERROR] 2026/03/06 15:17:07 auth_middleware.go:34: AuthMiddleware - No token found in cookie or Authorization header
+[ERROR] 2026/03/06 15:17:08 jwt.go:117: Invalid access token
+[ERROR] 2026/03/06 15:17:08 admin_auth_middleware.go:49: AdminAuthMiddleware - Token validation failed: invalid token
+[ERROR] 2026/03/06 15:17:08 admin_auth_middleware.go:32: AdminAuthMiddleware - No token found in cookie or Authorization header
+[ERROR] 2026/03/06 15:17:08 admin_auth_middleware.go:32: AdminAuthMiddleware - No token found in cookie or Authorization header
+[ERROR] 2026/03/06 15:46:03 auth_middleware.go:34: AuthMiddleware - No token found in cookie or Authorization header
+[ERROR] 2026/03/06 15:46:03 admin_auth_middleware.go:32: AdminAuthMiddleware - No token found in cookie or Authorization header
+[ERROR] 2026/03/06 15:46:03 jwt.go:117: Invalid access token
+[ERROR] 2026/03/06 15:46:03 admin_auth_middleware.go:49: AdminAuthMiddleware - Token validation failed: invalid token
+[ERROR] 2026/03/06 15:46:03 admin_auth_middleware.go:32: AdminAuthMiddleware - No token found in cookie or Authorization header
+[ERROR] 2026/03/06 16:10:01 auth_middleware.go:34: AuthMiddleware - No token found in cookie or Authorization header
+[ERROR] 2026/03/06 16:10:26 auth_middleware.go:34: AuthMiddleware - No token found in cookie or Authorization header
+[ERROR] 2026/03/06 16:10:29 auth_middleware.go:34: AuthMiddleware - No token found in cookie or Authorization header
+[ERROR] 2026/03/06 16:11:00 jwt.go:117: Invalid access token
+[ERROR] 2026/03/06 16:11:00 admin_auth_middleware.go:49: AdminAuthMiddleware - Token validation failed: invalid token
+[ERROR] 2026/03/06 16:11:00 admin_auth_middleware.go:32: AdminAuthMiddleware - No token found in cookie or Authorization header
+[ERROR] 2026/03/06 16:11:00 admin_auth_middleware.go:32: AdminAuthMiddleware - No token found in cookie or Authorization header
+[ERROR] 2026/03/06 16:11:02 admin_auth_middleware.go:32: AdminAuthMiddleware - No token found in cookie or Authorization header
+[ERROR] 2026/03/06 16:15:39 jwt.go:117: Invalid access token
+[ERROR] 2026/03/06 16:15:39 admin_auth_middleware.go:49: AdminAuthMiddleware - Token validation failed: invalid token
+[ERROR] 2026/03/06 16:15:39 admin_auth_middleware.go:32: AdminAuthMiddleware - No token found in cookie or Authorization header
+[ERROR] 2026/03/06 16:15:39 admin_auth_middleware.go:32: AdminAuthMiddleware - No token found in cookie or Authorization header
+[ERROR] 2026/03/06 16:15:43 admin_auth_middleware.go:32: AdminAuthMiddleware - No token found in cookie or Authorization header
+[ERROR] 2026/03/06 16:15:43 jwt.go:117: Invalid access token
+[ERROR] 2026/03/06 16:15:43 admin_auth_middleware.go:49: AdminAuthMiddleware - Token validation failed: invalid token
+[ERROR] 2026/03/06 16:15:43 admin_auth_middleware.go:32: AdminAuthMiddleware - No token found in cookie or Authorization header
+[ERROR] 2026/03/06 16:30:10 admin_auth_middleware.go:32: AdminAuthMiddleware - No token found in cookie or Authorization header
+[ERROR] 2026/03/06 16:30:10 admin_auth_middleware.go:32: AdminAuthMiddleware - No token found in cookie or Authorization header
+[ERROR] 2026/03/06 16:30:30 admin_auth_middleware.go:32: AdminAuthMiddleware - No token found in cookie or Authorization header
+[ERROR] 2026/03/06 16:48:43 admin_auth_middleware.go:32: AdminAuthMiddleware - No token found in cookie or Authorization header
